@@ -10,5 +10,5 @@ package edu.poly.duan1.model;
  * @author Nguyen Thi Thu Thao
  */
 public class NewClass {
-    
+    // thay nguyen dep trai
 }
