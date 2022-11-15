@@ -5,10 +5,20 @@
  */
 package edu.poly.duan1.services;
 
+import edu.poly.duan1.model.Sach;
+import java.util.List;
+
 /**
  *
  * @author Nguyen Thi Thu Thao
  */
 public interface SachServices {
-    
+
+    public List<Sach> getAll();
+
+    public Boolean saveOrUpdate(Sach s);
+
+    public Boolean delete(Sach s);
+
+    public Sach getObjbyMa(String ma);
 }
