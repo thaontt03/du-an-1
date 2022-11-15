@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.poly.duan1.model;
+package edu.poly.duan1.services.impl;
 
 /**
  *
  * @author Nguyen Thi Thu Thao
  */
-public class NewClass {
-    // thay nguyen dep trai
+public class SachServicesImpl {
+    
 }
