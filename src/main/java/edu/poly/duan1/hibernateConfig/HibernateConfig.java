@@ -4,6 +4,7 @@
  */
 package edu.poly.duan1.hibernateConfig;
 
+import edu.poly.duan1.model.Sach;
 import java.util.Properties;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -27,7 +28,7 @@ public class HibernateConfig {
 //        properties.put(Environment.SHOW_SQL, "true");
 
         conf.setProperties(properties);
-//        conf.addAnnotatedClass(LopHoc.class);
+        conf.addAnnotatedClass(Sach.class);
 //        conf.addAnnotatedClass(SinhVien.class);
 
         ServiceRegistry registry = new StandardServiceRegistryBuilder()

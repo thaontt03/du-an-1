@@ -5,17 +5,49 @@
  */
 package edu.poly.duan1.view;
 
+import edu.poly.duan1.services.SachServices;
+import edu.poly.duan1.services.impl.SachServicesImpl;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Nguyen Thi Thu Thao
  */
-public class Sach extends javax.swing.JFrame {
+public class view_Sach extends javax.swing.JFrame {
 
     /**
-     * Creates new form Sach
+     * Creates new form view_Sach
      */
-    public Sach() {
+    private SachServices sachServices = new SachServicesImpl();
+    private DefaultTableModel tblModel;
+
+    public view_Sach() {
         initComponents();
+        setLocationRelativeTo(null);
+        loadDataTable();
+    }
+
+    private void loadDataTable() {
+        tblModel = (DefaultTableModel) tblSach.getModel();
+        tblModel.setColumnIdentifiers(new String[]{"id", "ma", "ten"});
+        tblModel.setRowCount(0);
+
+        for (edu.poly.duan1.model.Sach x : sachServices.getAll()) {
+            tblModel.addRow(new Object[]{x.getId(), x.getMa(), x.getTen()});
+        }
+    }
+
+    private void add() {
+        edu.poly.duan1.model.Sach s = new edu.poly.duan1.model.Sach();
+        s.setMa(txtMa.getText());
+        s.setTen(txtTen.getText());
+        if (sachServices.saveOrUpdate(s)) {
+            JOptionPane.showMessageDialog(this, "add oke");
+        } else {
+            JOptionPane.showMessageDialog(this, "add loi");
+        }
+        loadDataTable();
     }
 
     /**
@@ -69,6 +101,11 @@ public class Sach extends javax.swing.JFrame {
         jLabel5.setText("Trạng thái");
 
         btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
 
         btnSua.setText("Sửa");
 
@@ -107,14 +144,17 @@ public class Sach extends javax.swing.JFrame {
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel4))
                                 .addGap(44, 44, 44)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtTen, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                                    .addComponent(txtMa)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(164, 164, 164)
                         .addComponent(jLabel1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtMa, txtTen});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -148,8 +188,15 @@ public class Sach extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtMa, txtTen});
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        add();
+
+    }//GEN-LAST:event_btnThemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -168,20 +215,21 @@ public class Sach extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Sach.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(view_Sach.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Sach.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(view_Sach.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Sach.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(view_Sach.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Sach.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(view_Sach.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Sach().setVisible(true);
+                new view_Sach().setVisible(true);
             }
         });
     }
