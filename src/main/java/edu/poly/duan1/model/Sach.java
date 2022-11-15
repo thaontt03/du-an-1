@@ -5,18 +5,42 @@
  */
 package edu.poly.duan1.model;
 
+import java.util.Date;
+import java.util.UUID;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import lombok.Data;
+
 /**
  *
  * @author Nguyen Thi Thu Thao
  */
+@Data
+
+@Entity
+@Table(name = "Sach")
 public class Sach {
-    // duc anh da vao git
-    
-    //comment
-    
-            
-            
-            
-            
-            
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
+
+    @Column
+    private String ma;
+
+    @Column
+    private String ten;
+
+    @Column
+    private int trangThai;
+
+    @Column
+    private Date ngayTao;
+
+    @Column
+    private Date ngaySua;
 }
