@@ -12,6 +12,7 @@ import java.util.List;
  *
  * @author Nguyen Thi Thu Thao
  */
+
 public interface SachServices {
 
     public List<Sach> getAll();
