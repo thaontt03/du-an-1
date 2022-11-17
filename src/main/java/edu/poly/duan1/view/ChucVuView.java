@@ -4,6 +4,17 @@
  */
 package edu.poly.duan1.view;
 
+
+
+import edu.poly.duan1.model.ChucVu;
+import edu.poly.duan1.services.ChucVuService;
+import edu.poly.duan1.services.impl.ChucVuServiceImpl;
+import edu.poly.duan1.ultis.helper;
+import java.time.LocalDate;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Tran Tien
@@ -13,9 +24,29 @@ public class ChucVuView extends javax.swing.JFrame {
     /**
      * Creates new form ChucVuView
      */
+     private ChucVuService chucVuu = new ChucVuServiceImpl();
+    private DefaultTableModel tblModel;
+    private helper helper = new helper();
+    private List<ChucVu> cv;
     public ChucVuView() {
         initComponents();
         setLocationRelativeTo(null);
+        fillToTable();
+    }
+     private boolean checkNull() {
+        if (helper.checkNull(txtma, "Mã") || helper.checkNull(txtten, "Tên")) {
+            return false;
+        }
+        return true;
+    }
+     private boolean Validate() {
+        String ma = txtma.getText();
+        if (chucVuu.getObjbyMa(ma) != null) {
+            helper.error(this, "mã đã tồn tại vui lòng thử lại bằng mã khác");
+            return false;
+        } else {
+            return true;
+        }
     }
 
     /**
@@ -27,6 +58,7 @@ public class ChucVuView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txttimkiem = new javax.swing.JTextField();
@@ -38,11 +70,12 @@ public class ChucVuView extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtten = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        lbltrangthai = new javax.swing.JLabel();
         btnthem = new javax.swing.JButton();
         btnsua = new javax.swing.JButton();
         btnXoa = new javax.swing.JButton();
         btnlammoi = new javax.swing.JButton();
+        rdoConhoatdong = new javax.swing.JRadioButton();
+        rdodaNghi = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,6 +97,11 @@ public class ChucVuView extends javax.swing.JFrame {
                 "ID", "Ma", "Tên", "Ngày Tạo", "Ngày Sửa ", "Trạng Thái"
             }
         ));
+        tblchucvu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblchucvuMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblchucvu);
 
         jLabel2.setText("Mã ");
@@ -72,15 +110,39 @@ public class ChucVuView extends javax.swing.JFrame {
 
         jLabel5.setText("Trạng Thái");
 
-        lbltrangthai.setText("  ");
-
         btnthem.setText("Thêm ");
+        btnthem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnthemActionPerformed(evt);
+            }
+        });
 
         btnsua.setText("Sửa");
+        btnsua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnsuaActionPerformed(evt);
+            }
+        });
 
         btnXoa.setText("Xóa");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
 
         btnlammoi.setText("Làm Mới ");
+        btnlammoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnlammoiActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(rdoConhoatdong);
+        rdoConhoatdong.setText("Còn Hoạt Động");
+
+        buttonGroup1.add(rdodaNghi);
+        rdodaNghi.setText("Đã Nghỉ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -106,18 +168,23 @@ public class ChucVuView extends javax.swing.JFrame {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addGroup(layout.createSequentialGroup()
-                                                .addGap(11, 11, 11)
                                                 .addComponent(btnthem)
                                                 .addGap(52, 52, 52)
-                                                .addComponent(btnsua)
+                                                .addComponent(btnsua))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel5)
+                                                .addGap(35, 35, 35)
+                                                .addComponent(rdoConhoatdong, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
                                                 .addGap(48, 48, 48)
                                                 .addComponent(btnXoa)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(btnlammoi))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel5)
-                                                .addGap(35, 35, 35)
-                                                .addComponent(lbltrangthai, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addGap(30, 30, 30)
+                                                .addComponent(rdodaNghi, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(126, 126, 126)))
                                         .addGap(10, 10, 10)))
                                 .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,25 +212,59 @@ public class ChucVuView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(3, 3, 3)
+                .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3)
                     .addComponent(txtten, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(lbltrangthai))
-                .addGap(26, 26, 26)
+                    .addComponent(rdoConhoatdong)
+                    .addComponent(rdodaNghi))
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnthem)
                     .addComponent(btnsua)
                     .addComponent(btnXoa)
                     .addComponent(btnlammoi))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnthemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnthemActionPerformed
+        if (checkNull()) {
+            if (Validate()) {
+                add();
+            }
+        }
+    }//GEN-LAST:event_btnthemActionPerformed
+
+    private void tblchucvuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblchucvuMouseClicked
+      int index = tblchucvu.getSelectedRow();
+        ChucVu s = chucVuu.getAll().get(index);
+        txtma.setText(s.getMa());
+        txtten.setText(s.getTen());
+         if (s.getTrangThai() == 1) {
+            rdoConhoatdong.setSelected(true);
+        } else {
+            rdodaNghi.setSelected(true);
+        }
+       
+    }//GEN-LAST:event_tblchucvuMouseClicked
+
+    private void btnlammoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlammoiActionPerformed
+        reset();
+    }//GEN-LAST:event_btnlammoiActionPerformed
+
+    private void btnsuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsuaActionPerformed
+        update();
+    }//GEN-LAST:event_btnsuaActionPerformed
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        delete();
+    }//GEN-LAST:event_btnXoaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -206,16 +307,114 @@ public class ChucVuView extends javax.swing.JFrame {
     private javax.swing.JButton btnsua;
     private javax.swing.JButton btnthem;
     private javax.swing.JButton btntimkiem;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lbltrangthai;
+    private javax.swing.JRadioButton rdoConhoatdong;
+    private javax.swing.JRadioButton rdodaNghi;
     private javax.swing.JTable tblchucvu;
     private javax.swing.JTextField txtma;
     private javax.swing.JTextField txtten;
     private javax.swing.JTextField txttimkiem;
     // End of variables declaration//GEN-END:variables
+
+    private void fillToTable() {
+        tblModel = (DefaultTableModel) tblchucvu.getModel();
+//        tblModel.setColumnIdentifiers(new String[]{"id", "mã", "tên", "ngày tạo", "ngày sửa"});
+         tblModel.setRowCount(0);
+         for (ChucVu x : chucVuu.getAll()) {
+            tblModel.addRow(new Object[]{x.getId(), x.getMa(), x.getTen(), x.getNgayTao(), x.getNgaySua(), x.getTrangThai()==1?"Còn Hoạt Động":"Đã Nghỉ"});
+        }
+            
+        }
+    public boolean validatee() {
+        if (txtma.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "chưa nhập mã nhân viên");
+            return false;
+        }
+        if (txtten.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "chưa nhập giới tính nhân viên");
+            return false;
+        }
+        
+        
+        return true;
+    }
+    private void add() {
+        ChucVu s = new ChucVu();
+        int trangThai;
+        s.setMa(txtma.getText());
+        s.setTen(txtten.getText());
+        s.setNgayTao(java.sql.Date.valueOf(LocalDate.now()));
+        s.setNgaySua(java.sql.Date.valueOf(LocalDate.now()));
+        if (rdoConhoatdong.isSelected()) {
+            s.setTrangThai(1);
+        }
+        else{
+           s.setTrangThai(0);
+        }
+        if (chucVuu.saveOrUpdate(s)) {
+            helper.alert(this, "Thêm Thành Công");
+        } else {
+            helper.error(this, "Lỗi Thêm");
+        }
+        fillToTable();
+    }
+     private void update() {
+        int row = tblchucvu.getSelectedRow();
+        ChucVu s = chucVuu.getObjbyMa((String) tblchucvu.getValueAt(row, 1));
+        if (row == -1) {
+            helper.error(this, "Vui lòng chọn thể loại cần sửa");
+        } else {
+            s.setMa(txtma.getText());
+            s.setTen(txtten.getText());
+            s.setNgaySua(java.sql.Date.valueOf(LocalDate.now()));
+            int a;
+            if (rdoConhoatdong.isSelected()) {
+                a = 1;
+            } else {
+                a = 0;
+            }
+            s.setTrangThai(a);
+            if (chucVuu.saveOrUpdate(s)) {
+                helper.alert(this, "Sửa thành công");
+                reset();
+            } else {
+                helper.error(this, "Sửa thất bại");
+            }
+            fillToTable();
+        }
+    }
+     private void delete() {
+        int index = tblchucvu.getSelectedRow();
+        if (index == -1) {
+            helper.error(this, "vui lòng chọn dòng cần xóa");
+        } else {
+            ChucVu s = chucVuu.getAll().get(index);
+            if (chucVuu.delete(s)) {
+                helper.alert(this, "xóa thành công");
+            } else {
+                helper.error(this, "xóa thất bại vui lòng kiểm tra lại");
+            }
+            reset();
+        }
+        fillToTable();
+    }
+    public void ShowDentail(ChucVu nv) {
+        txtma.setText(nv.getMa());
+        txtten.setText(nv.getTen());
+    }
+    private void reset(){
+        txtma.setText("");
+        txtten.setText("");
+        buttonGroup1.clearSelection();
+        
+    }
 }
+    
+    
+
