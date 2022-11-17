@@ -35,11 +35,10 @@ public class view_Sach extends javax.swing.JFrame {
 
     private void loadDataTable() {
         tblModel = (DefaultTableModel) tblSach.getModel();
-        tblModel.setColumnIdentifiers(new String[]{"id", "mã", "tên", "ngày tạo", "ngày sửa"});
         tblModel.setRowCount(0);
 
         for (edu.poly.duan1.model.Sach x : sachServices.getAll()) {
-            tblModel.addRow(new Object[]{x.getId(), x.getMa(), x.getTen(), x.getNgayTao(), x.getNgaySua()});
+            tblModel.addRow(new Object[]{x.getId(), x.getMa(), x.getTen(), x.getNgayTao(), x.getNgaySua(), x.getTrangThai() == 1 ? "Còn" : "Hết"});
         }
     }
 
@@ -98,6 +97,13 @@ public class view_Sach extends javax.swing.JFrame {
             s.setMa(txtMa.getText());
             s.setTen(txtTen.getText());
             s.setNgaySua(java.sql.Date.valueOf(LocalDate.now()));
+            int a;
+            if (rdbCon.isSelected()) {
+                a = 1;
+            } else {
+                a = 0;
+            }
+            s.setTrangThai(a);
             if (sachServices.saveOrUpdate(s)) {
                 helper.alert(this, "sửa thành công");
             } else {
@@ -110,6 +116,8 @@ public class view_Sach extends javax.swing.JFrame {
     private void reset() {
         txtMa.setText("");
         txtTen.setText("");
+        buttonGroup1.clearSelection();
+
     }
 
     /**
@@ -121,6 +129,7 @@ public class view_Sach extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblSach = new javax.swing.JTable();
@@ -128,7 +137,6 @@ public class view_Sach extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        lbTrangThai = new javax.swing.JLabel();
         btnThem = new javax.swing.JButton();
         btnSua = new javax.swing.JButton();
         btnXoa = new javax.swing.JButton();
@@ -137,6 +145,8 @@ public class view_Sach extends javax.swing.JFrame {
         txtTen = new javax.swing.JTextField();
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        rdbCon = new javax.swing.JRadioButton();
+        rdbHet = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -205,6 +215,12 @@ public class view_Sach extends javax.swing.JFrame {
 
         jButton1.setText("Tìm kiếm");
 
+        buttonGroup1.add(rdbCon);
+        rdbCon.setText("Còn");
+
+        buttonGroup1.add(rdbHet);
+        rdbHet.setText("Hết");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -225,21 +241,25 @@ public class view_Sach extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(86, 86, 86)
-                                        .addComponent(lbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
                                         .addGap(30, 30, 30)
                                         .addComponent(lbID, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel5)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(jLabel4)
+                                                    .addGap(65, 65, 65))
+                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                    .addComponent(jLabel3)
+                                                    .addGap(79, 79, 79)))
                                             .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel4)
-                                                .addGap(65, 65, 65))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addComponent(jLabel3)
-                                                .addGap(79, 79, 79)))
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(jLabel5)
+                                                .addGap(44, 44, 44)))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(rdbCon)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(rdbHet))
                                             .addComponent(txtTen, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
                                             .addComponent(txtMa))))
                                 .addGap(0, 0, Short.MAX_VALUE))))
@@ -274,9 +294,7 @@ public class view_Sach extends javax.swing.JFrame {
                     .addComponent(jButton1))
                 .addGap(24, 24, 24)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbTrangThai)
-                .addGap(9, 9, 9)
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -284,15 +302,18 @@ public class view_Sach extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(17, 17, 17)
-                .addComponent(jLabel5)
+                .addGap(13, 13, 13)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(rdbCon)
+                    .addComponent(rdbHet))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThem)
                     .addComponent(btnSua)
                     .addComponent(btnXoa)
                     .addComponent(btnReset))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtMa, txtTen});
@@ -319,6 +340,11 @@ public class view_Sach extends javax.swing.JFrame {
         Sach s = sachServices.getAll().get(index);
         txtMa.setText(s.getMa());
         txtTen.setText(s.getTen());
+        if (s.getTrangThai() == 0) {
+            rdbHet.setSelected(true);
+        } else {
+            rdbCon.setSelected(true);
+        }
     }//GEN-LAST:event_tblSachMouseClicked
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
@@ -370,6 +396,7 @@ public class view_Sach extends javax.swing.JFrame {
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnXoa;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
@@ -378,7 +405,8 @@ public class view_Sach extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lbID;
-    private javax.swing.JLabel lbTrangThai;
+    private javax.swing.JRadioButton rdbCon;
+    private javax.swing.JRadioButton rdbHet;
     private javax.swing.JTable tblSach;
     private javax.swing.JTextField txtMa;
     private javax.swing.JTextField txtTen;
