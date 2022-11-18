@@ -33,7 +33,13 @@ public class KhachHang {
 
     @Column
     private String ten;
-
+    
+    @Column
+    private String diaChi;
+    
+     @Column
+    private String sdt;
+    
     @Column
     private int trangThai;
 

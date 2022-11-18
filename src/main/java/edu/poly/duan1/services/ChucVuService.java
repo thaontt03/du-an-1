@@ -12,7 +12,8 @@ import java.util.List;
  * @author Tran Tien
  */
 public interface ChucVuService {
-      public List<ChucVu> getAll();
+
+    public List<ChucVu> getAll();
 
     public Boolean saveOrUpdate(ChucVu s);
 
