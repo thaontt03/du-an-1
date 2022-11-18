@@ -36,7 +36,7 @@ public class view_TheLoai extends javax.swing.JFrame {
         tblModel.setRowCount(0);
 
         for (edu.poly.duan1.model.TheLoai x : theLoaiServices.getAll()) {
-            tblModel.addRow(new Object[]{x.getId(), x.getMa(), x.getTen(), x.getNgayTao(), x.getNgaySua()});
+            tblModel.addRow(new Object[]{x.getId(), x.getMa(), x.getTen(), x.getNgayTao(), x.getNgaySua(), x.getTrangThai() == 1 ? "Còn" : "Hết"});
         }
     }
 
@@ -73,7 +73,7 @@ public class view_TheLoai extends javax.swing.JFrame {
     private void reset() {
         txtMa.setText("");
         txtTen.setText("");
-        lbTrangThai.setText("");
+        buttonGroup1.clearSelection();
     }
 
     private void delete() {
@@ -101,6 +101,13 @@ public class view_TheLoai extends javax.swing.JFrame {
             s.setMa(txtMa.getText());
             s.setTen(txtTen.getText());
             s.setNgaySua(java.sql.Date.valueOf(LocalDate.now()));
+            int a;
+            if (rdbCon.isSelected()) {
+                a = 1;
+            } else {
+                a = 0;
+            }
+            s.setTrangThai(a);
             if (theLoaiServices.saveOrUpdate(s)) {
                 helper.alert(this, "Sửa thành công");
                 reset();
@@ -120,6 +127,7 @@ public class view_TheLoai extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         txtTimKiem = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
@@ -130,11 +138,12 @@ public class view_TheLoai extends javax.swing.JFrame {
         txtMa = new javax.swing.JTextField();
         txtTen = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        lbTrangThai = new javax.swing.JLabel();
         btnThem = new javax.swing.JButton();
         btnSua = new javax.swing.JButton();
         btnXoa = new javax.swing.JButton();
         btnReset = new javax.swing.JButton();
+        rdbCon = new javax.swing.JRadioButton();
+        rdbHet = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -208,6 +217,12 @@ public class view_TheLoai extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(rdbCon);
+        rdbCon.setText("Còn");
+
+        buttonGroup1.add(rdbHet);
+        rdbHet.setText("Hết");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -244,7 +259,10 @@ public class view_TheLoai extends javax.swing.JFrame {
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                 .addComponent(txtTen, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
                                                 .addComponent(txtMa)
-                                                .addComponent(lbTrangThai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(rdbCon)
+                                                    .addGap(18, 18, 18)
+                                                    .addComponent(rdbHet))))))
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -274,7 +292,8 @@ public class view_TheLoai extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(lbTrangThai))
+                    .addComponent(rdbCon)
+                    .addComponent(rdbHet))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThem)
@@ -292,6 +311,11 @@ public class view_TheLoai extends javax.swing.JFrame {
         TheLoai s = theLoaiServices.getAll().get(index);
         txtMa.setText(s.getMa());
         txtTen.setText(s.getTen());
+        if (s.getTrangThai() == 0) {
+            rdbHet.setSelected(true);
+        } else {
+            rdbCon.setSelected(true);
+        }
     }//GEN-LAST:event_tblTheLoaiMouseClicked
 
     private void txtTenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenActionPerformed
@@ -359,13 +383,15 @@ public class view_TheLoai extends javax.swing.JFrame {
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnXoa;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lbTrangThai;
+    private javax.swing.JRadioButton rdbCon;
+    private javax.swing.JRadioButton rdbHet;
     private javax.swing.JTable tblTheLoai;
     private javax.swing.JTextField txtMa;
     private javax.swing.JTextField txtTen;

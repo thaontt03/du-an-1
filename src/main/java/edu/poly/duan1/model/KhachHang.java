@@ -35,6 +35,12 @@ public class KhachHang {
     private String ten;
 
     @Column
+    private String diaChi;
+
+    @Column
+    private String sdt;
+
+    @Column
     private int trangThai;
 
     @Column
