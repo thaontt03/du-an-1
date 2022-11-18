@@ -31,7 +31,7 @@ public class KhachHang {
     @Column
     private String ma;
 
-    @Column
+    @Column(name = "HoTen")
     private String ten;
 
     @Column

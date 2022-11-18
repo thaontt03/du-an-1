@@ -23,7 +23,7 @@ public class KhachHangRepositories {
 
     public List<KhachHang> getAll() {
         List<KhachHang> list = new ArrayList<>();
-        Query query = session.createQuery("SELECT c FROM Sach c");
+        Query query = session.createQuery("SELECT c FROM KhachHang c");
         list = query.getResultList();
         return list;
     }
