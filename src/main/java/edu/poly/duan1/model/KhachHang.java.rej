@@ -1,0 +1,16 @@
+diff a/src/main/java/edu/poly/duan1/model/KhachHang.java b/src/main/java/edu/poly/duan1/model/KhachHang.java	(rejected hunks)
+@@ -33,7 +33,13 @@
+ 
+     @Column
+     private String ten;
+-
++    
++    @Column
++    private String diaChi;
++    
++     @Column
++    private String sdt;
++    
+     @Column
+     private int trangThai;
+ 

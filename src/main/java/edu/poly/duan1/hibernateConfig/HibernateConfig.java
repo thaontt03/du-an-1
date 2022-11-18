@@ -1,11 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package edu.poly.duan1.hibernateConfig;
 
+import edu.poly.duan1.model.ChucVu;
 import edu.poly.duan1.model.NguoiDung;
 import edu.poly.duan1.model.Sach;
+import edu.poly.duan1.model.SachCT;
+import edu.poly.duan1.model.TheLoai;
 import java.util.Properties;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -31,7 +30,9 @@ public class HibernateConfig {
         conf.setProperties(properties);
         conf.addAnnotatedClass(Sach.class);
         conf.addAnnotatedClass(NguoiDung.class);
-//        conf.addAnnotatedClass(SinhVien.class);
+        conf.addAnnotatedClass(ChucVu.class);
+        conf.addAnnotatedClass(TheLoai.class);
+        conf.addAnnotatedClass(SachCT.class);
 
         ServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .applySettings(conf.getProperties()).build();
