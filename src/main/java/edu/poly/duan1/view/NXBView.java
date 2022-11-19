@@ -4,6 +4,16 @@
  */
 package edu.poly.duan1.view;
 
+import edu.poly.duan1.model.NXB;
+import edu.poly.duan1.model.Sach;
+import edu.poly.duan1.services.NXBService;
+import edu.poly.duan1.services.impl.NXBServiceImpl;
+import edu.poly.duan1.ultis.helper;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import javax.swing.ButtonGroup;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Admin 88
@@ -13,9 +23,116 @@ public class NXBView extends javax.swing.JFrame {
     /**
      * Creates new form NXBView
      */
+    private NXBService nxbService = new NXBServiceImpl();
+    private DefaultTableModel tblModel;
+    private helper helper = new helper();
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+
     public NXBView() {
         initComponents();
         setLocationRelativeTo(null);
+        loadDataTable();
+        GroupTT();
+    }
+
+    private void loadDataTable() {
+        tblModel = (DefaultTableModel) tblNXB.getModel();
+        tblModel.setRowCount(0);
+
+        for (edu.poly.duan1.model.NXB x : nxbService.getAll()) {
+            tblModel.addRow(new Object[]{
+                x.getId(),
+                x.getMa(),
+                x.getTen(),
+                sdf.format(x.getNgayTao()),
+                sdf.format(x.getNgaySua())}
+            );
+        }
+    }
+
+    private boolean checkNull() {
+        if (helper.checkNull(txtMa, "Mã") || helper.checkNull(txtTen, "Tên")) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean Validate() {
+        String ma = txtMa.getText();
+        if (nxbService.getObjbyMa(ma) != null) {
+            helper.error(this, "mã đã tồn tại vui lòng thử lại bằng mã khác");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private void add() {
+        edu.poly.duan1.model.NXB s = new edu.poly.duan1.model.NXB();
+        s.setMa(txtMa.getText());
+        s.setTen(txtTen.getText());
+        s.setNgayTao(java.sql.Date.valueOf(LocalDate.now()));
+        s.setNgaySua(java.sql.Date.valueOf(LocalDate.now()));
+        if (nxbService.saveOrUpdate(s)) {
+            helper.alert(this, "add thanh cong");
+        } else {
+            helper.error(this, "add loi");
+        }
+        loadDataTable();
+    }
+
+    private void delete() {
+        int index = tblNXB.getSelectedRow();
+        if (index == -1) {
+            helper.error(this, "vui lòng chọn dòng cần xóa");
+        } else {
+            NXB nxb = nxbService.getAll().get(index);
+            if (nxbService.delete(nxb)) {
+                helper.alert(this, "xóa thành công");
+            } else {
+                helper.error(this, "xóa thất bại vui lòng kiểm tra lại");
+            }
+            reset();
+        }
+        loadDataTable();
+    }
+
+    private void update() {
+        int row = tblNXB.getSelectedRow();
+        NXB s = nxbService.getObjbyMa((String) tblNXB.getValueAt(row, 1));
+        if (row == -1) {
+            helper.error(this, "vui lòng chọn dòng cần sửa trước khi sửa");
+        } else {
+            s.setMa(txtMa.getText());
+            s.setTen(txtTen.getText());
+            s.setNgaySua(java.sql.Date.valueOf(LocalDate.now()));
+            int a;
+            if (rdbCon.isSelected()) {
+                a = 1;
+            } else {
+                a = 0;
+            }
+            s.setTrangThai(a);
+            if (nxbService.saveOrUpdate(s)) {
+                helper.alert(this, "sửa thành công");
+            } else {
+                helper.error(this, "sửa thất bại");
+            }
+            loadDataTable();
+        }
+    }
+    ButtonGroup buttonGroup1 = new ButtonGroup();
+
+    private void GroupTT() {
+        buttonGroup1.add(rdbCon);
+        buttonGroup1.add(rdbHet);
+    }
+
+    private void reset() {
+        txtMa.setText("");
+        txtTen.setText("");
+        buttonGroup1.clearSelection();
+
     }
 
     /**
@@ -43,6 +160,8 @@ public class NXBView extends javax.swing.JFrame {
         btnLammoi = new javax.swing.JButton();
         btnXoa = new javax.swing.JButton();
         lblTrangThai = new javax.swing.JLabel();
+        rdbCon = new javax.swing.JRadioButton();
+        rdbHet = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,6 +184,11 @@ public class NXBView extends javax.swing.JFrame {
                 "ID", "Mã", "Tên NXB", "Ngày Tạo", "Ngày Sửa", "Trạng Thái"
             }
         ));
+        tblNXB.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblNXBMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblNXB);
 
         jLabel3.setText("Mã");
@@ -74,12 +198,36 @@ public class NXBView extends javax.swing.JFrame {
         jLabel5.setText("Trạng Thái");
 
         btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
 
         btnSua.setText("Sửa");
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaActionPerformed(evt);
+            }
+        });
 
         btnLammoi.setText("Làm mới");
+        btnLammoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLammoiActionPerformed(evt);
+            }
+        });
 
         btnXoa.setText("Xóa");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
+
+        rdbCon.setText("Còn");
+
+        rdbHet.setText("Hết");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -106,10 +254,15 @@ public class NXBView extends javax.swing.JFrame {
                                                 .addComponent(jLabel5))
                                             .addGap(22, 22, 22)
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(lblTrangThai)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                     .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                                    .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(rdbCon)
+                                                    .addGap(18, 18, 18)
+                                                    .addComponent(rdbHet)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(lblTrangThai)))))
                                     .addGap(6, 6, 6))
                                 .addGroup(layout.createSequentialGroup()
                                     .addGap(8, 8, 8)
@@ -155,20 +308,55 @@ public class NXBView extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(lblTrangThai))
-                .addGap(26, 26, 26)
+                    .addComponent(lblTrangThai)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(rdbCon)
+                        .addComponent(rdbHet)))
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLammoi, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnLammoi, btnSua, btnThem, btnXoa});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        if (checkNull()) {
+            if (Validate()) {
+                add();
+            }
+        }
+    }//GEN-LAST:event_btnThemActionPerformed
+
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        update();
+    }//GEN-LAST:event_btnSuaActionPerformed
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        delete();
+    }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void btnLammoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLammoiActionPerformed
+        reset();
+    }//GEN-LAST:event_btnLammoiActionPerformed
+
+    private void tblNXBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNXBMouseClicked
+        int index = tblNXB.getSelectedRow();
+        NXB nxb = nxbService.getAll().get(index);
+        txtMa.setText(nxb.getMa());
+        txtTen.setText(nxb.getTen());
+        if (nxb.getTrangThai() == 0) {
+            rdbHet.setSelected(true);
+        } else {
+            rdbCon.setSelected(true);
+        }
+    }//GEN-LAST:event_tblNXBMouseClicked
 
     /**
      * @param args the command line arguments
@@ -218,6 +406,8 @@ public class NXBView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTrangThai;
+    private javax.swing.JRadioButton rdbCon;
+    private javax.swing.JRadioButton rdbHet;
     private javax.swing.JTable tblNXB;
     private javax.swing.JTextField txtMa;
     private javax.swing.JTextField txtTen;
