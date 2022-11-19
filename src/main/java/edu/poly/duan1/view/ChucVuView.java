@@ -4,12 +4,11 @@
  */
 package edu.poly.duan1.view;
 
-
-
 import edu.poly.duan1.model.ChucVu;
 import edu.poly.duan1.services.ChucVuService;
 import edu.poly.duan1.services.impl.ChucVuServiceImpl;
 import edu.poly.duan1.ultis.helper;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -24,22 +23,26 @@ public class ChucVuView extends javax.swing.JFrame {
     /**
      * Creates new form ChucVuView
      */
-     private ChucVuService chucVuu = new ChucVuServiceImpl();
+    private ChucVuService chucVuu = new ChucVuServiceImpl();
     private DefaultTableModel tblModel;
     private helper helper = new helper();
-    private List<ChucVu> cv;
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+//    private List<ChucVu> cv;
+
     public ChucVuView() {
         initComponents();
         setLocationRelativeTo(null);
         fillToTable();
     }
-     private boolean checkNull() {
+
+    private boolean checkNull() {
         if (helper.checkNull(txtma, "Mã") || helper.checkNull(txtten, "Tên")) {
             return false;
         }
         return true;
     }
-     private boolean Validate() {
+
+    private boolean Validate() {
         String ma = txtma.getText();
         if (chucVuu.getObjbyMa(ma) != null) {
             helper.error(this, "mã đã tồn tại vui lòng thử lại bằng mã khác");
@@ -242,16 +245,16 @@ public class ChucVuView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnthemActionPerformed
 
     private void tblchucvuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblchucvuMouseClicked
-      int index = tblchucvu.getSelectedRow();
+        int index = tblchucvu.getSelectedRow();
         ChucVu s = chucVuu.getAll().get(index);
         txtma.setText(s.getMa());
         txtten.setText(s.getTen());
-         if (s.getTrangThai() == 1) {
+        if (s.getTrangThai() == 1) {
             rdoConhoatdong.setSelected(true);
         } else {
             rdodaNghi.setSelected(true);
         }
-       
+
     }//GEN-LAST:event_tblchucvuMouseClicked
 
     private void btnlammoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlammoiActionPerformed
@@ -324,13 +327,19 @@ public class ChucVuView extends javax.swing.JFrame {
 
     private void fillToTable() {
         tblModel = (DefaultTableModel) tblchucvu.getModel();
-//        tblModel.setColumnIdentifiers(new String[]{"id", "mã", "tên", "ngày tạo", "ngày sửa"});
-         tblModel.setRowCount(0);
-         for (ChucVu x : chucVuu.getAll()) {
-            tblModel.addRow(new Object[]{x.getId(), x.getMa(), x.getTen(), x.getNgayTao(), x.getNgaySua(), x.getTrangThai()==1?"Còn Hoạt Động":"Đã Nghỉ"});
+        tblModel.setRowCount(0);
+        for (ChucVu x : chucVuu.getAll()) {
+            tblModel.addRow(new Object[]{
+                x.getId(),
+                x.getMa(),
+                x.getTen(),
+                sdf.format(x.getNgayTao()),
+                sdf.format(x.getNgaySua()),
+                x.getTrangThai() == 1 ? "Còn Hoạt Động" : "Đã Nghỉ"});
         }
-            
-        }
+
+    }
+
     public boolean validatee() {
         if (txtma.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "chưa nhập mã nhân viên");
@@ -340,10 +349,10 @@ public class ChucVuView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "chưa nhập giới tính nhân viên");
             return false;
         }
-        
-        
+
         return true;
     }
+
     private void add() {
         ChucVu s = new ChucVu();
         int trangThai;
@@ -353,9 +362,8 @@ public class ChucVuView extends javax.swing.JFrame {
         s.setNgaySua(java.sql.Date.valueOf(LocalDate.now()));
         if (rdoConhoatdong.isSelected()) {
             s.setTrangThai(1);
-        }
-        else{
-           s.setTrangThai(0);
+        } else {
+            s.setTrangThai(0);
         }
         if (chucVuu.saveOrUpdate(s)) {
             helper.alert(this, "Thêm Thành Công");
@@ -364,7 +372,8 @@ public class ChucVuView extends javax.swing.JFrame {
         }
         fillToTable();
     }
-     private void update() {
+
+    private void update() {
         int row = tblchucvu.getSelectedRow();
         ChucVu s = chucVuu.getObjbyMa((String) tblchucvu.getValueAt(row, 1));
         if (row == -1) {
@@ -389,7 +398,8 @@ public class ChucVuView extends javax.swing.JFrame {
             fillToTable();
         }
     }
-     private void delete() {
+
+    private void delete() {
         int index = tblchucvu.getSelectedRow();
         if (index == -1) {
             helper.error(this, "vui lòng chọn dòng cần xóa");
@@ -404,17 +414,16 @@ public class ChucVuView extends javax.swing.JFrame {
         }
         fillToTable();
     }
+
     public void ShowDentail(ChucVu nv) {
         txtma.setText(nv.getMa());
         txtten.setText(nv.getTen());
     }
-    private void reset(){
+
+    private void reset() {
         txtma.setText("");
         txtten.setText("");
         buttonGroup1.clearSelection();
-        
+
     }
 }
-    
-    
-

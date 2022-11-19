@@ -69,6 +69,7 @@ public class view_KhachHang extends javax.swing.JPanel {
         }
         s.setTrangThai(a);
         s.setNgayTao(java.sql.Date.valueOf(LocalDate.now()));
+        s.setNgaySua(java.sql.Date.valueOf(LocalDate.now()));
         if (khachHangServices.saveOrUpdate(s)) {
             helper.alert(this, "Thêm thành công");
             reset();

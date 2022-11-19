@@ -71,6 +71,7 @@ public class view_Sach extends javax.swing.JFrame {
         s.setMa(txtMa.getText());
         s.setTen(txtTen.getText());
         s.setNgayTao(java.sql.Date.valueOf(LocalDate.now()));
+        s.setNgaySua(java.sql.Date.valueOf(LocalDate.now()));
         if (sachServices.saveOrUpdate(s)) {
             helper.alert(this, "add thanh cong");
         } else {
