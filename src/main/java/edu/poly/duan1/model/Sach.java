@@ -30,7 +30,7 @@ public class Sach {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID id;
+    private  int id;
 
     @Column
     private String ma;

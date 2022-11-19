@@ -29,7 +29,7 @@ public class SachCT {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID id;
+    private  int id;
 
     @ManyToOne
     @JoinColumn(name = "idSach")
