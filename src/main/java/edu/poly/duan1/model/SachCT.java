@@ -29,7 +29,7 @@ public class SachCT {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  int id;
+    private int id;
 
     @ManyToOne
     @JoinColumn(name = "idSach")
@@ -38,6 +38,14 @@ public class SachCT {
     @ManyToOne
     @JoinColumn(name = "idTheLoai")
     private TheLoai theLoai;
+
+    @ManyToOne
+    @JoinColumn(name = "idNXB")
+    private NXB NXB;
+
+    @ManyToOne
+    @JoinColumn(name = "idNCC")
+    private NCC NCC;
 
     @Column
     private String moTa;
