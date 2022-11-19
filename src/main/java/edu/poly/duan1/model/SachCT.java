@@ -68,6 +68,9 @@ public class SachCT {
     @Column
     private int trangThai;
 
+    @Column
+    private String tacGia;
+
 }
 /*
 Id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
