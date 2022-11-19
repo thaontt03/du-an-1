@@ -50,4 +50,10 @@ public class ChucVu {
 
     @OneToMany(mappedBy = "chucVu", fetch = FetchType.LAZY)
     List<NguoiDung> listND;
+
+    @Override
+    public String toString() {
+        return ten;
+    }
+
 }

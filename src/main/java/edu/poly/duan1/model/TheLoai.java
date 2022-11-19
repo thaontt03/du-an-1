@@ -29,7 +29,7 @@ public class TheLoai {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  int id;
+    private int id;
 
     @Column
     private String ma;
@@ -45,7 +45,12 @@ public class TheLoai {
 
     @Column
     private Date ngaySua;
-    
+
     @OneToMany(mappedBy = "theLoai", fetch = FetchType.LAZY)
     List<SachCT> list_SachCT;
+
+    @Override
+    public String toString() {
+        return ten;
+    }
 }

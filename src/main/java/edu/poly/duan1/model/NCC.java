@@ -48,4 +48,8 @@ public class NCC {
     @OneToMany(mappedBy = "NCC", fetch = FetchType.LAZY)
     List<SachCT> listSach;
 
+    @Override
+    public String toString() {
+        return ten;
+    }
 }

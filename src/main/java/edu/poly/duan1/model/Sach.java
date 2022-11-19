@@ -30,7 +30,7 @@ public class Sach {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  int id;
+    private int id;
 
     @Column
     private String ma;
@@ -49,4 +49,9 @@ public class Sach {
 
     @OneToMany(mappedBy = "sach", fetch = FetchType.LAZY)
     List<SachCT> list_SachCT;
+
+    @Override
+    public String toString() {
+        return ten;
+    }
 }

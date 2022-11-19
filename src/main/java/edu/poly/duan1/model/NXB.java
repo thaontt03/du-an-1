@@ -44,6 +44,10 @@ public class NXB {
     @OneToMany(mappedBy = "NXB", fetch = FetchType.LAZY)
     List<SachCT> listSach;
 
+    @Override
+    public String toString() {
+        return ten;
+    }
 }
 /*
 Id INT IDENTITY(1,1) PRIMARY KEY,
