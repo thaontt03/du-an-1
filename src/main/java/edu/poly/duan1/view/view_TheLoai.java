@@ -181,6 +181,11 @@ public class view_TheLoai extends javax.swing.JFrame {
         jLabel1.setText("QUẢN LÝ THỂ LOẠI SÁCH");
 
         jButton1.setText("Tìm kiếm");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         tblTheLoai.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -372,6 +377,10 @@ public class view_TheLoai extends javax.swing.JFrame {
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         delete();        // TODO add your handling code here:
     }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        search();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
