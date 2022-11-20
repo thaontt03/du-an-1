@@ -5,7 +5,6 @@
 package edu.poly.duan1.view;
 
 import edu.poly.duan1.model.NXB;
-import edu.poly.duan1.model.Sach;
 import edu.poly.duan1.services.NXBService;
 import edu.poly.duan1.services.impl.NXBServiceImpl;
 import edu.poly.duan1.ultis.helper;
@@ -306,12 +305,13 @@ public class NXBView extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(lblTrangThai)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(rdbCon)
-                        .addComponent(rdbHet)))
+                        .addComponent(rdbHet))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5)
+                        .addComponent(lblTrangThai)))
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
