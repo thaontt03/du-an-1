@@ -1,6 +1,7 @@
 package edu.poly.duan1.services;
 
 import edu.poly.duan1.model.NCC;
+import edu.poly.duan1.model.TheLoai;
 import java.util.List;
 
 /**
@@ -16,4 +17,6 @@ public interface NCCService {
     public Boolean delete(NCC ncc);
 
     public NCC getObjbyMa(String ma);
+
+    public List<NCC> search(String ten);
 }

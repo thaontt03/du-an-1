@@ -23,6 +23,13 @@ public class NCCRepositories {
         list = query.getResultList();
         return list;
     }
+    public List<NCC> search(String ten) {
+        List<NCC> list = new ArrayList();
+        Query query = session.createQuery("SELECT c From NCC c where c.ten like :ten");
+        query.setParameter("ten", "%" + ten + "%");
+        list = query.getResultList();
+        return list;
+    }
 
     public Boolean saveOrUpdate(NCC ncc) {
         try {

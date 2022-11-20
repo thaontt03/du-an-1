@@ -10,6 +10,7 @@ import edu.poly.duan1.services.impl.NCCServiceImpl;
 import edu.poly.duan1.ultis.helper;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.table.DefaultTableModel;
 
@@ -134,6 +135,25 @@ public class view_NCC extends javax.swing.JPanel {
         buttonGroup1.clearSelection();
 
     }
+        private void loadDataTable(List<NCC> list) {
+        tblModel = (DefaultTableModel) tblNCC.getModel();
+        tblModel.setRowCount(0);
+
+        for (edu.poly.duan1.model.NCC x : list) {
+            tblModel.addRow(new Object[]{
+                x.getId(),
+                x.getMa(),
+                x.getTen(),
+                sdf.format(x.getNgayTao()),
+                sdf.format(x.getNgaySua())}
+            );
+        }
+    }
+
+        public void search() {
+        String ten = txtTimKiem.getText();
+        loadDataTable(nccService.search(ten));
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -144,7 +164,7 @@ public class view_NCC extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
+        txtTimKiem = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -165,6 +185,11 @@ public class view_NCC extends javax.swing.JPanel {
         jLabel1.setText("QUẢN LÝ NCC");
 
         jButton1.setText("Tìm kiếm");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         tblNCC.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -272,7 +297,7 @@ public class view_NCC extends javax.swing.JPanel {
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton1)))
                     .addGap(38, 38, 38)))
@@ -286,7 +311,7 @@ public class view_NCC extends javax.swing.JPanel {
                     .addComponent(jLabel1)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton1))
                     .addGap(24, 24, 24)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -345,6 +370,10 @@ public class view_NCC extends javax.swing.JPanel {
         reset();
     }//GEN-LAST:event_btnResetActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       search();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnReset;
@@ -357,11 +386,11 @@ public class view_NCC extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JRadioButton rdbCon;
     private javax.swing.JRadioButton rdbHet;
     private javax.swing.JTable tblNCC;
     private javax.swing.JTextField txtMa;
     private javax.swing.JTextField txtTen;
+    private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
 }

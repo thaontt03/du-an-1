@@ -37,4 +37,10 @@ public class NCCServiceImpl implements NCCService {
         return nccRep.getObjbyMa(ma);
     }
 
+    @Override
+    public List<NCC> search(String ten) {
+        return nccRep.search(ten);
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
