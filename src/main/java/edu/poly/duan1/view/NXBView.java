@@ -10,6 +10,7 @@ import edu.poly.duan1.services.impl.NXBServiceImpl;
 import edu.poly.duan1.ultis.helper;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.table.DefaultTableModel;
 
@@ -59,7 +60,7 @@ public class NXBView extends javax.swing.JFrame {
     private boolean Validate() {
         String ma = txtMa.getText();
         if (nxbService.getObjbyMa(ma) != null) {
-            helper.error(this, "mã đã tồn tại vui lòng thử lại bằng mã khác");
+            helper.error(this, "Mã đã tồn tại vui lòng thử lại bằng mã khác");
             return false;
         } else {
             return true;
@@ -73,9 +74,9 @@ public class NXBView extends javax.swing.JFrame {
         s.setNgayTao(java.sql.Date.valueOf(LocalDate.now()));
         s.setNgaySua(java.sql.Date.valueOf(LocalDate.now()));
         if (nxbService.saveOrUpdate(s)) {
-            helper.alert(this, "add thanh cong");
+            helper.alert(this, "Thêm thành công");
         } else {
-            helper.error(this, "add loi");
+            helper.error(this, "Thêm thất bại");
         }
         loadDataTable();
     }
@@ -83,13 +84,13 @@ public class NXBView extends javax.swing.JFrame {
     private void delete() {
         int index = tblNXB.getSelectedRow();
         if (index == -1) {
-            helper.error(this, "vui lòng chọn dòng cần xóa");
+            helper.error(this, "Vui lòng chọn dòng cần xóa");
         } else {
             NXB nxb = nxbService.getAll().get(index);
             if (nxbService.delete(nxb)) {
-                helper.alert(this, "xóa thành công");
+                helper.alert(this, "Xóa thành công");
             } else {
-                helper.error(this, "xóa thất bại vui lòng kiểm tra lại");
+                helper.error(this, "Xóa thất bại vui lòng kiểm tra lại");
             }
             reset();
         }
@@ -100,7 +101,7 @@ public class NXBView extends javax.swing.JFrame {
         int row = tblNXB.getSelectedRow();
         NXB s = nxbService.getObjbyMa((String) tblNXB.getValueAt(row, 1));
         if (row == -1) {
-            helper.error(this, "vui lòng chọn dòng cần sửa trước khi sửa");
+            helper.error(this, "Vui lòng chọn dòng cần sửa trước khi sửa");
         } else {
             s.setMa(txtMa.getText());
             s.setTen(txtTen.getText());
@@ -113,9 +114,9 @@ public class NXBView extends javax.swing.JFrame {
             }
             s.setTrangThai(a);
             if (nxbService.saveOrUpdate(s)) {
-                helper.alert(this, "sửa thành công");
+                helper.alert(this, "Sửa thành công");
             } else {
-                helper.error(this, "sửa thất bại");
+                helper.error(this, "Sửa thất bại");
             }
             loadDataTable();
         }
@@ -132,6 +133,26 @@ public class NXBView extends javax.swing.JFrame {
         txtTen.setText("");
         buttonGroup1.clearSelection();
 
+    }
+
+    private void loadDataTable(List<NXB> list) {
+        tblModel = (DefaultTableModel) tblNXB.getModel();
+        tblModel.setRowCount(0);
+
+        for (edu.poly.duan1.model.NXB x : list) {
+            tblModel.addRow(new Object[]{
+                x.getId(),
+                x.getMa(),
+                x.getTen(),
+                sdf.format(x.getNgayTao()),
+                sdf.format(x.getNgaySua())}
+            );
+        }
+    }
+
+    public void search() {
+        String ten = txtTimKiem.getText();
+        loadDataTable(nxbService.search(ten));
     }
 
     /**
@@ -171,6 +192,11 @@ public class NXBView extends javax.swing.JFrame {
 
         btnTimKiem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnTimKiem.setText("Tìm Kiếm");
+        btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimKiemActionPerformed(evt);
+            }
+        });
 
         tblNXB.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -234,51 +260,53 @@ public class NXBView extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addGap(24, 24, 24)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel3)
+                                        .addComponent(jLabel4)
+                                        .addComponent(jLabel5))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel2)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(btnTimKiem))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel3)
-                                                .addComponent(jLabel4)
-                                                .addComponent(jLabel5))
                                             .addGap(22, 22, 22)
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                     .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addGroup(layout.createSequentialGroup()
-                                                    .addComponent(rdbCon)
-                                                    .addGap(18, 18, 18)
-                                                    .addComponent(rdbHet)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(lblTrangThai)))))
-                                    .addGap(6, 6, 6))
+                                                    .addGap(106, 106, 106)
+                                                    .addComponent(lblTrangThai))))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(18, 18, 18)
+                                            .addComponent(rdbCon)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(rdbHet)))
+                                    .addGap(96, 96, 96))
                                 .addGroup(layout.createSequentialGroup()
-                                    .addGap(8, 8, 8)
                                     .addComponent(btnThem)
-                                    .addGap(26, 26, 26)
+                                    .addGap(45, 45, 45)
                                     .addComponent(btnSua)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGap(43, 43, 43)
                                     .addComponent(btnXoa)
-                                    .addGap(29, 29, 29)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnLammoi)
-                                    .addGap(40, 40, 40))))
+                                    .addGap(17, 17, 17))))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addContainerGap()
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(152, 152, 152)
-                        .addComponent(jLabel1)))
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2)
+                        .addGap(30, 30, 30)
+                        .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnTimKiem)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -289,14 +317,14 @@ public class NXBView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
                     .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTimKiem)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTimKiem))
                 .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -305,20 +333,19 @@ public class NXBView extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(rdbCon)
-                        .addComponent(rdbHet))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel5)
-                        .addComponent(lblTrangThai)))
-                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(rdbCon)
+                    .addComponent(rdbHet))
+                .addGap(5, 5, 5)
+                .addComponent(lblTrangThai)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLammoi, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(41, Short.MAX_VALUE))
+                    .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLammoi, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnLammoi, btnSua, btnThem, btnXoa});
@@ -357,6 +384,10 @@ public class NXBView extends javax.swing.JFrame {
             rdbCon.setSelected(true);
         }
     }//GEN-LAST:event_tblNXBMouseClicked
+
+    private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
+        search();
+    }//GEN-LAST:event_btnTimKiemActionPerformed
 
     /**
      * @param args the command line arguments

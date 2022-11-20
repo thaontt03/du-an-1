@@ -37,4 +37,10 @@ public class NXBServiceImpl implements NXBService {
         return nxbRep.getObjbyMa(ma);
     }
 
+    @Override
+    public List<NXB> search(String ten) {
+        return nxbRep.search(ten);
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

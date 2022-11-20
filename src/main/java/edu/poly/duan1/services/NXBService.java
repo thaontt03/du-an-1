@@ -16,4 +16,6 @@ public interface NXBService {
     public Boolean delete(NXB nxb);
 
     public NXB getObjbyMa(String ma);
+
+    public List<NXB> search(String ten);
 }

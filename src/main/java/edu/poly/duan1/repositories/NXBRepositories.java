@@ -24,6 +24,14 @@ public class NXBRepositories {
         return list;
     }
 
+    public List<NXB> search(String ten) {
+        List<NXB> list = new ArrayList();
+        Query query = session.createQuery("SELECT c From NXB c where c.ten like :ten");
+        query.setParameter("ten", "%" + ten + "%");
+        list = query.getResultList();
+        return list;
+    }
+
     public Boolean saveOrUpdate(NXB nxb) {
         try {
             transaction.begin();
