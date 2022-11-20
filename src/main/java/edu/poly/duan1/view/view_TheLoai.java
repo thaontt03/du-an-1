@@ -10,6 +10,7 @@ import edu.poly.duan1.services.TheLoaiService;
 import edu.poly.duan1.services.impl.SachServicesImpl;
 import edu.poly.duan1.services.impl.TheLoaiServiceImpl;
 import edu.poly.duan1.ultis.helper;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import javax.swing.table.DefaultTableModel;
 
@@ -22,6 +23,7 @@ public class view_TheLoai extends javax.swing.JFrame {
     private TheLoaiService theLoaiServices = new TheLoaiServiceImpl();
     private DefaultTableModel tblModel;
     private helper helper = new helper();
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
     /**
      * Creates new form view_TheLoai
@@ -36,8 +38,15 @@ public class view_TheLoai extends javax.swing.JFrame {
         tblModel.setRowCount(0);
 
         for (edu.poly.duan1.model.TheLoai x : theLoaiServices.getAll()) {
-            tblModel.addRow(new Object[]{x.getId(), x.getMa(), x.getTen(), x.getNgayTao(), x.getNgaySua(), x.getTrangThai() == 1 ? "Còn" : "Hết"});
+            tblModel.addRow(new Object[]{
+                x.getId(),
+                x.getMa(),
+                x.getTen(),
+                sdf.format(x.getNgayTao()),
+                sdf.format(x.getNgaySua()),
+                x.getTrangThai() == 1 ? "Còn" : "Hết"});
         }
+
     }
 
     private boolean checkNull() {
@@ -62,6 +71,7 @@ public class view_TheLoai extends javax.swing.JFrame {
         s.setMa(txtMa.getText());
         s.setTen(txtTen.getText());
         s.setNgayTao(java.sql.Date.valueOf(LocalDate.now()));
+        s.setNgaySua(java.sql.Date.valueOf(LocalDate.now()));
         if (theLoaiServices.saveOrUpdate(s)) {
             helper.alert(this, "Thêm thành công");
         } else {
