@@ -20,4 +20,6 @@ public interface TheLoaiService {
     public Boolean delete(TheLoai s);
 
     public TheLoai getObjbyMa(String ma);
+    
+    public List<TheLoai> search(String ten);
 }

@@ -12,6 +12,7 @@ import edu.poly.duan1.services.impl.TheLoaiServiceImpl;
 import edu.poly.duan1.ultis.helper;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -31,6 +32,21 @@ public class view_TheLoai extends javax.swing.JFrame {
     public view_TheLoai() {
         initComponents();
         loadDataTable();
+    }
+
+    private void loadDataTable(List<TheLoai> list) {
+        tblModel = (DefaultTableModel) tblTheLoai.getModel();
+        tblModel.setRowCount(0);
+
+        for (edu.poly.duan1.model.TheLoai x : list) {
+            tblModel.addRow(new Object[]{
+                x.getId(),
+                x.getMa(),
+                x.getTen(),
+                sdf.format(x.getNgayTao()),
+                sdf.format(x.getNgaySua())}
+            );
+        }
     }
 
     private void loadDataTable() {
@@ -126,6 +142,11 @@ public class view_TheLoai extends javax.swing.JFrame {
             }
             loadDataTable();
         }
+    }
+
+    public void search() {
+        String ten = txtTimKiem.getText();
+        loadDataTable(theLoaiServices.search(ten));
     }
 
     /**

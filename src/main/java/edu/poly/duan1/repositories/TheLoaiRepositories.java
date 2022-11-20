@@ -18,12 +18,21 @@ import org.hibernate.Transaction;
  * @author Nguyen Thi Thu Thao
  */
 public class TheLoaiRepositories {
+
     Session session = HibernateConfig.getFACTORY().openSession();
     private Transaction transaction = session.getTransaction();
 
     public List<TheLoai> getAll() {
         List<TheLoai> list = new ArrayList<>();
         Query query = session.createQuery("SELECT c FROM TheLoai c");
+        list = query.getResultList();
+        return list;
+    }
+
+    public List<TheLoai> search(String ten) {
+        List<TheLoai> list = new ArrayList();
+        Query query = session.createQuery("SELECT c From TheLoai c where c.ten like :ten");
+        query.setParameter("ten", "%" + ten + "%");
         list = query.getResultList();
         return list;
     }

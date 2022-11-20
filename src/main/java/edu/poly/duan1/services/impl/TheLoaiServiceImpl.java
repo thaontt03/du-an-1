@@ -14,26 +14,34 @@ import java.util.List;
  *
  * @author Nguyen Thi Thu Thao
  */
-public class TheLoaiServiceImpl implements TheLoaiService{
-private TheLoaiRepositories sachRepositories = new TheLoaiRepositories();
+public class TheLoaiServiceImpl implements TheLoaiService {
+
+    private TheLoaiRepositories theLoaiRepositories = new TheLoaiRepositories();
+
     @Override
     public List<TheLoai> getAll() {
-        return sachRepositories.getAll();
+        return theLoaiRepositories.getAll();
     }
 
     @Override
     public Boolean saveOrUpdate(TheLoai s) {
-        return sachRepositories.saveOrUpdate(s);
+        return theLoaiRepositories.saveOrUpdate(s);
     }
 
     @Override
     public Boolean delete(TheLoai s) {
-        return sachRepositories.delete(s);
+        return theLoaiRepositories.delete(s);
     }
 
     @Override
     public TheLoai getObjbyMa(String ma) {
-       return sachRepositories.getObjbyMa(ma);
+        return theLoaiRepositories.getObjbyMa(ma);
     }
-    
+
+    @Override
+    public List<TheLoai> search(String ten) {
+        return theLoaiRepositories.search(ten);
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
