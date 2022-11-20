@@ -64,4 +64,12 @@ public class SachRepositories {
         }
         return s;
     }
+
+    public List<Sach> search(String ten) {
+        List<Sach> list = new ArrayList();
+        Query query = session.createQuery("SELECT c From Sach c where c.ten like :ten");
+        query.setParameter("ten", "%" + ten + "%");
+        list = query.getResultList();
+        return list;
+    }
 }

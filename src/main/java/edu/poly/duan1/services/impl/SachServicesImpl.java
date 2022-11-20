@@ -38,4 +38,9 @@ public class SachServicesImpl implements SachServices {
         return sachRepositories.getObjbyMa(ma);
     }
 
+    @Override
+    public List<Sach> search(String ten) {
+        return sachRepositories.search(ten);
+    }
+
 }

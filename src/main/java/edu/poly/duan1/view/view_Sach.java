@@ -11,6 +11,7 @@ import edu.poly.duan1.services.impl.SachServicesImpl;
 import edu.poly.duan1.ultis.helper;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -32,6 +33,8 @@ public class view_Sach extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         loadDataTable();
         tblSach.getTableHeader().setReorderingAllowed(false);
+        tblSach.setRowSelectionInterval(0, 0);
+        loadText();
     }
 
     private void loadDataTable() {
@@ -39,6 +42,21 @@ public class view_Sach extends javax.swing.JFrame {
         tblModel.setRowCount(0);
 
         for (edu.poly.duan1.model.Sach x : sachServices.getAll()) {
+            tblModel.addRow(new Object[]{
+                x.getId(),
+                x.getMa(),
+                x.getTen(),
+                sdf.format(x.getNgayTao()),
+                sdf.format(x.getNgaySua())}
+            );
+        }
+    }
+
+    private void loadDataTable(List<Sach> list) {
+        tblModel = (DefaultTableModel) tblSach.getModel();
+        tblModel.setRowCount(0);
+
+        for (edu.poly.duan1.model.Sach x : list) {
             tblModel.addRow(new Object[]{
                 x.getId(),
                 x.getMa(),
@@ -121,11 +139,28 @@ public class view_Sach extends javax.swing.JFrame {
         }
     }
 
+    public void search() {
+        String ten = txtTimKiem.getText();
+        loadDataTable(sachServices.search(ten));
+    }
+
     private void reset() {
         txtMa.setText("");
         txtTen.setText("");
         buttonGroup1.clearSelection();
 
+    }
+
+    private void loadText() {
+        int index = tblSach.getSelectedRow();
+        Sach s = sachServices.getAll().get(index);
+        txtMa.setText(s.getMa());
+        txtTen.setText(s.getTen());
+        if (s.getTrangThai() == 0) {
+            rdbHet.setSelected(true);
+        } else {
+            rdbCon.setSelected(true);
+        }
     }
 
     /**
@@ -151,7 +186,7 @@ public class view_Sach extends javax.swing.JFrame {
         btnReset = new javax.swing.JButton();
         txtMa = new javax.swing.JTextField();
         txtTen = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
+        txtTimKiem = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         rdbCon = new javax.swing.JRadioButton();
         rdbHet = new javax.swing.JRadioButton();
@@ -221,6 +256,12 @@ public class view_Sach extends javax.swing.JFrame {
             }
         });
 
+        txtTimKiem.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtTimKiemCaretUpdate(evt);
+            }
+        });
+
         jButton1.setText("Tìm kiếm");
 
         buttonGroup1.add(rdbCon);
@@ -279,7 +320,7 @@ public class view_Sach extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton1)))))
                 .addContainerGap())
@@ -298,7 +339,7 @@ public class view_Sach extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addGap(24, 24, 24)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -344,15 +385,7 @@ public class view_Sach extends javax.swing.JFrame {
     }//GEN-LAST:event_btnResetActionPerformed
 
     private void tblSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSachMouseClicked
-        int index = tblSach.getSelectedRow();
-        Sach s = sachServices.getAll().get(index);
-        txtMa.setText(s.getMa());
-        txtTen.setText(s.getTen());
-        if (s.getTrangThai() == 0) {
-            rdbHet.setSelected(true);
-        } else {
-            rdbCon.setSelected(true);
-        }
+        loadText();
     }//GEN-LAST:event_tblSachMouseClicked
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
@@ -362,6 +395,10 @@ public class view_Sach extends javax.swing.JFrame {
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         update();
     }//GEN-LAST:event_btnSuaActionPerformed
+
+    private void txtTimKiemCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTimKiemCaretUpdate
+        search();
+    }//GEN-LAST:event_txtTimKiemCaretUpdate
 
     /**
      * @param args the command line arguments
@@ -411,12 +448,12 @@ public class view_Sach extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lbID;
     private javax.swing.JRadioButton rdbCon;
     private javax.swing.JRadioButton rdbHet;
     private javax.swing.JTable tblSach;
     private javax.swing.JTextField txtMa;
     private javax.swing.JTextField txtTen;
+    private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
 }

@@ -12,7 +12,6 @@ import java.util.List;
  *
  * @author Nguyen Thi Thu Thao
  */
-
 public interface SachServices {
 
     public List<Sach> getAll();
@@ -22,4 +21,6 @@ public interface SachServices {
     public Boolean delete(Sach s);
 
     public Sach getObjbyMa(String ma);
+
+    public List<Sach> search(String ten);
 }
