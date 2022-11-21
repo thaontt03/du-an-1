@@ -88,6 +88,11 @@ public class ChucVuView extends javax.swing.JFrame {
         jLabel4.setText("Tìm Kiếm ");
 
         btntimkiem.setText("Tìm Kiếm");
+        btntimkiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btntimkiemActionPerformed(evt);
+            }
+        });
 
         tblchucvu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -269,6 +274,10 @@ public class ChucVuView extends javax.swing.JFrame {
         delete();
     }//GEN-LAST:event_btnXoaActionPerformed
 
+    private void btntimkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntimkiemActionPerformed
+        search();
+    }//GEN-LAST:event_btntimkiemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -340,6 +349,19 @@ public class ChucVuView extends javax.swing.JFrame {
 
     }
 
+    private void fillToTable(List<ChucVu> list) {
+        tblModel = (DefaultTableModel) tblchucvu.getModel();
+        tblModel.setRowCount(0);
+        for (edu.poly.duan1.model.ChucVu x : list) {
+            tblModel.addRow(new Object[]{
+                x.getId(),
+                x.getMa(),
+                x.getTen(),
+                sdf.format(x.getNgayTao()),
+                sdf.format(x.getNgaySua()),
+               x.getTrangThai() == 1 ? "Còn Hoạt Động" : "Đã Nghỉ"});
+        }
+}
     public boolean validatee() {
         if (txtma.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "chưa nhập mã nhân viên");
@@ -425,5 +447,9 @@ public class ChucVuView extends javax.swing.JFrame {
         txtten.setText("");
         buttonGroup1.clearSelection();
 
+    }
+     public void search() {
+        String ten = txttimkiem.getText();
+        fillToTable(chucVuu.search(ten));   
     }
 }

@@ -20,4 +20,6 @@ public interface ChucVuService {
     public Boolean delete(ChucVu s);
 
     public ChucVu getObjbyMa(String ma);
+    
+    public List<ChucVu> search(String ten);
 }

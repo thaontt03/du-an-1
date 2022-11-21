@@ -34,5 +34,10 @@ public class ChucVuServiceImpl implements ChucVuService{
     public ChucVu getObjbyMa(String ma) {
         return chucvuRepositoryy.getObjbyMa(ma);
     }
+
+    @Override
+    public List<ChucVu> search(String ten) {
+       return chucvuRepositoryy.search(ten);
+    }
     
 }

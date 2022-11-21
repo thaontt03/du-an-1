@@ -26,6 +26,13 @@ public class ChucVuRepository {
         list = query.getResultList();
         return list;
     }
+    public List<ChucVu> search(String ten) {
+        List<ChucVu> list = new ArrayList();
+        Query query = session.createQuery("SELECT c From ChucVu c where c.ten like :ten");
+        query.setParameter("ten", "%" + ten + "%");
+        list = query.getResultList();
+        return list;
+    }
 
     public Boolean saveOrUpdate(ChucVu s) {
         try {
@@ -62,4 +69,5 @@ public class ChucVuRepository {
         }
         return s;
     }
+   
 }
