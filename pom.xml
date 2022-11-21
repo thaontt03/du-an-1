@@ -32,6 +32,20 @@
             <version>1.18.24</version>
             <scope>provided</scope>
         </dependency>
-</dependencies>
+        <!-- https://mvnrepository.com/artifact/com.kenai.nbpwr/org-jdesktop-animation-timing -->
+        <dependency>
+            <groupId>com.kenai.nbpwr</groupId>
+            <artifactId>org-jdesktop-animation-timing</artifactId>
+            <version>1.0-201002281504</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/me.shib.plugin/text-file-writer-maven-plugin -->
+        <dependency>
+            <groupId>me.shib.plugin</groupId>
+            <artifactId>text-file-writer-maven-plugin</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+
+    </dependencies>
     
 </project>
