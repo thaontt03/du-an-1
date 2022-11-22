@@ -11,6 +11,7 @@ public class NewJFrame extends javax.swing.JFrame {
      */
     private Jp_Sach jpsach = new Jp_Sach();
     private view_KhachHang viewKH = new view_KhachHang();
+    private view_NCC viewNCC = new view_NCC();
 
     public NewJFrame() {
         initComponents();
@@ -96,7 +97,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         main.removeAll();
-        main.add(viewKH);
+        main.add(viewNCC);
         main.revalidate();
         main.repaint();
     }//GEN-LAST:event_jButton2ActionPerformed

@@ -215,6 +215,7 @@ public class view_Sach extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblSach.setSelectionBackground(new java.awt.Color(0, 204, 204));
         tblSach.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblSachMouseClicked(evt);
