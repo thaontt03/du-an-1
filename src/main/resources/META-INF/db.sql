@@ -126,7 +126,7 @@ CREATE TABLE NguoiDung(
     NgayTao DATE DEFAULT NULL,
     NgaySua DATE DEFAULT NULL,
     TrangThai INT DEFAULT 0,
-    TongTienMuaHang float default 0
+--     TongTienMuaHang float default 0
 )
 --Hóa đơn trả
 CREATE TABLE HoaDonTra(

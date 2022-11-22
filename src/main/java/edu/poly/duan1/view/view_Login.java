@@ -3,6 +3,7 @@ package edu.poly.duan1.view;
 import edu.poly.duan1.services.NguoiDungService;
 import edu.poly.duan1.services.impl.NguoiDungServiceImpl;
 import edu.poly.duan1.ultis.helper;
+import edu.poly.main.Main;
 
 /**
  *
@@ -27,7 +28,7 @@ public class view_Login extends javax.swing.JFrame {
         if (nguoiDungService.getObjbyMa(ma) == null) {
             helper.error(this, "Người dùng không tồn tại");
         } else if (mk.equals(nguoiDungService.getObjbyMa(ma).getMatKhau())) {
-            new view_Sach().setVisible(true);
+            new Main().setVisible(true);
             this.dispose();
         } else {
             helper.error(this, "Mật khẩu sai");
