@@ -542,7 +542,7 @@ public class view_NguoiDung extends javax.swing.JFrame {
         NguoiDung nd = new NguoiDung();
         nd.setMa(txtMa.getText());
         nd.setHoTen(txtHoTen.getText());
-
+        nd.setNgaySinh(java.sql.Date.valueOf(txtNS.getText()));
         nd.setGioiTinh(rdoNam.isSelected() ? "Nam" : "Nữ");
         nd.setDiaChi(txtDiaChi.getText());
         nd.setSdt(txtSĐT.getText());
@@ -567,6 +567,7 @@ public class view_NguoiDung extends javax.swing.JFrame {
         } else {
             nd.setMa(txtMa.getText());
             nd.setHoTen(txtHoTen.getText());
+            nd.setNgaySinh(java.sql.Date.valueOf(txtNS.getText()));
             nd.setGioiTinh(rdoNam.isSelected() ? "Nam" : "Nữ");
             nd.setDiaChi(txtDiaChi.getText());
             nd.setSdt(txtSĐT.getText());
