@@ -47,7 +47,9 @@ public class view_Sach extends javax.swing.JFrame {
                 x.getMa(),
                 x.getTen(),
                 sdf.format(x.getNgayTao()),
-                sdf.format(x.getNgaySua())}
+                sdf.format(x.getNgaySua()),
+                x.getTrangThai() == 1 ? "Còn" : "hết"
+            }
             );
         }
     }
@@ -62,7 +64,8 @@ public class view_Sach extends javax.swing.JFrame {
                 x.getMa(),
                 x.getTen(),
                 sdf.format(x.getNgayTao()),
-                sdf.format(x.getNgaySua())}
+                sdf.format(x.getNgaySua()),
+                x.getTrangThai() == 1 ? "Còn" : "hết"}
             );
         }
     }
