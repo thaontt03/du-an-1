@@ -147,10 +147,10 @@ public class ChucVuView extends javax.swing.JFrame {
         });
 
         buttonGroup1.add(rdoConhoatdong);
-        rdoConhoatdong.setText("Còn Hoạt Động");
+        rdoConhoatdong.setText("Đang Hoạt Động");
 
         buttonGroup1.add(rdodaNghi);
-        rdodaNghi.setText("Đã Nghỉ");
+        rdodaNghi.setText("Đang Trống");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -189,10 +189,9 @@ public class ChucVuView extends javax.swing.JFrame {
                                                 .addComponent(btnXoa)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(btnlammoi))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addGroup(layout.createSequentialGroup()
                                                 .addGap(30, 30, 30)
-                                                .addComponent(rdodaNghi, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(126, 126, 126)))
+                                                .addComponent(rdodaNghi, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addGap(10, 10, 10)))
                                 .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
