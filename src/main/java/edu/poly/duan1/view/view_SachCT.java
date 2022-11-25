@@ -16,6 +16,7 @@ import edu.poly.duan1.services.impl.SachCTServiceImpl;
 import edu.poly.duan1.services.impl.SachServicesImpl;
 import edu.poly.duan1.services.impl.TheLoaiServiceImpl;
 import edu.poly.duan1.ultis.helper;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import javax.swing.DefaultComboBoxModel;
@@ -129,8 +130,16 @@ public class view_SachCT extends javax.swing.JFrame {
         sct.setMoTa(txtMoTa.getText());
         sct.setTacGia(txtTacGia.getText());
         sct.setSoLuongTon((int) spSLT.getValue());
-        sct.setGiaNhap(helper.convertToDecimal(txtGiaNhap, "Giá nhập không hợp lệ"));
-        sct.setGiaBan(helper.convertToDecimal(txtGiaBan, "Giá nhập không hợp lệ"));
+        BigDecimal giaNhap = helper.convertToDecimal(txtGiaNhap, "Giá nhập không hợp lệ");
+        if (giaNhap == null) {
+            return;
+        }
+        BigDecimal giaBan = helper.convertToDecimal(txtGiaBan, "Giá nhập không hợp lệ");
+        if (giaNhap == null) {
+            return;
+        }
+        sct.setGiaNhap(giaNhap);
+        sct.setGiaBan(giaBan);
         sct.setNgayTao(java.sql.Date.valueOf(LocalDate.now()));
         sct.setNgaySua(java.sql.Date.valueOf(LocalDate.now()));
         if (sachCTService.saveOrUpdate(sct)) {
