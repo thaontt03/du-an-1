@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package edu.poly.duan1.view;
+package edu.poly.duan1.ViewNV;
 
+import edu.poly.duan1.view.*;
 import edu.poly.duan1.model.ChucVu;
 import edu.poly.duan1.services.ChucVuService;
 import edu.poly.duan1.services.impl.ChucVuServiceImpl;
@@ -18,10 +19,10 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Tran Tien
  */
-public class ChucVuView extends javax.swing.JFrame {
+public class ChucVuViewNV extends javax.swing.JFrame {
 
     /**
-     * Creates new form ChucVuView
+     * Creates new form ChucVuViewNV
      */
     private ChucVuService chucVuu = new ChucVuServiceImpl();
     private DefaultTableModel tblModel;
@@ -29,7 +30,7 @@ public class ChucVuView extends javax.swing.JFrame {
     private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 //    private List<ChucVu> cv;
 
-    public ChucVuView() {
+    public ChucVuViewNV() {
         initComponents();
         setLocationRelativeTo(null);
         fillToTable();
@@ -294,20 +295,23 @@ public class ChucVuView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ChucVuView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ChucVuViewNV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ChucVuView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ChucVuViewNV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ChucVuView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ChucVuViewNV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ChucVuView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ChucVuViewNV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ChucVuView().setVisible(true);
+                new ChucVuViewNV().setVisible(true);
             }
         });
     }

@@ -45,7 +45,9 @@ public class NXBView extends javax.swing.JFrame {
                 x.getMa(),
                 x.getTen(),
                 sdf.format(x.getNgayTao()),
-                sdf.format(x.getNgaySua())}
+                sdf.format(x.getNgaySua()),
+                x.getTrangThai()==1?"Đang Kinh Doanh": "Ngừng Kinh Doanh"
+                }
             );
         }
     }
@@ -145,7 +147,8 @@ public class NXBView extends javax.swing.JFrame {
                 x.getMa(),
                 x.getTen(),
                 sdf.format(x.getNgayTao()),
-                sdf.format(x.getNgaySua())}
+                sdf.format(x.getNgaySua()),
+            x.getTrangThai()==1?"Đang Hợp Tác": "Ngừng Hợp Tác"}
             );
         }
     }
@@ -250,9 +253,9 @@ public class NXBView extends javax.swing.JFrame {
             }
         });
 
-        rdbCon.setText("Còn");
+        rdbCon.setText("Đang Hợp Tác");
 
-        rdbHet.setText("Hết");
+        rdbHet.setText("Ngừng Hợp Tác");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

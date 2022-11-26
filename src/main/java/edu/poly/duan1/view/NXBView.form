@@ -280,12 +280,12 @@
     </Component>
     <Component class="javax.swing.JRadioButton" name="rdbCon">
       <Properties>
-        <Property name="text" type="java.lang.String" value="C&#xf2;n"/>
+        <Property name="text" type="java.lang.String" value="&#x110;ang H&#x1ee3;p T&#xe1;c"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JRadioButton" name="rdbHet">
       <Properties>
-        <Property name="text" type="java.lang.String" value="H&#x1ebf;t"/>
+        <Property name="text" type="java.lang.String" value="Ng&#x1eeb;ng H&#x1ee3;p T&#xe1;c"/>
       </Properties>
     </Component>
   </SubComponents>
