@@ -19,7 +19,7 @@ public class HoaDonRepositories {
 
     public List<HoaDon> getAll() {
         List<HoaDon> list = new ArrayList<>();
-        Query query = session.createQuery("SELECT h FROM HoaDon h");
+        Query query = session.createQuery("SELECT h FROM HoaDon h ORDER BY cast(SUBSTRING(ma,3,len(ma)-2) as int) desc");
         list = query.getResultList();
         return list;
     }
