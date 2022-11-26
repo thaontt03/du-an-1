@@ -56,8 +56,8 @@ public class view_SachCT extends javax.swing.JFrame {
         loadCbMaNXB();
         loadCbMaMCC();
         setLocationRelativeTo(null);
-        tblSachCT.setRowSelectionInterval(0, 0);
-        loadText();
+//        tblSachCT.setRowSelectionInterval(0, 0);
+//        loadText();
     }
 
     private void loadDataTable() {

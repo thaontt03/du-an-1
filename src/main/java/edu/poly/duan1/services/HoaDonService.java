@@ -4,20 +4,22 @@
  */
 package edu.poly.duan1.services;
 
-import edu.poly.duan1.model.SachCT;
+import edu.poly.duan1.model.HoaDon;
 import java.util.List;
 
 /**
  *
  * @author AnhTiTan
  */
-public interface SachCTService {
+public interface HoaDonService {
+    
+    public List<HoaDon> getAll();
 
-    public List<SachCT> getAll();
+    public Boolean saveOrUpdate(HoaDon hd);
 
-    public Boolean saveOrUpdate(SachCT stc);
+    public Boolean delete(HoaDon hd);
 
-    public Boolean delete(SachCT stc);
-
-    public SachCT getObjbyID(int id);
+    public HoaDon getObjbyMa(String ma);
+    
+    public List<HoaDon> search(int tt);
 }

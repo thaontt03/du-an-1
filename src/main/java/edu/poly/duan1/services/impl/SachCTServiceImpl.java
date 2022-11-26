@@ -27,4 +27,9 @@ public class SachCTServiceImpl implements SachCTService {
     public Boolean delete(SachCT stc) {
         return sachCTRep.delete(stc);
     }
+
+    @Override
+    public SachCT getObjbyID(int id) {
+        return sachCTRep.getObjbyID(id);
+    }
 }
