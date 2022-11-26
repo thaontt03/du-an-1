@@ -169,7 +169,7 @@ public class view_NguoiDung extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel1.setText("Quản Lý Tài Khoản");
+        jLabel1.setText("Quản Lý Người Dùng");
 
         jLabel2.setText("Mã");
 
