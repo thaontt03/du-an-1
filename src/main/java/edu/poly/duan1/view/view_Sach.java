@@ -48,7 +48,7 @@ public class view_Sach extends javax.swing.JFrame {
                 x.getTen(),
                 sdf.format(x.getNgayTao()),
                 sdf.format(x.getNgaySua()),
-                x.getTrangThai() == 1 ? "Còn" : "hết"
+                x.getTrangThai() == 1 ? "Đang Kinh Doanh" : "Ngừng Kinh Doanh"
             }
             );
         }
@@ -65,7 +65,7 @@ public class view_Sach extends javax.swing.JFrame {
                 x.getTen(),
                 sdf.format(x.getNgayTao()),
                 sdf.format(x.getNgaySua()),
-                x.getTrangThai() == 1 ? "Còn" : "hết"}
+                x.getTrangThai() == 1 ? "Đang Kinh Doanh" : "Ngừng Kinh Doanh"}
             );
         }
     }
@@ -269,10 +269,10 @@ public class view_Sach extends javax.swing.JFrame {
         jButton1.setText("Tìm kiếm");
 
         buttonGroup1.add(rdbCon);
-        rdbCon.setText("Còn");
+        rdbCon.setText("Đang Kinh Doanh ");
 
         buttonGroup1.add(rdbHet);
-        rdbHet.setText("Hết");
+        rdbHet.setText("Ngừng Kinh Doanh");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
