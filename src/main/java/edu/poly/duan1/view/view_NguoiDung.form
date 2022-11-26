@@ -230,7 +230,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Times New Roman" size="24" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n L&#xfd; Ng&#x1b0;&#x1edd;i D&#xf9;ng"/>
+        <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n L&#xfd; T&#xe0;i Kho&#x1ea3;n"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
@@ -341,7 +341,7 @@
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="buttonGroup2"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Ch&#x1b0;a &#x110;&#x103;ng K&#xfd;"/>
+        <Property name="text" type="java.lang.String" value="Ngh&#x1ec9; L&#xe0;m"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JRadioButton" name="rdoDDK">
@@ -349,7 +349,7 @@
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="buttonGroup2"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="&#x110;&#xe3; &#x110;&#x103;ng K&#xfd;"/>
+        <Property name="text" type="java.lang.String" value="&#x110;ang l&#xe0;m vi&#x1ec7;c"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">

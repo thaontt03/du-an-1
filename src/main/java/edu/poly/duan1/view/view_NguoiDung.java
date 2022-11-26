@@ -66,7 +66,7 @@ public class view_NguoiDung extends javax.swing.JFrame {
                 x.getChucVu().getTen(),
                 x.getNgayTao(),
                 x.getNgaySua(),
-                x.getTrangThai() == 1 ? "Đã Đăng Ký" : "Chưa Đăng Ký"
+                x.getTrangThai() == 1 ? "Đang làm việc" : "Nghỉ Làm"
             });
         }
     }
@@ -169,7 +169,7 @@ public class view_NguoiDung extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel1.setText("Quản Lý Người Dùng");
+        jLabel1.setText("Quản Lý Tài Khoản");
 
         jLabel2.setText("Mã");
 
@@ -208,10 +208,10 @@ public class view_NguoiDung extends javax.swing.JFrame {
         cboChucVu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         buttonGroup2.add(rdoCDK);
-        rdoCDK.setText("Chưa Đăng Ký");
+        rdoCDK.setText("Nghỉ Làm");
 
         buttonGroup2.add(rdoDDK);
-        rdoDDK.setText("Đã Đăng Ký");
+        rdoDDK.setText("Đang làm việc");
 
         tblND.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -551,6 +551,13 @@ public class view_NguoiDung extends javax.swing.JFrame {
         nd.setChucVu(cv);
         nd.setNgayTao(java.sql.Date.valueOf(LocalDate.now()));
         nd.setNgaySua(java.sql.Date.valueOf(LocalDate.now()));
+        int a;
+            if (rdoDDK.isSelected()) {
+                a = 1;
+            } else {
+                a = 0;
+            }
+            nd.setTrangThai(a);
         if (ndService.saveOrUpdate(nd)) {
             helper.alert(this, "Thêm Thành Công");
         } else {
@@ -592,7 +599,8 @@ public class view_NguoiDung extends javax.swing.JFrame {
             loadDataTable();
         }
     }
-     private void delete() {
+
+    private void delete() {
         int index = tblND.getSelectedRow();
         if (index == -1) {
             helper.error(this, "vui lòng chọn dòng cần xóa");
@@ -618,7 +626,5 @@ public class view_NguoiDung extends javax.swing.JFrame {
         txtNgayTao.setText("");
         txtNgaySua.setText("");
     }
-
-
 
 }
