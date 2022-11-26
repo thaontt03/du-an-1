@@ -45,7 +45,7 @@ public class view_TheLoai extends javax.swing.JFrame {
                 x.getTen(),
                 sdf.format(x.getNgayTao()),
                 sdf.format(x.getNgaySua()),
-                x.getTrangThai()==1?"Còn":"hết"
+                x.getTrangThai()==1?"Đang Kinh Doanh":"Ngừng Kinh Doanh"
             }
             );
         }
@@ -62,7 +62,7 @@ public class view_TheLoai extends javax.swing.JFrame {
                 x.getTen(),
                 sdf.format(x.getNgayTao()),
                 sdf.format(x.getNgaySua()),
-                x.getTrangThai() == 1 ? "Còn" : "Hết"});
+                x.getTrangThai()==1?"Đang Kinh Doanh":"Ngừng Kinh Doanh"});
         }
 
     }
@@ -256,10 +256,10 @@ public class view_TheLoai extends javax.swing.JFrame {
         });
 
         buttonGroup1.add(rdbCon);
-        rdbCon.setText("Còn");
+        rdbCon.setText("Đang Kinh Doanh");
 
         buttonGroup1.add(rdbHet);
-        rdbHet.setText("Hết");
+        rdbHet.setText("Ngừng Kinh Doanh");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -295,7 +295,7 @@ public class view_TheLoai extends javax.swing.JFrame {
                                             .addComponent(jLabel4)
                                             .addGap(18, 18, 18)
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(txtTen, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
+                                                .addComponent(txtTen)
                                                 .addComponent(txtMa)
                                                 .addGroup(layout.createSequentialGroup()
                                                     .addComponent(rdbCon)
