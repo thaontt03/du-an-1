@@ -290,6 +290,9 @@
                           </Table>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblGioHangMouseClicked"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -479,14 +482,14 @@
                           <Component id="textField2" linkSize="1" alignment="0" max="32767" attributes="0"/>
                           <Component id="textField3" linkSize="1" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtTongTien" linkSize="1" alignment="0" max="32767" attributes="0"/>
-                          <Component id="textField5" linkSize="1" alignment="0" max="32767" attributes="0"/>
-                          <Component id="textField6" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtTienKhachDua" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtTienThua" linkSize="1" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace pref="174" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="button2" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnThanhToan" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="137" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -502,24 +505,27 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="txtTongTien" linkSize="2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="textField5" linkSize="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtTienKhachDua" linkSize="2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="textField6" linkSize="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtTienThua" linkSize="2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
-                      <Component id="button2" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnThanhToan" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="49" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="edu.poly.swing.Button" name="button2">
+            <Component class="edu.poly.swing.Button" name="btnThanhToan">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="cc" red="cc" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Thanh To&#xe1;n"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThanhToanActionPerformed"/>
+              </Events>
             </Component>
             <Component class="edu.poly.duan1.swing.textfield.TextField" name="textField1">
               <Properties>
@@ -541,12 +547,15 @@
                 <Property name="labelText" type="java.lang.String" value="T&#x1ed5;ng ti&#x1ec1;n"/>
               </Properties>
             </Component>
-            <Component class="edu.poly.duan1.swing.textfield.TextField" name="textField5">
+            <Component class="edu.poly.duan1.swing.textfield.TextField" name="txtTienKhachDua">
               <Properties>
                 <Property name="labelText" type="java.lang.String" value="Ti&#x1ec1;n kh&#xe1;ch &#x111;&#x1b0;a"/>
               </Properties>
+              <Events>
+                <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="txtTienKhachDuaCaretUpdate"/>
+              </Events>
             </Component>
-            <Component class="edu.poly.duan1.swing.textfield.TextField" name="textField6">
+            <Component class="edu.poly.duan1.swing.textfield.TextField" name="txtTienThua">
               <Properties>
                 <Property name="labelText" type="java.lang.String" value="Ti&#x1ec1;n th&#x1eeb;a"/>
               </Properties>
@@ -560,6 +569,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Tr&#x1edf; v&#x1ec1; m&#xe0;n h&#xec;nh ch&#xed;nh"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button3ActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
