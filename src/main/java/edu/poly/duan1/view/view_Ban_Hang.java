@@ -135,21 +135,21 @@ public class view_Ban_Hang extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         tblGioHang = new edu.poly.duan1.swing.table.Table();
         jPanel2 = new javax.swing.JPanel();
-        btnTaoHD = new edu.poly.swing.Button();
         rdChuaTT = new edu.poly.duan1.swing.radio_button.RadioButtonCustom();
         rdDaTT = new edu.poly.duan1.swing.radio_button.RadioButtonCustom();
         rdTatCa = new edu.poly.duan1.swing.radio_button.RadioButtonCustom();
         roundPanel1 = new edu.poly.duan1.swing.scrollbar.roundpanel.RoundPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblHD = new edu.poly.duan1.swing.table.Table();
+        btnTaoHoaDon = new edu.poly.duan1.swing.button.Button();
         jPanel4 = new javax.swing.JPanel();
-        btnThanhToan = new edu.poly.swing.Button();
         txtMaHD = new edu.poly.duan1.swing.textfield.TextField();
         txtNgayTao = new edu.poly.duan1.swing.textfield.TextField();
         txtNhanVien = new edu.poly.duan1.swing.textfield.TextField();
         txtTongTien = new edu.poly.duan1.swing.textfield.TextField();
         txtTienKhachDua = new edu.poly.duan1.swing.textfield.TextField();
         txtTienThua = new edu.poly.duan1.swing.textfield.TextField();
+        btnThanhToan = new edu.poly.duan1.swing.button.Button();
         button3 = new edu.poly.duan1.swing.button.Button();
 
         radioButtonCustom1.setText("radioButtonCustom1");
@@ -272,14 +272,6 @@ public class view_Ban_Hang extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Hóa đơn"));
 
-        btnTaoHD.setBackground(new java.awt.Color(204, 204, 204));
-        btnTaoHD.setText("Tạo Hóa Đơn");
-        btnTaoHD.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTaoHDActionPerformed(evt);
-            }
-        });
-
         rdChuaTT.setText("Chưa thanh toán");
         rdChuaTT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -344,6 +336,13 @@ public class view_Ban_Hang extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        btnTaoHoaDon.setText("Tạo Hóa Đơn");
+        btnTaoHoaDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTaoHoaDonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -356,8 +355,8 @@ public class view_Ban_Hang extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnTaoHD, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(61, 61, 61)
+                        .addComponent(btnTaoHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(104, 104, 104)
                         .addComponent(rdChuaTT, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
                         .addComponent(rdDaTT, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -372,7 +371,7 @@ public class view_Ban_Hang extends javax.swing.JFrame {
                     .addComponent(rdTatCa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rdDaTT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rdChuaTT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTaoHD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnTaoHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(roundPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -380,14 +379,6 @@ public class view_Ban_Hang extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Hóa đơn"));
-
-        btnThanhToan.setBackground(new java.awt.Color(204, 204, 204));
-        btnThanhToan.setText("Thanh Toán");
-        btnThanhToan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThanhToanActionPerformed(evt);
-            }
-        });
 
         txtMaHD.setLabelText("Mã HD");
 
@@ -406,6 +397,13 @@ public class view_Ban_Hang extends javax.swing.JFrame {
 
         txtTienThua.setLabelText("Tiền thừa");
 
+        btnThanhToan.setText("Thanh Toán");
+        btnThanhToan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThanhToanActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -423,7 +421,7 @@ public class view_Ban_Hang extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(137, 137, 137))
+                .addGap(57, 57, 57))
         );
 
         jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtMaHD, txtNgayTao, txtNhanVien, txtTienKhachDua, txtTienThua, txtTongTien});
@@ -442,9 +440,9 @@ public class view_Ban_Hang extends javax.swing.JFrame {
                 .addComponent(txtTienKhachDua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtTienThua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(69, 69, 69)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
                 .addComponent(btnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addGap(28, 28, 28))
         );
 
         jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtMaHD, txtNgayTao, txtNhanVien, txtTienKhachDua, txtTienThua, txtTongTien});
@@ -528,10 +526,6 @@ private void taoHoaDon() {
         }
         loadDataHoaDon(hoaDonService.getAll());
     }
-    private void btnTaoHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoHDActionPerformed
-        taoHoaDon();
-    }//GEN-LAST:event_btnTaoHDActionPerformed
-
     private void tblSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMouseClicked
 
         try {
@@ -623,8 +617,7 @@ private void taoHoaDon() {
             txtTienThua.setText(tienKhachDua - tongTien + "");
         }
     }//GEN-LAST:event_txtTienKhachDuaCaretUpdate
-
-    private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
+    private void thanhToan() {
         Double tongTien = 0.0;
         Double tienKhachDua = 0.0;
         Double tienThua = 0.0;
@@ -658,8 +651,7 @@ private void taoHoaDon() {
 
         }
         LoadData();
-    }//GEN-LAST:event_btnThanhToanActionPerformed
-
+    }
     private void tblGioHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGioHangMouseClicked
         String input = JOptionPane.showInputDialog("Nhập số lượng");
         Integer soLuong = Integer.parseInt(input);
@@ -683,6 +675,14 @@ private void taoHoaDon() {
     private void rdTatCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdTatCaActionPerformed
         loadDataHoaDon(hoaDonService.getAll());
     }//GEN-LAST:event_rdTatCaActionPerformed
+
+    private void btnTaoHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoHoaDonActionPerformed
+        taoHoaDon();
+    }//GEN-LAST:event_btnTaoHoaDonActionPerformed
+
+    private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
+        thanhToan();
+    }//GEN-LAST:event_btnThanhToanActionPerformed
 
     ButtonGroup buttonGroup1 = new ButtonGroup();
 
@@ -728,8 +728,8 @@ private void taoHoaDon() {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private edu.poly.swing.Button btnTaoHD;
-    private edu.poly.swing.Button btnThanhToan;
+    private edu.poly.duan1.swing.button.Button btnTaoHoaDon;
+    private edu.poly.duan1.swing.button.Button btnThanhToan;
     private edu.poly.duan1.swing.button.Button button3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
