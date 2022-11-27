@@ -4,6 +4,7 @@ import edu.poly.component.Header;
 import edu.poly.component.Menu;
 import edu.poly.duan1.ultis.helper;
 import edu.poly.duan1.view.Panel_SachCT;
+import edu.poly.duan1.view.view_Ban_Hang;
 import edu.poly.duan1.view.view_KhachHang;
 import edu.poly.duan1.view.view_NCC;
 import edu.poly.duan1.view.view_SachCT;
@@ -54,9 +55,14 @@ public class Main extends javax.swing.JFrame {
                         main.showForm(new view_NCC());
                     } else if (subMenuIndex == 1) {
                         main.showForm(new Form1());
-                    }
+                    }                    
+                } else if (menuIndex == 1) {
+                    logoutƠut();
+                    new view_Ban_Hang().setVisible(true);
+                
                 } else if (menuIndex == 3) {
                     logoutƠut();
+//                    new view_Ban_Hang().setVisible(true);
                 }
             }
         });

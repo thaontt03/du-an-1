@@ -326,11 +326,11 @@
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               <Component id="btnTaoHD" min="-2" pref="84" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
-                              <Component id="radioButtonCustom4" min="-2" pref="125" max="-2" attributes="0"/>
+                              <Component id="rdChuaTT" min="-2" pref="125" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                              <Component id="rdDaThanhToan" min="-2" pref="113" max="-2" attributes="0"/>
+                              <Component id="rdDaTT" min="-2" pref="113" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="radioButtonCustom6" min="-2" pref="83" max="-2" attributes="0"/>
+                              <Component id="rdTatCa" min="-2" pref="83" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -341,9 +341,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="radioButtonCustom6" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="rdDaThanhToan" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="radioButtonCustom4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="rdTatCa" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="rdDaTT" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="rdChuaTT" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnTaoHD" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -365,20 +365,29 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTaoHDActionPerformed"/>
               </Events>
             </Component>
-            <Component class="edu.poly.duan1.swing.radio_button.RadioButtonCustom" name="radioButtonCustom4">
+            <Component class="edu.poly.duan1.swing.radio_button.RadioButtonCustom" name="rdChuaTT">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Ch&#x1b0;a thanh to&#xe1;n"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdChuaTTActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="edu.poly.duan1.swing.radio_button.RadioButtonCustom" name="rdDaThanhToan">
+            <Component class="edu.poly.duan1.swing.radio_button.RadioButtonCustom" name="rdDaTT">
               <Properties>
                 <Property name="text" type="java.lang.String" value="&#x110;&#xe3; thanh to&#xe1;n"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdDaTTActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="edu.poly.duan1.swing.radio_button.RadioButtonCustom" name="radioButtonCustom6">
+            <Component class="edu.poly.duan1.swing.radio_button.RadioButtonCustom" name="rdTatCa">
               <Properties>
                 <Property name="text" type="java.lang.String" value="T&#x1ea5;t c&#x1ea3;"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdTatCaActionPerformed"/>
+              </Events>
             </Component>
             <Container class="edu.poly.duan1.swing.scrollbar.roundpanel.RoundPanel" name="roundPanel1">
 
@@ -478,9 +487,9 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="84" pref="84" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="textField1" linkSize="1" alignment="0" pref="288" max="32767" attributes="0"/>
-                          <Component id="textField2" linkSize="1" alignment="0" max="32767" attributes="0"/>
-                          <Component id="textField3" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtMaHD" linkSize="1" alignment="0" pref="288" max="32767" attributes="0"/>
+                          <Component id="txtNgayTao" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtNhanVien" linkSize="1" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtTongTien" linkSize="1" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtTienKhachDua" linkSize="1" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtTienThua" linkSize="1" alignment="0" max="32767" attributes="0"/>
@@ -497,11 +506,11 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="textField1" linkSize="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtMaHD" linkSize="2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="textField2" linkSize="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtNgayTao" linkSize="2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="textField3" linkSize="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtNhanVien" linkSize="2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="txtTongTien" linkSize="2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -527,17 +536,17 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThanhToanActionPerformed"/>
               </Events>
             </Component>
-            <Component class="edu.poly.duan1.swing.textfield.TextField" name="textField1">
+            <Component class="edu.poly.duan1.swing.textfield.TextField" name="txtMaHD">
               <Properties>
                 <Property name="labelText" type="java.lang.String" value="M&#xe3; HD"/>
               </Properties>
             </Component>
-            <Component class="edu.poly.duan1.swing.textfield.TextField" name="textField2">
+            <Component class="edu.poly.duan1.swing.textfield.TextField" name="txtNgayTao">
               <Properties>
                 <Property name="labelText" type="java.lang.String" value="Ng&#xe0;y t&#x1ea1;o"/>
               </Properties>
             </Component>
-            <Component class="edu.poly.duan1.swing.textfield.TextField" name="textField3">
+            <Component class="edu.poly.duan1.swing.textfield.TextField" name="txtNhanVien">
               <Properties>
                 <Property name="labelText" type="java.lang.String" value="T&#xea;n NV"/>
               </Properties>

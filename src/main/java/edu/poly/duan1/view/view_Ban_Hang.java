@@ -19,6 +19,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -46,7 +47,8 @@ public class view_Ban_Hang extends javax.swing.JFrame {
         tblSanPham.fixTable(jScrollPane6);
         LoadData();
         List<HoaDonCT> listGH = new ArrayList<>();
-
+        GroupTT();
+        rdTatCa.setSelected(true);
     }
 
     private void loadDataTaSach(List<SachCT> list) {
@@ -134,17 +136,17 @@ public class view_Ban_Hang extends javax.swing.JFrame {
         tblGioHang = new edu.poly.duan1.swing.table.Table();
         jPanel2 = new javax.swing.JPanel();
         btnTaoHD = new edu.poly.swing.Button();
-        radioButtonCustom4 = new edu.poly.duan1.swing.radio_button.RadioButtonCustom();
-        rdDaThanhToan = new edu.poly.duan1.swing.radio_button.RadioButtonCustom();
-        radioButtonCustom6 = new edu.poly.duan1.swing.radio_button.RadioButtonCustom();
+        rdChuaTT = new edu.poly.duan1.swing.radio_button.RadioButtonCustom();
+        rdDaTT = new edu.poly.duan1.swing.radio_button.RadioButtonCustom();
+        rdTatCa = new edu.poly.duan1.swing.radio_button.RadioButtonCustom();
         roundPanel1 = new edu.poly.duan1.swing.scrollbar.roundpanel.RoundPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblHD = new edu.poly.duan1.swing.table.Table();
         jPanel4 = new javax.swing.JPanel();
         btnThanhToan = new edu.poly.swing.Button();
-        textField1 = new edu.poly.duan1.swing.textfield.TextField();
-        textField2 = new edu.poly.duan1.swing.textfield.TextField();
-        textField3 = new edu.poly.duan1.swing.textfield.TextField();
+        txtMaHD = new edu.poly.duan1.swing.textfield.TextField();
+        txtNgayTao = new edu.poly.duan1.swing.textfield.TextField();
+        txtNhanVien = new edu.poly.duan1.swing.textfield.TextField();
         txtTongTien = new edu.poly.duan1.swing.textfield.TextField();
         txtTienKhachDua = new edu.poly.duan1.swing.textfield.TextField();
         txtTienThua = new edu.poly.duan1.swing.textfield.TextField();
@@ -278,11 +280,26 @@ public class view_Ban_Hang extends javax.swing.JFrame {
             }
         });
 
-        radioButtonCustom4.setText("Chưa thanh toán");
+        rdChuaTT.setText("Chưa thanh toán");
+        rdChuaTT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdChuaTTActionPerformed(evt);
+            }
+        });
 
-        rdDaThanhToan.setText("Đã thanh toán");
+        rdDaTT.setText("Đã thanh toán");
+        rdDaTT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdDaTTActionPerformed(evt);
+            }
+        });
 
-        radioButtonCustom6.setText("Tất cả");
+        rdTatCa.setText("Tất cả");
+        rdTatCa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdTatCaActionPerformed(evt);
+            }
+        });
 
         tblHD.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -341,20 +358,20 @@ public class view_Ban_Hang extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnTaoHD, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(61, 61, 61)
-                        .addComponent(radioButtonCustom4, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(rdChuaTT, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
-                        .addComponent(rdDaThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(rdDaTT, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(radioButtonCustom6, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(rdTatCa, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(17, 17, 17))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(radioButtonCustom6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rdDaThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(radioButtonCustom4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rdTatCa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rdDaTT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rdChuaTT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTaoHD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(roundPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -372,11 +389,11 @@ public class view_Ban_Hang extends javax.swing.JFrame {
             }
         });
 
-        textField1.setLabelText("Mã HD");
+        txtMaHD.setLabelText("Mã HD");
 
-        textField2.setLabelText("Ngày tạo");
+        txtNgayTao.setLabelText("Ngày tạo");
 
-        textField3.setLabelText("Tên NV");
+        txtNhanVien.setLabelText("Tên NV");
 
         txtTongTien.setLabelText("Tổng tiền");
 
@@ -396,9 +413,9 @@ public class view_Ban_Hang extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(84, 84, 84)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(textField1, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
-                    .addComponent(textField2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(textField3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtMaHD, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
+                    .addComponent(txtNgayTao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtNhanVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtTongTien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtTienKhachDua, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtTienThua, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -409,16 +426,16 @@ public class view_Ban_Hang extends javax.swing.JFrame {
                 .addGap(137, 137, 137))
         );
 
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {textField1, textField2, textField3, txtTienKhachDua, txtTienThua, txtTongTien});
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtMaHD, txtNgayTao, txtNhanVien, txtTienKhachDua, txtTienThua, txtTongTien});
 
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtMaHD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -430,7 +447,7 @@ public class view_Ban_Hang extends javax.swing.JFrame {
                 .addContainerGap(49, Short.MAX_VALUE))
         );
 
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {textField1, textField2, textField3, txtTienKhachDua, txtTienThua, txtTongTien});
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtMaHD, txtNgayTao, txtNhanVien, txtTienKhachDua, txtTienThua, txtTongTien});
 
         button3.setBackground(new java.awt.Color(204, 204, 204));
         button3.setText("Trở về màn hình chính");
@@ -490,8 +507,7 @@ public class view_Ban_Hang extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnTaoHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoHDActionPerformed
+private void taoHoaDon() {
         HoaDon hd = new HoaDon();
         String result;
         hd.setNgayTao(java.sql.Date.valueOf(LocalDate.now()));
@@ -511,6 +527,9 @@ public class view_Ban_Hang extends javax.swing.JFrame {
 
         }
         loadDataHoaDon(hoaDonService.getAll());
+    }
+    private void btnTaoHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoHDActionPerformed
+        taoHoaDon();
     }//GEN-LAST:event_btnTaoHDActionPerformed
 
     private void tblSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMouseClicked
@@ -560,11 +579,16 @@ public class view_Ban_Hang extends javax.swing.JFrame {
             }
         }
         txtTongTien.setText(tongTien.toString());
+        //  BigDecimal tienKhach = BigDecimal.valueOf(Double.parseDouble(txtTienKhachDua_hd.getText()));
+        // BigDecimal tongTien = (BigDecimal) tbHoaDonChiTiet.getValueAt(row, 4);
     }//GEN-LAST:event_tblSanPhamMouseClicked
 
     private void tblHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHDMouseClicked
         int row = tblHD.getSelectedRow();
+        HoaDon hd = hoaDonService.getObjbyMa((String) tblHD.getValueAt(row, 1));
         loadDataGH((List<HoaDonCT>) hoaDonCTService.getObjbyMa((String) tblHD.getValueAt(row, 1)));
+        txtMaHD.setText(hd.getMa());
+        txtNgayTao.setText(sdf.format(hd.getNgayTao()) + "");
         Double tongTien = 0.0;
         // Tổng tiền
         for (int i = 0; i < tblGioHang.getRowCount(); i++) {
@@ -648,6 +672,26 @@ public class view_Ban_Hang extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tblGioHangMouseClicked
 
+    private void rdChuaTTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdChuaTTActionPerformed
+        loadDataHoaDon(hoaDonService.search(0));
+    }//GEN-LAST:event_rdChuaTTActionPerformed
+
+    private void rdDaTTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdDaTTActionPerformed
+        loadDataHoaDon(hoaDonService.search(1));
+    }//GEN-LAST:event_rdDaTTActionPerformed
+
+    private void rdTatCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdTatCaActionPerformed
+        loadDataHoaDon(hoaDonService.getAll());
+    }//GEN-LAST:event_rdTatCaActionPerformed
+
+    ButtonGroup buttonGroup1 = new ButtonGroup();
+
+    private void GroupTT() {
+        buttonGroup1.add(rdChuaTT);
+        buttonGroup1.add(rdDaTT);
+        buttonGroup1.add(rdTatCa);
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -696,19 +740,19 @@ public class view_Ban_Hang extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private edu.poly.duan1.swing.radio_button.RadioButtonCustom radioButtonCustom1;
-    private edu.poly.duan1.swing.radio_button.RadioButtonCustom radioButtonCustom4;
-    private edu.poly.duan1.swing.radio_button.RadioButtonCustom radioButtonCustom6;
-    private edu.poly.duan1.swing.radio_button.RadioButtonCustom rdDaThanhToan;
+    private edu.poly.duan1.swing.radio_button.RadioButtonCustom rdChuaTT;
+    private edu.poly.duan1.swing.radio_button.RadioButtonCustom rdDaTT;
+    private edu.poly.duan1.swing.radio_button.RadioButtonCustom rdTatCa;
     private edu.poly.duan1.swing.scrollbar.roundpanel.RoundPanel roundPanel1;
     private edu.poly.duan1.swing.scrollbar.roundpanel.RoundPanel roundPanel2;
     private edu.poly.duan1.swing.scrollbar.roundpanel.RoundPanel roundPanel3;
     private edu.poly.duan1.swing.table.Table tblGioHang;
     private edu.poly.duan1.swing.table.Table tblHD;
     private edu.poly.duan1.swing.table.Table tblSanPham;
-    private edu.poly.duan1.swing.textfield.TextField textField1;
-    private edu.poly.duan1.swing.textfield.TextField textField2;
-    private edu.poly.duan1.swing.textfield.TextField textField3;
     private edu.poly.duan1.swing.textfield.TextField textField7;
+    private edu.poly.duan1.swing.textfield.TextField txtMaHD;
+    private edu.poly.duan1.swing.textfield.TextField txtNgayTao;
+    private edu.poly.duan1.swing.textfield.TextField txtNhanVien;
     private edu.poly.duan1.swing.textfield.TextField txtTienKhachDua;
     private edu.poly.duan1.swing.textfield.TextField txtTienThua;
     private edu.poly.duan1.swing.textfield.TextField txtTongTien;

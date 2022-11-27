@@ -79,7 +79,7 @@ public class view_SachCT extends javax.swing.JFrame {
                 x.getGiaBan(),
                 sdf.format(x.getNgayTao()),
                 sdf.format(x.getNgaySua()),
-                x.getTrangThai() == 1 ? "Đang Kinh Doanh" : "Ngừng Kinh Doanh"
+                x.getTrangThai() == 1 ? "Hết" : "Còn"
             });
         }
     }
@@ -163,10 +163,17 @@ public class view_SachCT extends javax.swing.JFrame {
         sct.setNCC(ncc);
         sct.setMoTa(txtMoTa.getText());
         sct.setTacGia(txtTacGia.getText());
-        sct.setSoLuongTon((int) spSLT.getValue());
+       
+        int soluongton =(int) spSLT.getValue();
+         sct.setSoLuongTon(soluongton);
         sct.setGiaNhap(helper.convertToDecimal(txtGiaNhap, "Giá nhập không hợp lệ"));
         sct.setGiaBan(helper.convertToDecimal(txtGiaBan, "Giá nhập không hợp lệ"));
         sct.setNgaySua(java.sql.Date.valueOf(LocalDate.now()));
+        if(soluongton>0){
+            sct.setTrangThai(0);
+        }else if(soluongton<=0){
+            sct.setTrangThai(1);
+        }
         if (sachCTService.saveOrUpdate(sct)) {
             helper.alert(this, "sửa oke");
         } else {

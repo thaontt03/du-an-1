@@ -52,7 +52,7 @@ public class HoaDonRepositories {
 
     public List<HoaDon> search(int tt) {
         List<HoaDon> list = new ArrayList<>();
-        Query query = session.createQuery("SELECT h FROM HoaDon h where h.trangThai = :tt");
+        Query query = session.createQuery("SELECT h FROM HoaDon h where h.trangThai = :tt ORDER BY cast(SUBSTRING(ma,3,len(ma)-2) as int) desc");
         query.setParameter("tt", tt);
         list = query.getResultList();
         return list;
