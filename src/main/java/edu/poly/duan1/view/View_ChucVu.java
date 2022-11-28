@@ -18,10 +18,10 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Tran Tien
  */
-public class ChucVuView extends javax.swing.JFrame {
+public class View_ChucVu extends javax.swing.JFrame {
 
     /**
-     * Creates new form ChucVuView
+     * Creates new form View_ChucVu
      */
     private ChucVuService chucVuu = new ChucVuServiceImpl();
     private DefaultTableModel tblModel;
@@ -29,7 +29,7 @@ public class ChucVuView extends javax.swing.JFrame {
     private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 //    private List<ChucVu> cv;
 
-    public ChucVuView() {
+    public View_ChucVu() {
         initComponents();
         setLocationRelativeTo(null);
         fillToTable();
@@ -294,20 +294,21 @@ public class ChucVuView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ChucVuView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(View_ChucVu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ChucVuView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(View_ChucVu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ChucVuView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(View_ChucVu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ChucVuView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(View_ChucVu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ChucVuView().setVisible(true);
+                new View_ChucVu().setVisible(true);
             }
         });
     }

@@ -12,6 +12,8 @@ import java.util.List;
  * @author Tran Tien
  */
 public interface ChucVuService {
+    
+    public List<ChucVu> getAll2(int heso);
 
     public List<ChucVu> getAll();
 

@@ -18,17 +18,17 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Admin 88
  */
-public class NXBView extends javax.swing.JFrame {
+public class View_NXB extends javax.swing.JFrame {
 
     /**
-     * Creates new form NXBView
+     * Creates new form View_NXB
      */
     private NXBService nxbService = new NXBServiceImpl();
     private DefaultTableModel tblModel;
     private helper helper = new helper();
     private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
-    public NXBView() {
+    public View_NXB() {
         initComponents();
         setLocationRelativeTo(null);
         loadDataTable();
@@ -409,20 +409,21 @@ public class NXBView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NXBView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(View_NXB.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NXBView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(View_NXB.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NXBView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(View_NXB.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NXBView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(View_NXB.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NXBView().setVisible(true);
+                new View_NXB().setVisible(true);
             }
         });
     }

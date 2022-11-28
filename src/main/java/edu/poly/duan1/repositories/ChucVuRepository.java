@@ -26,6 +26,12 @@ public class ChucVuRepository {
         list = query.getResultList();
         return list;
     }
+     public List<ChucVu> getAll2(int heso) {
+        List<ChucVu> list = new ArrayList<>();
+        Query query = session.createQuery("SELECT c FROM ChucVu c");
+        list = query.setFirstResult(heso).getResultList();
+        return list;
+    }
     public List<ChucVu> search(String ten) {
         List<ChucVu> list = new ArrayList();
         Query query = session.createQuery("SELECT c From ChucVu c where c.ten like :ten");

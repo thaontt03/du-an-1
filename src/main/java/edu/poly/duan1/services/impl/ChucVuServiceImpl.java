@@ -7,6 +7,7 @@ package edu.poly.duan1.services.impl;
 import edu.poly.duan1.model.ChucVu;
 import edu.poly.duan1.repositories.ChucVuRepository;
 import edu.poly.duan1.services.ChucVuService;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,6 +39,20 @@ public class ChucVuServiceImpl implements ChucVuService{
     @Override
     public List<ChucVu> search(String ten) {
        return chucvuRepositoryy.search(ten);
+    }
+
+    @Override
+    public List<ChucVu> getAll2(int heso) {
+        List<ChucVu> list = chucvuRepositoryy.getAll2(heso);
+        List<ChucVu> list2 = new ArrayList<>();
+        int index = 0;
+        for (ChucVu x : list) {
+            list2.add(x);
+            index++;
+            if(index ==5)
+            break;
+        }
+       return list2;
     }
     
 }
