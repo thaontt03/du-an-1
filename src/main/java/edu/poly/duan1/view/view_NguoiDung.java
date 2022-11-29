@@ -59,13 +59,13 @@ public class view_NguoiDung extends javax.swing.JFrame {
                 x.getMa(),
                 x.getHoTen(),
                 x.getGioiTinh(),
-                x.getNgaySinh(),
+                sdf.format(x.getNgaySinh()),
                 x.getDiaChi(),
                 x.getSdt(),
                 x.getMatKhau(),
                 x.getChucVu().getTen(),
-                x.getNgayTao(),
-                x.getNgaySua(),
+                sdf.format(x.getNgayTao()),
+                sdf.format(x.getNgaySua()),
                 x.getTrangThai() == 1 ? "Đang làm việc" : "Nghỉ Làm"
             });
         }
@@ -84,7 +84,7 @@ public class view_NguoiDung extends javax.swing.JFrame {
         NguoiDung nd = ndService.getAll().get(choice);
         txtMa.setText(nd.getMa());
         txtHoTen.setText(nd.getHoTen());
-        txtNS.setText(nd.getNgaySinh() + "");
+        txtNS.setText(sdf.format(nd.getNgaySinh()));
         if (nd.getGioiTinh().equals("Nam")) {
             rdoNam.setSelected(true);
         } else {
@@ -94,8 +94,8 @@ public class view_NguoiDung extends javax.swing.JFrame {
         txtSĐT.setText(nd.getSdt());
         txtMK.setText(nd.getMatKhau());
         dcbmCV.setSelectedItem(nd.getChucVu());
-        txtNgayTao.setText(nd.getNgayTao() + "");
-        txtNgaySua.setText(nd.getNgaySua() + "");
+        txtNgayTao.setText(sdf.format(nd.getNgayTao()));
+        txtNgaySua.setText(sdf.format(nd.getNgaySua()));
         if (nd.getTrangThai() == 1) {
             rdoDDK.setSelected(true);
         } else {
@@ -105,10 +105,13 @@ public class view_NguoiDung extends javax.swing.JFrame {
 
     private boolean checkNull() {
         if (helper.checkNull(txtMa, "Mã") || helper.checkNull(txtHoTen, "Họ tên") || helper.checkNull(txtDiaChi, "Địa Chỉ")
-                || helper.checkNull(txtSĐT, "SĐT") || helper.checkNull(txtMK, "Mật Khẩu")) {
+                || helper.checkNull(txtSĐT, "SĐT") || helper.checkNull(txtMK, "Mật Khẩu") || helper.checkNull(txtNS,"Ngày Sinh")) {
             return false;
         }
         return true;
+    }
+    private void checkDate(){
+        helper.checkDate(txtNS.getText());
     }
 
     private boolean Validate() {
@@ -440,6 +443,7 @@ public class view_NguoiDung extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (checkNull()) {
             if (Validate()) {
+                checkDate();
                 add();
             }
         }
