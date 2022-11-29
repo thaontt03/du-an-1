@@ -44,8 +44,8 @@ public class view_NguoiDung extends javax.swing.JFrame {
         dcbmCV = new DefaultComboBoxModel<>();
         loadDataTable();
         loadCBChucVu();
-        tblND.setRowSelectionInterval(0, 0);
-        loadText();
+//        tblND.setRowSelectionInterval(0, 0);
+//        loadText();
     }
 
     private void loadDataTable() {
@@ -539,31 +539,35 @@ public class view_NguoiDung extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void add() {
-        NguoiDung nd = new NguoiDung();
-        nd.setMa(txtMa.getText());
-        nd.setHoTen(txtHoTen.getText());
-        nd.setNgaySinh(java.sql.Date.valueOf(txtNS.getText()));
-        nd.setGioiTinh(rdoNam.isSelected() ? "Nam" : "Nữ");
-        nd.setDiaChi(txtDiaChi.getText());
-        nd.setSdt(txtSĐT.getText());
-        nd.setMatKhau(txtMK.getText());
-        ChucVu cv = (ChucVu) cboChucVu.getSelectedItem();
-        nd.setChucVu(cv);
-        nd.setNgayTao(java.sql.Date.valueOf(LocalDate.now()));
-        nd.setNgaySua(java.sql.Date.valueOf(LocalDate.now()));
-        int a;
+        try {
+            NguoiDung nd = new NguoiDung();
+            nd.setMa(txtMa.getText());
+            nd.setHoTen(txtHoTen.getText());
+            nd.setNgaySinh(sdf.parse(txtNS.getText()));
+            nd.setGioiTinh(rdoNam.isSelected() ? "Nam" : "Nữ");
+            nd.setDiaChi(txtDiaChi.getText());
+            nd.setSdt(txtSĐT.getText());
+            nd.setMatKhau(txtMK.getText());
+            ChucVu cv = (ChucVu) cboChucVu.getSelectedItem();
+            nd.setChucVu(cv);
+            nd.setNgayTao(java.sql.Date.valueOf(LocalDate.now()));
+            nd.setNgaySua(java.sql.Date.valueOf(LocalDate.now()));
+            int a;
             if (rdoDDK.isSelected()) {
                 a = 1;
             } else {
                 a = 0;
             }
             nd.setTrangThai(a);
-        if (ndService.saveOrUpdate(nd)) {
-            helper.alert(this, "Thêm Thành Công");
-        } else {
-            helper.error(this, "Thêm Thất Bại");
+            if (ndService.saveOrUpdate(nd)) {
+                helper.alert(this, "Thêm Thành Công");
+            } else {
+                helper.error(this, "Thêm Thất Bại");
+            }
+            loadDataTable();
+        } catch (ParseException ex) {
+            Logger.getLogger(view_NguoiDung.class.getName()).log(Level.SEVERE, null, ex);
         }
-        loadDataTable();
     }
 
     private void update() {
