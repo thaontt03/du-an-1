@@ -14,6 +14,8 @@ import java.util.List;
 public interface NguoiDungService {
 
     public List<NguoiDung> getAll();
+    
+    public List<NguoiDung> search(String ma);
 
     public Boolean saveOrUpdate(NguoiDung nd);
 

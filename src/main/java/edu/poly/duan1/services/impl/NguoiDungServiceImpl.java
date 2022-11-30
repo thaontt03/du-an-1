@@ -37,4 +37,10 @@ public class NguoiDungServiceImpl implements NguoiDungService {
         return nguoiDungRepositories.getObjbyMa(ma);
     }
 
+    @Override
+    public List<NguoiDung> search(String ma) {
+        return nguoiDungRepositories.search(ma);
+    }
+
+  
 }

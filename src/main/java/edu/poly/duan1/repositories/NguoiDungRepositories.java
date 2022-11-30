@@ -6,6 +6,7 @@ package edu.poly.duan1.repositories;
 
 import edu.poly.duan1.hibernateConfig.HibernateConfig;
 import edu.poly.duan1.model.NguoiDung;
+import edu.poly.duan1.model.TheLoai;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
@@ -24,6 +25,13 @@ public class NguoiDungRepositories {
     public List<NguoiDung> getAll() {
         List<NguoiDung> list = new ArrayList<>();
         Query query = session.createQuery("SELECT c FROM NguoiDung c");
+        list = query.getResultList();
+        return list;
+    }
+    public List<NguoiDung> search(String ma) {
+        List<NguoiDung> list = new ArrayList();
+        Query query = session.createQuery("SELECT c From NguoiDung c where c.ma like :ma");
+        query.setParameter("ma", "%" + ma + "%");
         list = query.getResultList();
         return list;
     }
