@@ -32,4 +32,9 @@ public class SachCTServiceImpl implements SachCTService {
     public SachCT getObjbyID(int id) {
         return sachCTRep.getObjbyID(id);
     }
+
+    @Override
+    public List getObjbyTen(String ten) {
+        return sachCTRep.getObjbyTen(ten);
+    }
 }

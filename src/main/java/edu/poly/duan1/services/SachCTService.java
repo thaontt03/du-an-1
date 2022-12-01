@@ -20,4 +20,5 @@ public interface SachCTService {
     public Boolean delete(SachCT stc);
 
     public SachCT getObjbyID(int id);
+     public List getObjbyTen(String ten);
 }

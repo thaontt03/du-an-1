@@ -60,6 +60,20 @@ public class HoaDonCTRepositories {
         return query.getResultList();
     }
 
+
+    
+
+    public HoaDonCT getObjbyID(int id) {
+        HoaDonCT hdct = null;
+        try {
+            Query query = session.createQuery("SELECT h FROM HoaDonCT h WHERE h.id = :id ");
+            query.setParameter("id", id);
+            hdct = (HoaDonCT) query.getSingleResult();
+        } catch (Exception e) {
+        }
+        return hdct;
+    }
+
     public HoaDonCT getObj(int idhd, int idcts) {
         HoaDonCT hdct = null;
         try {
@@ -71,4 +85,5 @@ public class HoaDonCTRepositories {
         }
         return hdct;
     }
+
 }

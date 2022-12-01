@@ -42,4 +42,9 @@ public class HoaDonCTServiceImpl implements HoaDonCTService {
         return hoaDonRep.getObj(idhd, idcts);
     }
 
+    @Override
+    public HoaDonCT getObjbyID(int id) {
+        return hoaDonRep.getObjbyID(id);
+    }
+
 }

@@ -60,4 +60,15 @@ public class SachCTRepositories {
         return sct;
     }
 
+    public List getObjbyTen(String ten) {
+        List<SachCT> list = new ArrayList<>();
+        try {
+            Query query = session.createQuery("select c from SachCT c where c.sach.ten = :ten");
+            query.setParameter("ten", ten);
+            list = query.getResultList();
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
 }

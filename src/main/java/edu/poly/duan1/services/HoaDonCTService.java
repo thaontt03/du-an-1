@@ -23,4 +23,6 @@ public interface HoaDonCTService {
 
     public HoaDonCT getObj(int idhd, int idcts);
 
+    public HoaDonCT getObjbyID(int id);
+
 }

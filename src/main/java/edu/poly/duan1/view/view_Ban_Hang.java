@@ -2,16 +2,13 @@ package edu.poly.duan1.view;
 
 import edu.poly.duan1.model.HoaDon;
 import edu.poly.duan1.model.HoaDonCT;
-import edu.poly.duan1.model.Sach;
 import edu.poly.duan1.model.SachCT;
 import edu.poly.duan1.services.HoaDonCTService;
 import edu.poly.duan1.services.HoaDonService;
 import edu.poly.duan1.services.SachCTService;
-import edu.poly.duan1.services.SachServices;
 import edu.poly.duan1.services.impl.HoaDonCTServiceImpl;
 import edu.poly.duan1.services.impl.HoaDonServiceImpl;
 import edu.poly.duan1.services.impl.SachCTServiceImpl;
-import edu.poly.duan1.services.impl.SachServicesImpl;
 import edu.poly.duan1.ultis.helper;
 import edu.poly.main.Main;
 import java.math.BigDecimal;
@@ -53,7 +50,7 @@ public class view_Ban_Hang extends javax.swing.JFrame {
 
     private void loadDataTaSach(List<SachCT> list) {
         tblModel = (DefaultTableModel) tblSanPham.getModel();
-        tblModel.setColumnIdentifiers(new String[]{"STT", "Mã", "Tên Sách", "SLT", "Giá bán", "Mô tả"});
+        tblModel.setColumnIdentifiers(new String[]{"STT", "Mã", "Tên sách", "SLT", "Giá bán", "Mô tả"});
         tblModel.setRowCount(0);
         int i = 1;
         for (SachCT x : list) {
@@ -505,7 +502,7 @@ public class view_Ban_Hang extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-private void taoHoaDon() {
+    private void taoHoaDon() {
         HoaDon hd = new HoaDon();
         String result;
         hd.setNgayTao(java.sql.Date.valueOf(LocalDate.now()));
@@ -519,7 +516,7 @@ private void taoHoaDon() {
             }
         }
         if (hoaDonService.saveOrUpdate(hd)) {
-            helper.alert(this, "Thêm Hoá Đơn Thành Công");
+            helper.alert(this, "Thêm hoá đơn Thành Công");
         } else {
             helper.error(this, "Thêm hoá đơn mới thất bại");
 
@@ -538,12 +535,16 @@ private void taoHoaDon() {
             sct = sachCTService.getObjbyID(sctt.getId());
             HoaDonCT hdct = hoaDonCTService.getObj(hd.getId(), sct.getId());
 
-            if (sctt.getSoLuongTon() == 0) {
-                helper.error(this, "da het hang");
+            if (sctt.getSoLuongTon() <= 0) {
+                helper.error(this, "Đã hết hàng");
                 return;
             }
-            String input = JOptionPane.showInputDialog("Nhập số lượng");
+            String input = JOptionPane.showInputDialog("Vui lòng nhập số lượng");
             Integer soLuong = Integer.parseInt(input);
+            if (soLuong > sctt.getSoLuongTon()) {
+                helper.error(this, "Đã vượt quá số lượng tối đa \n" + "(max:" + sct.getSoLuongTon() + ")");
+                return;
+            }
             if (hdct != null) {
 
                 hdct.setSoLuong(hdct.getSoLuong() + soLuong);
@@ -642,25 +643,60 @@ private void taoHoaDon() {
         if (tienKhachDua - tongTien >= 0) {
             hd.setTrangThai(1);
             if (hoaDonService.saveOrUpdate(hd)) {
-                helper.alert(this, "thanh toan thanh cong");
+                helper.alert(this, "Thanh toán thành công");
                 tblModel = (DefaultTableModel) tblGioHang.getModel();
                 tblModel.setRowCount(0);
             } else {
-                helper.error(this, "thanh toan that bai");
+                helper.error(this, "Thanh toán thất bại");
             }
 
         }
         LoadData();
     }
     private void tblGioHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGioHangMouseClicked
-        String input = JOptionPane.showInputDialog("Nhập số lượng");
-        Integer soLuong = Integer.parseInt(input);
-        try {
-            int row = tblGioHang.getSelectedRow();
-            HoaDonCT hdct = hoaDonCTService.getAll().get(row);
-            hdct.setSoLuong(soLuong);
-            hoaDonCTService.saveOrUpdate(hdct);
-        } catch (Exception e) {
+        int index = tblGioHang.getSelectedRow();
+        int row = tblHD.getSelectedRow();
+
+//        HoaDonCT hdct = hoaDonCTService.getAll().get(index);
+        List<HoaDonCT> listHDCT = hoaDonCTService.getObjbyMa((String) tblGioHang.getValueAt(row, 1));
+        HoaDonCT hdctt = listHDCT.get(index);
+        System.out.println("1");
+//        List<SachCT> listSCT = sachCTService.getObjbyTen((String) tblGioHang.getValueAt(index, 2));
+        System.out.println("2");
+//        SachCT sct = listSCT.get(index);
+        HoaDon hd = hoaDonService.getObjbyMa((String) tblHD.getValueAt(row, 1));
+        System.out.println("3");
+
+        if (hd.getTrangThai() == 1) {
+            helper.error(this, "Hóa đơn này đã được thanh toán");
+            return;
+        } else {
+            try {
+
+                String input = JOptionPane.showInputDialog("Vui lòng nhập số lượng");
+                Integer soLuong = Integer.parseInt(input);
+//            Integer soLuongCu = (Integer) tblGioHang.getValueAt(index, hdctt.getSoLuong());
+//            System.out.println(soLuongCu);
+                try {
+
+                    if (soLuong == 0) {
+                        hoaDonCTService.delete(hdctt);
+                    } else {
+
+                        hdctt.setSoLuong(soLuong);
+                        System.out.println(soLuong);
+
+                        hoaDonCTService.saveOrUpdate(hdctt);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                loadDataGH((List<HoaDonCT>) hoaDonCTService.getObjbyMa((String) tblHD.getValueAt(row, 1)));
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         }
     }//GEN-LAST:event_tblGioHangMouseClicked
 
