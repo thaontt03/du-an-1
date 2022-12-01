@@ -31,6 +31,7 @@ public class view_TheLoai extends javax.swing.JFrame {
      */
     public view_TheLoai() {
         initComponents();
+        setLocationRelativeTo(null);
         loadDataTable();
     }
 
@@ -90,6 +91,13 @@ public class view_TheLoai extends javax.swing.JFrame {
         s.setTen(txtTen.getText());
         s.setNgayTao(java.sql.Date.valueOf(LocalDate.now()));
         s.setNgaySua(java.sql.Date.valueOf(LocalDate.now()));
+        int a;
+            if (rdbCon.isSelected()) {
+                a = 1;
+            } else {
+                a = 0;
+            }
+            s.setTrangThai(a);
         if (theLoaiServices.saveOrUpdate(s)) {
             helper.alert(this, "Thêm thành công");
         } else {
@@ -289,8 +297,9 @@ public class view_TheLoai extends javax.swing.JFrame {
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addGroup(layout.createSequentialGroup()
                                             .addComponent(btnSua, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(45, 45, 45)
-                                            .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGap(38, 38, 38)
+                                            .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(47, 47, 47))
                                         .addGroup(layout.createSequentialGroup()
                                             .addComponent(jLabel4)
                                             .addGap(18, 18, 18)
