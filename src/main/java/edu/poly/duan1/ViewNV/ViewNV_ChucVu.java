@@ -58,15 +58,16 @@ public class ViewNV_ChucVu extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblchucvu = new javax.swing.JTable();
         txtsearch = new edu.poly.duan1.swing.textfield.TextField();
-        lblsotrang = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         btnfirst = new javax.swing.JButton();
         btnback = new javax.swing.JButton();
+        lblsotrang = new javax.swing.JLabel();
         btnnext = new javax.swing.JButton();
         btnlast = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel1.setText("Quản Lý Chức Vụ");
 
         tblchucvu.setModel(new javax.swing.table.DefaultTableModel(
@@ -99,8 +100,14 @@ public class ViewNV_ChucVu extends javax.swing.JFrame {
                 txtsearchCaretUpdate(evt);
             }
         });
+        txtsearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtsearchActionPerformed(evt);
+            }
+        });
 
-        lblsotrang.setText("Label");
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         btnfirst.setText("First");
         btnfirst.addActionListener(new java.awt.event.ActionListener() {
@@ -116,6 +123,8 @@ public class ViewNV_ChucVu extends javax.swing.JFrame {
             }
         });
 
+        lblsotrang.setText("label");
+
         btnnext.setText("Next");
         btnnext.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,11 +133,49 @@ public class ViewNV_ChucVu extends javax.swing.JFrame {
         });
 
         btnlast.setText("Last");
+        btnlast.setToolTipText("");
+        btnlast.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnlast.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnlastActionPerformed(evt);
             }
         });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(btnfirst)
+                .addGap(18, 18, 18)
+                .addComponent(btnback)
+                .addGap(19, 19, 19)
+                .addComponent(lblsotrang, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnnext)
+                .addGap(28, 28, 28)
+                .addComponent(btnlast)
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnback, btnfirst, btnlast, btnnext});
+
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblsotrang, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnfirst)
+                        .addComponent(btnlast)
+                        .addComponent(btnnext)
+                        .addComponent(btnback)))
+                .addContainerGap(11, Short.MAX_VALUE))
+        );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnback, btnfirst, btnlast, btnnext});
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -142,21 +189,14 @@ public class ViewNV_ChucVu extends javax.swing.JFrame {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(167, 167, 167))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnfirst)
-                                .addGap(29, 29, 29)
-                                .addComponent(btnback)
-                                .addGap(48, 48, 48)
-                                .addComponent(lblsotrang, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(37, 37, 37)
-                                .addComponent(btnnext)
-                                .addGap(32, 32, 32)
-                                .addComponent(btnlast))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtsearch, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE)))
-                        .addContainerGap(14, Short.MAX_VALUE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtsearch, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE))
+                        .addContainerGap(17, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,13 +208,8 @@ public class ViewNV_ChucVu extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblsotrang)
-                    .addComponent(btnfirst)
-                    .addComponent(btnback)
-                    .addComponent(btnnext)
-                    .addComponent(btnlast))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
@@ -246,6 +281,10 @@ public class ViewNV_ChucVu extends javax.swing.JFrame {
         lblsotrang.setText(String.valueOf(sotrang) + "/" + tongSoTrang);
     }//GEN-LAST:event_btnlastActionPerformed
 
+    private void txtsearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtsearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtsearchActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -295,6 +334,7 @@ public class ViewNV_ChucVu extends javax.swing.JFrame {
     private javax.swing.JButton btnnext;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblsotrang;
     private javax.swing.JTable tblchucvu;
@@ -332,7 +372,12 @@ public class ViewNV_ChucVu extends javax.swing.JFrame {
 
     public void search() {
         String ten = txtsearch.getText();
-        fillToTable(chucVuu.search(ten));
+        if (ten.isEmpty()) {
+            fillToTable(cv2);
+        }else{
+            fillToTable(chucVuu.search(ten));
+        }
+
     }
 
     private void uppanel() {
@@ -343,4 +388,12 @@ public class ViewNV_ChucVu extends javax.swing.JFrame {
         }
         lblsotrang.setText(String.valueOf(sotrang) + "/" + tongsotrang);
     }
+//    private void fill(){
+//        cv = chucVuu.getAll();
+//        int heso = (sotrang * 5) - 5;
+//        cv2 = chucVuu.getAll2(heso);
+//        fillToTable(cv2);
+////        fillToTable();
+//        uppanel();
+//    }
 }
