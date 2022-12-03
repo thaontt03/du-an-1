@@ -266,7 +266,7 @@ public class HoaDonChiTietView extends javax.swing.JFrame {
                 x.getDonGia(),
                 x.getSoLuong(),
                 sdf.format(x.getNgayTao()),
-                sdf.format(x.getNgaySua()),
+//                sdf.format(x.getNgaySua()),
                 x.getTrangThai() == 1 ? "Chưa thanh toán" : "Đã thanh toán"
             }
             );

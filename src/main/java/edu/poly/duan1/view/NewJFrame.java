@@ -97,7 +97,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         main.removeAll();
-        main.add(viewNCC);
+        main.add(viewKH);
         main.revalidate();
         main.repaint();
     }//GEN-LAST:event_jButton2ActionPerformed

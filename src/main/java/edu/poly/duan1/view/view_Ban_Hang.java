@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -333,6 +334,7 @@ public class view_Ban_Hang extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        btnTaoHoaDon.setBackground(new java.awt.Color(204, 204, 204));
         btnTaoHoaDon.setText("Tạo Hóa Đơn");
         btnTaoHoaDon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -394,6 +396,7 @@ public class view_Ban_Hang extends javax.swing.JFrame {
 
         txtTienThua.setLabelText("Tiền thừa");
 
+        btnThanhToan.setBackground(new java.awt.Color(204, 204, 204));
         btnThanhToan.setText("Thanh Toán");
         btnThanhToan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -656,16 +659,10 @@ public class view_Ban_Hang extends javax.swing.JFrame {
     private void tblGioHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGioHangMouseClicked
         int index = tblGioHang.getSelectedRow();
         int row = tblHD.getSelectedRow();
-
-//        HoaDonCT hdct = hoaDonCTService.getAll().get(index);
         List<HoaDonCT> listHDCT = hoaDonCTService.getObjbyMa((String) tblGioHang.getValueAt(row, 1));
         HoaDonCT hdctt = listHDCT.get(index);
-        System.out.println("1");
-//        List<SachCT> listSCT = sachCTService.getObjbyTen((String) tblGioHang.getValueAt(index, 2));
-        System.out.println("2");
-//        SachCT sct = listSCT.get(index);
+        SachCT sct = hdctt.getSachCT();
         HoaDon hd = hoaDonService.getObjbyMa((String) tblHD.getValueAt(row, 1));
-        System.out.println("3");
 
         if (hd.getTrangThai() == 1) {
             helper.error(this, "Hóa đơn này đã được thanh toán");
@@ -675,26 +672,46 @@ public class view_Ban_Hang extends javax.swing.JFrame {
 
                 String input = JOptionPane.showInputDialog("Vui lòng nhập số lượng");
                 Integer soLuong = Integer.parseInt(input);
-//            Integer soLuongCu = (Integer) tblGioHang.getValueAt(index, hdctt.getSoLuong());
-//            System.out.println(soLuongCu);
+
+                try {
+                    Pattern patternSL = Pattern.compile("[0-9]{0,10}$");
+                    if (patternSL.matcher(input).matches()) {
+                        
+                    } else {
+                        helper.error(this, "Số lượng phải là số nguyên");
+                        return;
+                    }
+                    if (soLuong < 0) {
+                        helper.error(this, "số lượng phải >=0");
+                        return;
+                    }
+
+                } catch (Exception e) {
+                    
+                }
+
+                Integer soLuongCu = (Integer) tblGioHang.getValueAt(index, 3);
                 try {
 
                     if (soLuong == 0) {
+                        sct.setSoLuongTon(sct.getSoLuongTon() + soLuongCu - soLuong);
                         hoaDonCTService.delete(hdctt);
+                        sachCTService.saveOrUpdate(sct);
                     } else {
 
                         hdctt.setSoLuong(soLuong);
-                        System.out.println(soLuong);
-
+                        sct.setSoLuongTon(sct.getSoLuongTon() + soLuongCu - soLuong);
+                        sachCTService.saveOrUpdate(sct);
                         hoaDonCTService.saveOrUpdate(hdctt);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 loadDataGH((List<HoaDonCT>) hoaDonCTService.getObjbyMa((String) tblHD.getValueAt(row, 1)));
-
+                loadDataTaSach(sachCTService.getAll());
             } catch (Exception e) {
-                e.printStackTrace();
+//                helper.error(this, "số lượng phải >=0");
+//                return;
             }
 
         }

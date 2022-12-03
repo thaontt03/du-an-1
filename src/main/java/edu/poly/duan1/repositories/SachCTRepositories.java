@@ -31,7 +31,7 @@ public class SachCTRepositories {
             transaction.commit();
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
             return false;
         }
     }

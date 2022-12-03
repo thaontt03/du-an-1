@@ -309,8 +309,8 @@ public class ViewNV_ChucVu extends javax.swing.JFrame {
                 x.getId(),
                 x.getMa(),
                 x.getTen(),
-                sdf.format(x.getNgayTao()),
-                sdf.format(x.getNgaySua()),
+//                sdf.format(x.getNgayTao()),
+//                sdf.format(x.getNgaySua()),
                 x.getTrangThai() == 1 ? "Còn Hoạt Động" : "Đã Nghỉ"});
         }
 
@@ -324,8 +324,8 @@ public class ViewNV_ChucVu extends javax.swing.JFrame {
                 x.getId(),
                 x.getMa(),
                 x.getTen(),
-                sdf.format(x.getNgayTao()),
-                sdf.format(x.getNgaySua()),
+//                sdf.format(x.getNgayTao()),
+//                sdf.format(x.getNgaySua()),
                 x.getTrangThai() == 1 ? "Còn Hoạt Động" : "Đã Nghỉ"});
         }
     }
