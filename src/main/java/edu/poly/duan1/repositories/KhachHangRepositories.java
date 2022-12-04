@@ -27,6 +27,12 @@ public class KhachHangRepositories {
         list = query.getResultList();
         return list;
     }
+     public List<KhachHang> getAll2(int heso) {
+        List<KhachHang> list = new ArrayList<>();
+        Query query = session.createQuery("SELECT c FROM KhachHang c");
+        list = query.setFirstResult(heso).getResultList();
+        return list;
+    }
 
     public Boolean saveOrUpdate(KhachHang s) {
         try {
@@ -62,5 +68,12 @@ public class KhachHangRepositories {
         } catch (Exception e) {
         }
         return s;
+    }
+    public List<KhachHang> search(String ten) {
+        List<KhachHang> list = new ArrayList();
+        Query query = session.createQuery("SELECT c From KhachHang c where c.ten like :ten");
+        query.setParameter("ten", "%" + ten + "%");
+        list = query.getResultList();
+        return list;
     }
 }

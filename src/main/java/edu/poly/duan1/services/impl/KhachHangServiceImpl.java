@@ -8,6 +8,7 @@ package edu.poly.duan1.services.impl;
 import edu.poly.duan1.model.KhachHang;
 import edu.poly.duan1.repositories.KhachHangRepositories;
 import edu.poly.duan1.services.KhachHangService;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,5 +41,25 @@ public class KhachHangServiceImpl implements KhachHangService {
         return khachHangRepositories.getObjbyMa(ma);
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public List<KhachHang> search(String ten) {
+        return khachHangRepositories.search(ten);
+    }
+
+    @Override
+    public List<KhachHang> getAll2(int heso) {
+       List<KhachHang> list = khachHangRepositories.getAll2(heso);
+        List<KhachHang> list2 = new ArrayList<>();
+        int index = 0;
+        for (KhachHang x : list) {
+            list2.add(x);
+            index++;
+            if(index ==5)
+            break;
+        }
+       return list2;
+    }
+    
 
 }

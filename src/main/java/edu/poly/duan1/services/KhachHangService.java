@@ -13,6 +13,10 @@ import java.util.List;
  * @author Nguyen Thi Thu Thao
  */
 public interface KhachHangService {
+    
+     public List<KhachHang> getAll2(int heso);
+    
+    public List<KhachHang> search(String ten);
 
     public List<KhachHang> getAll();
 
