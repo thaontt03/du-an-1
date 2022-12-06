@@ -7,6 +7,7 @@ package edu.poly.duan1.repositories;
 import edu.poly.duan1.hibernateConfig.HibernateConfig;
 import edu.poly.duan1.model.HoaDonCT;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Query;
 import org.hibernate.Session;
@@ -60,8 +61,11 @@ public class HoaDonCTRepositories {
         return query.getResultList();
     }
 
-
-    
+    public List<HoaDonCT> getObjbyDate(Date ngaythanhtoan) {
+        Query query = session.createQuery("SELECT tac FROM HoaDonCT tac where tac.hoaDon.ngayThanhToan = :ngaythanhtoan");
+        query.setParameter("ngaythanhtoan", ngaythanhtoan);
+        return query.getResultList();
+    }
 
     public HoaDonCT getObjbyID(int id) {
         HoaDonCT hdct = null;

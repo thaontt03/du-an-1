@@ -5,6 +5,7 @@
 package edu.poly.duan1.services;
 
 import edu.poly.duan1.model.HoaDonCT;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,4 +26,5 @@ public interface HoaDonCTService {
 
     public HoaDonCT getObjbyID(int id);
 
+    public List<HoaDonCT> getObjbyDate(Date date);
 }

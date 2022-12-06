@@ -24,6 +24,12 @@ public class HoaDonRepositories {
         return list;
     }
 
+    public List<HoaDon> getObjbyDate(String ngaythanhtoan) {
+        Query query = session.createQuery("SELECT h FROM HoaDon h WHERE h.hoaDon.ngaythanhtoan = :ngaythanhtoan");
+        query.setParameter("ngaythanhtoan", ngaythanhtoan);
+        return query.getResultList();
+    }
+
     public Boolean saveOrUpdate(HoaDon hd) {
         try {
             transaction.begin();

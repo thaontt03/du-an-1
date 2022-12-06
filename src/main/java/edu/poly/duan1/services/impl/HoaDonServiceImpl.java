@@ -42,4 +42,10 @@ public class HoaDonServiceImpl implements HoaDonService {
         return hoaDonRepositories.search(tt);
     }
 
+    @Override
+    public List<HoaDon> getObjbyDate(String ngaythanhtoan) {
+        return hoaDonRepositories.getObjbyDate(ngaythanhtoan);
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

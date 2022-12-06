@@ -12,14 +12,16 @@ import java.util.List;
  * @author AnhTiTan
  */
 public interface HoaDonService {
-    
+
     public List<HoaDon> getAll();
+
+    public List<HoaDon> getObjbyDate(String ngaythanhtoan);
 
     public Boolean saveOrUpdate(HoaDon hd);
 
     public Boolean delete(HoaDon hd);
 
     public HoaDon getObjbyMa(String ma);
-    
+
     public List<HoaDon> search(int tt);
 }
