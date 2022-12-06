@@ -23,6 +23,12 @@ public class NXBRepositories {
         list = query.getResultList();
         return list;
     }
+     public List<NXB> getAll2(int heso) {
+        List<NXB> list = new ArrayList<>();
+        Query query = session.createQuery("SELECT c FROM NXB c");
+        list = query.setFirstResult(heso).getResultList();
+        return list;
+    }
 
     public List<NXB> search(String ten) {
         List<NXB> list = new ArrayList();
@@ -67,4 +73,5 @@ public class NXBRepositories {
         }
         return nxb;
     }
+    
 }

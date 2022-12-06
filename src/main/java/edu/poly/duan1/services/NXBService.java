@@ -8,6 +8,8 @@ import java.util.List;
  * @author AnhTiTan
  */
 public interface NXBService {
+    
+    public List<NXB> getAll2(int heso);
 
     public List<NXB> getAll();
 
