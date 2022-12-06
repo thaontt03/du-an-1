@@ -645,6 +645,7 @@ public class view_Ban_Hang extends javax.swing.JFrame {
         }
         if (tienKhachDua - tongTien >= 0) {
             hd.setTrangThai(1);
+            hd.setNgayThanhToan(java.sql.Date.valueOf(LocalDate.now()));
             if (hoaDonService.saveOrUpdate(hd)) {
                 helper.alert(this, "Thanh toán thành công");
                 tblModel = (DefaultTableModel) tblGioHang.getModel();
