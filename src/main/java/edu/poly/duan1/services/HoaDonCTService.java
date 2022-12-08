@@ -5,6 +5,7 @@
 package edu.poly.duan1.services;
 
 import edu.poly.duan1.model.HoaDonCT;
+import edu.poly.duan1.model.thongke;
 import java.util.Date;
 import java.util.List;
 
@@ -15,6 +16,8 @@ import java.util.List;
 public interface HoaDonCTService {
 
     public List<HoaDonCT> getAll();
+
+    public List<thongke> getList();
 
     public Boolean saveOrUpdate(HoaDonCT hdct);
 
