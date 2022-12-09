@@ -96,7 +96,6 @@ public class HoaDonCTRepositories {
 //        list = query.getResultList();
 //        return list;
     }
-
     public HoaDonCT getObjbyID(int id) {
         HoaDonCT hdct = null;
         try {
