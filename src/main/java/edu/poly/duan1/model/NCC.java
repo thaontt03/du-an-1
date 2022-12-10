@@ -45,8 +45,8 @@ public class NCC {
     @Column
     private int trangThai;
 
-    @OneToMany(mappedBy = "NCC", fetch = FetchType.LAZY)
-    List<SachCT> listSach;
+//    @OneToMany(mappedBy = "NCC", fetch = FetchType.LAZY)
+//    List<SachCT> listSach;
 
     @Override
     public String toString() {

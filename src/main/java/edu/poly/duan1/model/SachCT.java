@@ -46,9 +46,9 @@ public class SachCT {
     @JoinColumn(name = "idNXB")
     private NXB NXB;
 
-    @ManyToOne
-    @JoinColumn(name = "idNCC")
-    private NCC NCC;
+//    @ManyToOne
+//    @JoinColumn(name = "idNCC")
+//    private NCC NCC;
 
     @Column
     private String moTa;

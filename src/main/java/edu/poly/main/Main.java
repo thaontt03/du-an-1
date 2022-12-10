@@ -4,6 +4,8 @@ import edu.poly.component.Header;
 import edu.poly.component.Menu;
 import edu.poly.duan1.ultis.helper;
 import edu.poly.duan1.view.Panel_SachCT;
+import edu.poly.duan1.view.PanleSach;
+import edu.poly.duan1.view.viewBH;
 import edu.poly.duan1.view.view_Ban_Hang;
 import edu.poly.duan1.view.view_KhachHang;
 import edu.poly.duan1.view.view_NCC;
@@ -55,10 +57,12 @@ public class Main extends javax.swing.JFrame {
                         main.showForm(new view_NCC());
                     } else if (subMenuIndex == 1) {
                         main.showForm(new Form1());
+                    }else if(subMenuIndex==3){
+                         main.showForm(new PanleSach());
                     }                    
                 } else if (menuIndex == 1) {
                     logoutƠut();
-                    new view_Ban_Hang().setVisible(true);
+                    new viewBH().setVisible(true);
                 
                 } else if (menuIndex == 3) {
                     logoutƠut();
@@ -137,7 +141,7 @@ public class Main extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
-        bg.setBackground(new java.awt.Color(245, 245, 245));
+        bg.setBackground(new java.awt.Color(255, 255, 255));
         bg.setOpaque(true);
 
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);

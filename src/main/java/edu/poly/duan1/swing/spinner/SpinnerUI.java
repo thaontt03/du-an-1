@@ -1,6 +1,5 @@
 package edu.poly.duan1.swing.spinner;
 
-import edu.poly.duan1.swing.textfield.TextField;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
@@ -15,6 +14,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.plaf.basic.BasicSpinnerUI;
+import edu.poly.duan1.swing.textfield.TextField;
 
 public class SpinnerUI extends BasicSpinnerUI {
 
@@ -42,8 +42,11 @@ public class SpinnerUI extends BasicSpinnerUI {
 
         public Editor(JSpinner spinner) {
             spinner.addChangeListener(this);
-            setEditable(false);
-            setText("0");
+//            setEditable(false);
+           
+            
+            setText(spinner.getValue().toString());
+            setText(spinner.getValue().toString());
         }
 
         @Override
@@ -116,4 +119,5 @@ public class SpinnerUI extends BasicSpinnerUI {
             g2.dispose();
         }
     }
+
 }

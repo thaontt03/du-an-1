@@ -2,7 +2,11 @@
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
-    <Component class="edu.poly.duan1.swing.combo_suggestion.ComboSuggestionUI" name="comboSuggestionUI1">
+    <Component class="edu.poly.duan1.swing.spinner.SpinnerUI" name="spinnerUI1">
+    </Component>
+    <Component class="edu.poly.duan1.swing.spinner.SpinnerUI" name="spinnerUI2">
+    </Component>
+    <Component class="edu.poly.duan1.swing.spinner.SpinnerUI" name="spinnerUI3">
     </Component>
   </NonVisualComponents>
   <Properties>
@@ -27,33 +31,34 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
-              <Component id="comboBoxSuggestion1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="199" max="32767" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <Component id="spinner1" min="-2" pref="155" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
+              <Component id="spinner3" min="-2" pref="158" max="-2" attributes="0"/>
+              <EmptySpace pref="152" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
-              <Component id="comboBoxSuggestion1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="210" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+              <Component id="spinner1" min="-2" pref="41" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
+              <Component id="spinner3" min="-2" pref="47" max="-2" attributes="0"/>
+              <EmptySpace pref="59" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="edu.poly.duan1.swing.combo_suggestion.ComboBoxSuggestion" name="comboBoxSuggestion1">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="2">
-            <StringItem index="0" value="&#x110;&#x1ee9;c Anh"/>
-            <StringItem index="1" value="ac"/>
-          </StringArray>
-        </Property>
-      </Properties>
+    <Component class="edu.poly.duan1.swing.spinner.Spinner" name="spinner1">
+    </Component>
+    <Component class="edu.poly.duan1.swing.spinner.Spinner" name="spinner3">
     </Component>
   </SubComponents>
 </Form>

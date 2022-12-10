@@ -66,7 +66,7 @@ public class Panel_SachCT extends javax.swing.JPanel {
     private void loadDataTable() {
         int i = 1;
         tblModel = (DefaultTableModel) tblSachCT.getModel();
-        tblModel.setColumnIdentifiers(new String[]{"STT", "Tên Sách", "Thể Loại", "NXB", "NCC", "Tác Giả", "Mô Tả", "SLT", "Giá Nhập", "Giá Bán", "Ngày Tạo", "Ngày Sửa", "Trạng Thái"});
+        tblModel.setColumnIdentifiers(new String[]{"STT", "Tên Sách", "Thể Loại", "NXB", "Tác Giả", "Mô Tả", "SLT", "Giá Nhập", "Giá Bán", "Ngày Tạo", "Ngày Sửa", "Trạng Thái"});
         tblModel.setRowCount(0);
         for (SachCT x : sachCTService.getAll()) {
             tblModel.addRow(new Object[]{
@@ -74,7 +74,7 @@ public class Panel_SachCT extends javax.swing.JPanel {
                 x.getSach().getTen(),
                 x.getTheLoai().getTen(),
                 x.getNXB().getTen(),
-                x.getNCC().getTen(),
+//                x.getNCC().getTen(),
                 x.getTacGia(),
                 x.getMoTa(),
                 x.getSoLuongTon(),
@@ -129,7 +129,7 @@ public class Panel_SachCT extends javax.swing.JPanel {
         sct.setSach(sach);
         sct.setTheLoai(tl);
         sct.setNXB(nxb);
-        sct.setNCC(ncc);
+//        sct.setNCC(ncc);
         sct.setMoTa(txtMoTa.getText());
         sct.setTacGia(txtTacGia.getText());
         sct.setSoLuongTon((int) spSLT.getValue());
@@ -155,7 +155,7 @@ public class Panel_SachCT extends javax.swing.JPanel {
         sct.setSach(sach);
         sct.setTheLoai(tl);
         sct.setNXB(nxb);
-        sct.setNCC(ncc);
+//        sct.setNCC(ncc);
         sct.setMoTa(txtMoTa.getText());
         sct.setTacGia(txtTacGia.getText());
         sct.setSoLuongTon((int) spSLT.getValue());
@@ -190,7 +190,7 @@ public class Panel_SachCT extends javax.swing.JPanel {
         int choice = tblSachCT.getSelectedRow();
         SachCT sct = sachCTService.getAll().get(choice);
         dcbmSach.setSelectedItem(sct.getSach());
-        dcbmNCC.setSelectedItem(sct.getNCC());
+//        dcbmNCC.setSelectedItem(sct.getNCC());
         dcbmTheLoai.setSelectedItem(sct.getTheLoai());
         dcbmNXB.setSelectedItem(sct.getNXB());
         txtMoTa.setText(sct.getMoTa());
@@ -234,6 +234,8 @@ public class Panel_SachCT extends javax.swing.JPanel {
         btnThem = new javax.swing.JButton();
         btnSua = new javax.swing.JButton();
         btnXoa = new javax.swing.JButton();
+
+        setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setText("Chi Tiết Sách");
 

@@ -5,6 +5,7 @@
 package edu.poly.duan1.services.impl;
 
 import edu.poly.duan1.model.HoaDonCT;
+import edu.poly.duan1.model.thongke;
 import edu.poly.duan1.repositories.HoaDonCTRepositories;
 import edu.poly.duan1.services.HoaDonCTService;
 import java.util.Date;
@@ -51,6 +52,12 @@ public class HoaDonCTServiceImpl implements HoaDonCTService {
     @Override
     public List<HoaDonCT> getObjbyDate(Date date) {
         return hoaDonRep.getObjbyDate(date);
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<thongke> getList() {
+        return hoaDonRep.getList();
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

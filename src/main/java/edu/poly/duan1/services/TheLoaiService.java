@@ -13,13 +13,14 @@ import java.util.List;
  * @author Nguyen Thi Thu Thao
  */
 public interface TheLoaiService {
-        public List<TheLoai> getAll();
+
+    public List<TheLoai> getAll();
 
     public Boolean saveOrUpdate(TheLoai s);
 
     public Boolean delete(TheLoai s);
 
     public TheLoai getObjbyMa(String ma);
-    
+
     public List<TheLoai> search(String ten);
 }

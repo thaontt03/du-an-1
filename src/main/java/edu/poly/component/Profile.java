@@ -15,7 +15,7 @@ public class Profile extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(224, 224, 224));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/open-book-64.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/menu.png"))); // NOI18N
         jLabel1.setText("Book Store");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

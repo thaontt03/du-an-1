@@ -1,6 +1,11 @@
 package edu.poly.duan1.hibernateConfig;
 
 import edu.poly.duan1.model.ChucVu;
+import edu.poly.duan1.model.HoaDon;
+import edu.poly.duan1.model.HoaDonCT;
+import edu.poly.duan1.model.KhachHang;
+import edu.poly.duan1.model.NCC;
+import edu.poly.duan1.model.NXB;
 import edu.poly.duan1.model.NguoiDung;
 import edu.poly.duan1.model.Sach;
 import edu.poly.duan1.model.SachCT;
@@ -22,7 +27,7 @@ public class HibernateConfig {
         Properties properties = new Properties();
         properties.put(Environment.DIALECT, "org.hibernate.dialect.SQLServerDialect");
         properties.put(Environment.DRIVER, "com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        properties.put(Environment.URL, "jdbc:sqlserver://localhost:1433;databaseName=DUAN_1");
+        properties.put(Environment.URL, "jdbc:sqlserver://localhost:1433;databaseName=DUAN_1_GROUP1_");
         properties.put(Environment.USER, "sa");
         properties.put(Environment.PASS, "123");
 //        properties.put(Environment.SHOW_SQL, "true");
@@ -32,7 +37,12 @@ public class HibernateConfig {
         conf.addAnnotatedClass(NguoiDung.class);
         conf.addAnnotatedClass(ChucVu.class);
         conf.addAnnotatedClass(TheLoai.class);
+        conf.addAnnotatedClass(NXB.class);
+        conf.addAnnotatedClass(NCC.class);
         conf.addAnnotatedClass(SachCT.class);
+        conf.addAnnotatedClass(KhachHang.class);
+        conf.addAnnotatedClass(HoaDon.class);
+        conf.addAnnotatedClass(HoaDonCT.class);
 
         ServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .applySettings(conf.getProperties()).build();

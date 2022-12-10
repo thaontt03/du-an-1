@@ -71,7 +71,7 @@ public class view_SachCT extends javax.swing.JFrame {
                 x.getSach().getTen(),
                 x.getTheLoai().getTen(),
                 x.getNXB().getTen(),
-                x.getNCC().getTen(),
+//                x.getNCC().getTen(),
                 x.getTacGia(),
                 x.getMoTa(),
                 x.getSoLuongTon(),
@@ -126,7 +126,7 @@ public class view_SachCT extends javax.swing.JFrame {
         sct.setSach(sach);
         sct.setTheLoai(tl);
         sct.setNXB(nxb);
-        sct.setNCC(ncc);
+//        sct.setNCC(ncc);
         sct.setMoTa(txtMoTa.getText());
         sct.setTacGia(txtTacGia.getText());
         sct.setSoLuongTon((int) spSLT.getValue());
@@ -160,7 +160,7 @@ public class view_SachCT extends javax.swing.JFrame {
         sct.setSach(sach);
         sct.setTheLoai(tl);
         sct.setNXB(nxb);
-        sct.setNCC(ncc);
+//        sct.setNCC(ncc);
         sct.setMoTa(txtMoTa.getText());
         sct.setTacGia(txtTacGia.getText());
        
@@ -202,7 +202,7 @@ public class view_SachCT extends javax.swing.JFrame {
         int choice = tblSachCT.getSelectedRow();
         SachCT sct = sachCTService.getAll().get(choice);
         dcbmSach.setSelectedItem(sct.getSach());
-        dcbmNCC.setSelectedItem(sct.getNCC());
+//        dcbmNCC.setSelectedItem(sct.getNCC());
         dcbmTheLoai.setSelectedItem(sct.getTheLoai());
         dcbmNXB.setSelectedItem(sct.getNXB());
         txtMoTa.setText(sct.getMoTa());

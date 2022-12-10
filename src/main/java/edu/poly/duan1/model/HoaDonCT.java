@@ -4,6 +4,7 @@
  */
 package edu.poly.duan1.model;
 
+import edu.poly.duan1.repositories.HoaDonCTRepositories;
 import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Column;
@@ -60,8 +61,8 @@ public class HoaDonCT {
     public Double ThanhTien(int soLuong, double donGia) {
         return donGia * soLuong;
     }
-
 }
+
 /*
     Id INT IDENTITY(1,1) PRIMARY KEY,
     IdSachCT INT,
