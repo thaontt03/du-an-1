@@ -1,6 +1,6 @@
-    CREATE DATABASE DUAN_1_GROUP1
+    CREATE DATABASE DUAN_1_GROUP1_
 GO
-    USE DUAN_1_GROUP1
+    USE DUAN_1_GROUP1_
 GO
 --Sách
 CREATE TABLE Sach(
@@ -18,7 +18,7 @@ CREATE TABLE SachCT(
     IdSach INT,
     IdTheLoai INT,
     IdNXB INT,
-    IdNCC INT,
+    --IdNCC INT,
     MoTa NVARCHAR(500) DEFAULT NULL,
     SoLuongTon INT,
     GiaNhap DECIMAL(20,0) DEFAULT 0,
@@ -27,6 +27,7 @@ CREATE TABLE SachCT(
     NgaySua DATE DEFAULT NULL,
     TrangThai INT DEFAULT 0,
     TacGia nvarchar(50)
+    --soluongdaban ra
 )
 
 
@@ -67,7 +68,7 @@ CREATE TABLE HoaDon(
     Id INT IDENTITY(1,1) PRIMARY KEY,
     IdKH INT,
     IdND INT,
---     Ma VARCHAR(20) UNIQUE,
+    Ma VARCHAR(20) UNIQUE,
     NgayTao DATE DEFAULT NULL,
     NgayThanhToan DATE DEFAULT NULL,
     NgaySua DATE DEFAULT NULL,
@@ -81,7 +82,7 @@ CREATE TABLE HoaDonCT(
     Id INT IDENTITY(1,1) PRIMARY KEY,
     IdSachCT INT,
     IdHD INT,
-    Ma VARCHAR(20) UNIQUE,
+--     Ma VARCHAR(20) UNIQUE, //  bor khong dung den
     DonGia DECIMAL(20,0) DEFAULT 0,
     SoLuong INT,
     NgayTao DATE DEFAULT NULL,
@@ -172,7 +173,7 @@ ALTER TABLE SachCT ADD FOREIGN KEY (IdTheLoai) REFERENCES TheLoai(Id)
 --SachChiTiet - NhaXuatBan
 ALTER TABLE SachCT ADD FOREIGN KEY (IdNXB) REFERENCES NXB(Id)
 --SachChiTiet - NhaCungCap
-ALTER TABLE SachCT ADD FOREIGN KEY (IdNCC) REFERENCES NCC(Id)
+--ALTER TABLE SachCT ADD FOREIGN KEY (IdNCC) REFERENCES NCC(Id)
 -- HoaDonNhap - NhaCungCap
 ALTER TABLE HoaDonNhap ADD FOREIGN KEY (IdNCC) REFERENCES NCC(Id)
 -- HoaDonNhap - nguoidung
@@ -201,30 +202,50 @@ alter table HoaDonTraCT add foreign key(IdHDT) references HoaDonTra(Id)
 
 --Thêm dữ liệu cho Sách
 insert into Sach(ma,ten,ngaytao,ngaysua) values 
-		('S1',N'Tôi yêu em','2002-11-11','2002-11-11'),
-		('S2',N'Bứt phá hóa học','2002-11-11','2002-11-11'),
-		('S3',N'Đồ thị hàm số','2002-11-11','2002-11-11'),
-		('S4',N'Nàng thơ','2002-11-11','2002-11-11'),
-		('S5',N'Toán cao cấp','2002-11-11','2002-11-11')
--- Thêm dữ liệu cho Thẻ Loại
+		('S1',N'Tiệm sách cơn mưa','2002-11-11','2002-11-11'),
+		('S2',N'Đáp án của thanh xuân','2002-11-11','2002-11-11'),
+		('S3',N'Kẻ truy sát','2002-11-11','2002-11-11'),
+		('S4',N'Bán hàng bằng trái tim','2002-11-11','2002-11-11'),
+		('S5',N'Họ đã khởi nghiệp thế nào','2002-11-11','2002-11-11'),
+		('S6',N'Nang đoạn kim cương','2002-11-11','2002-11-11'),
+		('S7',N'Những chú chó bán hàng','2002-11-11','2002-11-11'),
+		('S8',N'Biến tầm nhìn thành hành động','2002-11-11','2002-11-11'),
+		('S9',N'Sống tối giản','2002-11-11','2002-11-11'),
+		('S10',N'Việt Nam thời dựng nước','2002-11-11','2002-11-11'),
+		('S11',N'Việt Nam sử lược','2002-11-11','2002-11-11'),
+		('S12',N'Việt sử và những câu chuyện thú vị','2002-11-11','2002-11-11'),
+		('S13',N'Bác Hồ ở Tân Trào','2002-11-11','2002-11-11'),
+		('S14',N'25 tướng lĩnh Việt Nam','2002-11-11','2002-11-11'),
+		('S15',N'Bách khoa lịch sử thế giới','2002-11-11','2002-11-11'),
+		('S16',N'Ung thư hiểu để chữa lành','2002-11-11','2002-11-11'),
+		('S17',N'Đừng chết bởi canxi','2002-11-11','2002-11-11'),
+		('S18',N'Ma Y Thần tướng','2002-11-11','2002-11-11'),
+		('S19',N'Hệ miễn dịch-Kiệt tác của sự sống','2002-11-11','2002-11-11')
+
+-- Thêm dữ liệu cho Thể Loại
 insert into TheLoai(ma,ten,ngaytao,ngaysua) values 
-		('TL1',N'Văn Học','2002-11-11','2002-11-11'),
-		('TL2',N'Hóa Học','2002-11-11','2002-11-11'),
-		('TL3',N'Toán','2002-11-11','2002-11-11'),
-		('TL4',N'Vật lý','2002-11-11','2002-11-11'),
-		('TL5',N'Địa lý','2002-11-11','2002-11-11')
+		('TL1',N'Văn học','2002-11-11','2002-11-11'),
+		('TL2',N'Kinh tế','2002-11-11','2002-11-11'),
+		('TL3',N'Kỹ năng sống','2002-11-11','2002-11-11'),
+		('TL4',N'Lịch sử','2002-11-11','2002-11-11'),
+		('TL5',N'Y học','2002-11-11','2002-11-11')
 -- Thêm dữ liệu cho NCC
-insert into NCC(ma,ten,ngaytao,ngaysua) values 
-		('NCC1',N'Nhà cung 1','2002-11-11','2002-11-11'),
-		('NCC2',N'Nhà cung 2','2002-11-11','2002-11-11'),
-		('NCC3',N'Nhà cung 3','2002-11-11','2002-11-11'),
-		('NCC4',N'Nhà cung 4','2002-11-11','2002-11-11'),
-		('NCC5',N'Nhà cung 5','2002-11-11','2002-11-11')
+--insert into NCC(ma,ten,ngaytao,ngaysua) values 
+--		('NCC1',N'Công Ty Cổ Phần Dịch Vụ Xuất Bản Giáo Dục Hà Nội','2002-11-11','2002-11-11'),
+--		('NCC2',N'Công Ty TNHH Đăng Nguyên','2002-11-11','2002-11-11'),
+--		('NCC4',N'Nhà cung 4','2002-11-11','2002-11-11'),
+--		('NCC5',N'Nhà cung 5','2002-11-11','2002-11-11')
 -- Thêm dữ liệu cho NXB
-insert into NXB(ma,ten,ngaytao,ngaysua) values 
-		('NXB1',N'Đại học Bách Khoa HN','2002-11-11','2002-11-11'),
-		('NXB2',N'Đại học Sư Phạm HN','2002-11-11','2002-11-11'),
-		('NXB3',N'Báo tuổi trẻ','2002-11-11','2002-11-11'),
-		('NXB4',N'Báo lá cải','2002-11-11','2002-11-11'),
-		('NXB5',N'Báo tiền phong','2002-11-11','2002-11-11')
+insert into nxb(ma,ten,ngaytao,ngaysua) values 
+		('NXB1',N'Nhà xuất bản Lao Động','2002-11-11','2002-11-11'),
+		('NXB2',N'Nhà xuất bản Tổng hợp TP Hồ Chí Minh','2002-11-11','2002-11-11'),
+		('NXB3',N'Nhà xuất bản Hồng Đức','2002-11-11','2002-11-11'),
+		('NXB4',N'Nhà xuất bản Phụ Nữ','2002-11-11','2002-11-11'),
+		('NXB5',N'Nhà xuất bản Trẻ','2002-11-11','2002-11-11'),
+		('NXB6',N'Nhà xuất bản Hà Nội','2002-11-11','2002-11-11'),
+		('NXB7',N'Nhà xuất bản Công Thương','2002-11-11','2002-11-11')
+
+	--drop database DUAN_1_GROUP1_
+
+	--select * from HoaDon
 
