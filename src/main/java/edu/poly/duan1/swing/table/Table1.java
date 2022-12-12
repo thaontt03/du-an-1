@@ -2,8 +2,8 @@ package edu.poly.duan1.swing.table;
 
 import edu.poly.duan1.swing.scrollbar.ScrollBarCustomUI;
 import edu.poly.duan1.swing.textarea.TextAreaCellRenderer;
-import java.awt.Color;
-import java.awt.Graphics;
+
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -29,7 +29,7 @@ public class Table1 {
         }
 //        table.setDefaultRenderer(Object.class, cellRender);
         table.setShowVerticalLines(true);
-        table.setSelectionBackground(new Color(253, 153, 255)); //
+        table.setSelectionBackground(new Color(76, 204, 255)); //
         table.setGridColor(new Color(220, 220, 220));
         table.setForeground(new Color(51, 51, 51)); ///
         table.setSelectionForeground(new Color(51, 51, 51));
@@ -82,3 +82,67 @@ public class Table1 {
         MULTI_LINE, DEFAULT
     }
 }
+/*
+int row = tb_sanpham.getSelectedRow();
+        int rowHD = tb_hoadon.getSelectedRow();
+        String inPutSL = null;
+        Integer soLuongNhap;
+        if (rowHD == -1) {
+            tb_sanpham.clearSelection();
+            NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.ERROR, NotificationMess.Location.TOP_CENTER, "Bạn chưa chọn hóa đơn!");
+            panel.showNotification();
+        } else {
+            HoaDon hd = iHoaDonService.getObj((String) tb_hoadon.getValueAt(rowHD, 0));
+            ChiTietDep ctd = iChiTietDepService.findByTT(0, txt_sp_timkiem.getText(), "DESC").get(row);
+            if (hd.getTrangThai() == 1) {
+                tb_sanpham.clearSelection();
+                NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.ERROR, NotificationMess.Location.TOP_CENTER, "Hóa đơn đã được thanh toán!");
+                panel.showNotification();
+                return;
+            }
+            if (ctd.getSoLuong() == 0) {
+                tb_sanpham.clearSelection();
+                NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.ERROR, NotificationMess.Location.TOP_CENTER, "Sản phẩm này đã hết hàng");
+                panel.showNotification();
+                return;
+            }
+            inPutSL = helper.input(this, "Vui lòng nhập số lượng: ", "Số lượng");
+            try {
+                soLuongNhap = Integer.parseInt(inPutSL);
+                if (soLuongNhap <= 0) {
+                    NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Vui lòng nhập lại!");
+                    panel.showNotification();
+                    return;
+                } else if (soLuongNhap > ctd.getSoLuong()) {
+                    NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Quá số lượng cho phép !");
+                    panel.showNotification();
+                    return;
+                }
+            } catch (Exception e) {
+                NotificationMess panel = new NotificationMess(new FrmHome(), NotificationMess.Type.WARNING, NotificationMess.Location.TOP_CENTER, "Vui lòng nhập lại !");
+                panel.showNotification();
+                return;
+            }
+            if (iHoaDonCTService.getobj(ctd.getId(), hd.getId()) == null) {
+                HoaDonChiTiet hdct = new HoaDonChiTiet();
+                hdct.setCtdep(ctd);
+                hdct.setHoaDon(hd);
+                hdct.setSoLuong(soLuongNhap);
+                hdct.setDonGia(ctd.getGiaBan());
+                hdct.setTrangThai(0);
+                ctd.setSoLuong(ctd.getSoLuong() - soLuongNhap);
+                iChiTietDepService.save(ctd);
+                iHoaDonCTService.save(hdct);
+            } else {
+HoaDonChiTiet hdct = iHoaDonCTService.getobj(ctd.getId(), hd.getId());
+                hdct.setSoLuong(hdct.getSoLuong() + soLuongNhap);
+                ctd.setSoLuong(ctd.getSoLuong() - soLuongNhap);
+                iChiTietDepService.save(ctd);
+                iHoaDonCTService.save(hdct);
+            }
+            loadSP(iChiTietDepService.findByTT(0, txt_sp_timkiem.getText(), "DESC"));
+            loadGioHang(hd.getMa());
+        }
+        tongTien();
+
+ */

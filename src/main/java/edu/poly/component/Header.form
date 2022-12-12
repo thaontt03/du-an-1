@@ -26,12 +26,12 @@
               <Component id="cmdMenu" min="-2" pref="38" max="-2" attributes="0"/>
               <EmptySpace pref="453" max="32767" attributes="0"/>
               <Component id="jSeparator1" min="-2" pref="8" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="lbUserName" alignment="1" min="-2" max="-2" attributes="0"/>
                   <Component id="lbRole" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

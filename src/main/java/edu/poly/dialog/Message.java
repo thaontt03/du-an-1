@@ -1,7 +1,7 @@
 package edu.poly.dialog;
 
-import edu.poly.swing.icon.GoogleMaterialDesignIcons;
-import edu.poly.swing.icon.IconFontSwing;
+import edu.poly.duan1.ui.GoogleMaterialDesignIcons;
+import edu.poly.duan1.ui.IconFontSwing;
 import java.awt.Color;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;

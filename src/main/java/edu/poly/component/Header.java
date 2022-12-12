@@ -1,17 +1,24 @@
 package edu.poly.component;
 
+import edu.poly.duan1.model.NguoiDung;
 import java.awt.event.ActionListener;
 
 public class Header extends javax.swing.JPanel {
-
+    
     public Header() {
         initComponents();
     }
 
+    public Header(NguoiDung nd) {
+        initComponents();
+        lbUserName.setText(nd.getHoTen());
+        lbRole.setText(nd.getChucVu().getTen());
+    }
+    
     public void addMenuEvent(ActionListener event) {
         cmdMenu.addActionListener(event);
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -43,11 +50,11 @@ public class Header extends javax.swing.JPanel {
                 .addComponent(cmdMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 453, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbUserName, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lbRole, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap())
+                .addGap(50, 50, 50))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
