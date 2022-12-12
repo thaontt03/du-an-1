@@ -23,7 +23,7 @@ public interface HoaDonCTService {
 
     public Boolean delete(HoaDonCT hdct);
 
-    public List<HoaDonCT> getObjbyMa(String ma);
+    public List<HoaDonCT> findNByMa(String ma);
 
     public HoaDonCT getObj(int idhd, int idcts);
 

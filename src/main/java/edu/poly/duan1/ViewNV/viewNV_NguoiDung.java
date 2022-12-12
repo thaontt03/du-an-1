@@ -46,8 +46,8 @@ public class viewNV_NguoiDung extends javax.swing.JFrame {
         dcbmCV = new DefaultComboBoxModel<>();
         loadDataTable();
         loadCBChucVu();
-        tblND.setRowSelectionInterval(0, 0);
-        loadText();
+//        tblND.setRowSelectionInterval(0, 0);
+//        loadText();
     }
     
 

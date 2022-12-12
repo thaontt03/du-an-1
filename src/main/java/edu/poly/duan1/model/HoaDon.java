@@ -49,8 +49,12 @@ public class HoaDon {
     private int trangThai;
 
     @ManyToOne()
-    @JoinColumn(name = "idND")
-    private NguoiDung nguoiDung;
+    @JoinColumn(name = "idNguoiTao")
+    private NguoiDung nguoiDungTao;
+    
+    @ManyToOne()
+    @JoinColumn(name = "idNguoiThanhToan")
+     private NguoiDung nguoiDungThanhToan;
 
     @OneToMany(mappedBy = "hoaDon", fetch = FetchType.LAZY)
     List<HoaDonCT> listHoaDonCT;

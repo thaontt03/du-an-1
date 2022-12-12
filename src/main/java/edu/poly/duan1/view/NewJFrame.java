@@ -1,5 +1,8 @@
 package edu.poly.duan1.view;
 
+import java.awt.Image;
+import java.awt.Toolkit;
+
 /**
  *
  * @author AnhTiTan
@@ -16,6 +19,8 @@ public class NewJFrame extends javax.swing.JFrame {
     public NewJFrame() {
         initComponents();
 //        setExtendedState(MAXIMIZED_BOTH);
+ Image icon = Toolkit.getDefaultToolkit().getImage("images/logo.png");
+        this.setIconImage(icon);
     }
 
     /**

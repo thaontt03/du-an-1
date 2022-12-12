@@ -586,7 +586,7 @@ public class view_Ban_Hang extends javax.swing.JFrame {
             sachCTService.saveOrUpdate(sct);
             hoaDonCTService.saveOrUpdate(hdct);
             loadDataTaSach(sachCTService.getAll());
-            loadDataGH((List<HoaDonCT>) hoaDonCTService.getObjbyMa((String) tblHD.getValueAt(row, 1)));
+            loadDataGH((List<HoaDonCT>) hoaDonCTService.findNByMa((String) tblHD.getValueAt(row, 1)));
 
         } catch (Exception e) {
         }
@@ -609,7 +609,7 @@ public class view_Ban_Hang extends javax.swing.JFrame {
     private void tblHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHDMouseClicked
         int row = tblHD.getSelectedRow();
         HoaDon hd = hoaDonService.getObjbyMa((String) tblHD.getValueAt(row, 1));
-        loadDataGH((List<HoaDonCT>) hoaDonCTService.getObjbyMa((String) tblHD.getValueAt(row, 1)));
+        loadDataGH((List<HoaDonCT>) hoaDonCTService.findNByMa((String) tblHD.getValueAt(row, 1)));
         txtMaHD.setText(hd.getMa());
         txtNgayTao.setText(sdf.format(hd.getNgayTao()) + "");
         tongTien();
@@ -682,7 +682,7 @@ public class view_Ban_Hang extends javax.swing.JFrame {
         try {
             int index = tblGioHang.getSelectedRow();
             int row = tblHD.getSelectedRow();
-            List<HoaDonCT> listHDCT = hoaDonCTService.getObjbyMa((String) tblGioHang.getValueAt(row, 1));
+            List<HoaDonCT> listHDCT = hoaDonCTService.findNByMa((String) tblGioHang.getValueAt(row, 1));
             HoaDonCT hdctt = listHDCT.get(index);
             SachCT sct = hdctt.getSachCT();
             HoaDon hd = hoaDonService.getObjbyMa((String) tblHD.getValueAt(row, 1));
@@ -731,7 +731,7 @@ public class view_Ban_Hang extends javax.swing.JFrame {
                         e.printStackTrace();
                     }
                     loadDataTaSach(sachCTService.getAll());
-                    loadDataGH((List<HoaDonCT>) hoaDonCTService.getObjbyMa((String) tblHD.getValueAt(row, 1)));
+                    loadDataGH((List<HoaDonCT>) hoaDonCTService.findNByMa((String) tblHD.getValueAt(row, 1)));
                     System.out.println("12");
                     tongTien();
                 } catch (Exception e) {

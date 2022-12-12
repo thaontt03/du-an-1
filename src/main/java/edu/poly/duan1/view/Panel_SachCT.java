@@ -59,8 +59,8 @@ public class Panel_SachCT extends javax.swing.JPanel {
         loadCbMaNXB();
         loadCbMaMCC();
 //        setLocationRelativeTo(null);
-        tblSachCT.setRowSelectionInterval(0, 0);
-        loadText();
+//        tblSachCT.setRowSelectionInterval(0, 0);
+//        loadText();
     }
 
     private void loadDataTable() {

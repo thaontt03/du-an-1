@@ -63,8 +63,11 @@ public class NguoiDung {
     @Column
     private int trangThai;
 
-    @OneToMany(mappedBy = "nguoiDung", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "nguoiDungTao", fetch = FetchType.LAZY)
     List<HoaDon> listHD;
+    
+    @OneToMany(mappedBy = "nguoiDungThanhToan", fetch = FetchType.LAZY)
+    List<HoaDon> listtHD;
 
 }
 /*
