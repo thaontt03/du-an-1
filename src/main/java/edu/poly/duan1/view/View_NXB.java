@@ -29,7 +29,8 @@ public class View_NXB extends javax.swing.JFrame {
     private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     private List<NXB> nxb;
     private List<NXB> nxb2;
-    int sotrang =1;
+    int sotrang = 1;
+    int check;
 
     public View_NXB() {
         initComponents();
@@ -40,7 +41,8 @@ public class View_NXB extends javax.swing.JFrame {
         loadDataTable(nxb2);
 //        fillToTable();
         uppanel();
-        
+        check = -1;
+
     }
 
     private void loadDataTable() {
@@ -54,8 +56,8 @@ public class View_NXB extends javax.swing.JFrame {
                 x.getTen(),
                 sdf.format(x.getNgayTao()),
                 sdf.format(x.getNgaySua()),
-                x.getTrangThai()==1?"Đang Hợp Tác": "Ngừng Hợp Tác"
-                }
+                x.getTrangThai() == 1 ? "Đang Hợp Tác" : "Ngừng Hợp Tác"
+            }
             );
         }
     }
@@ -87,7 +89,7 @@ public class View_NXB extends javax.swing.JFrame {
             s.setTrangThai(1);
         } else {
             s.setTrangThai(0);
-        }   
+        }
         if (nxbService.saveOrUpdate(s)) {
             helper.alert(this, "Thêm thành công");
         } else {
@@ -138,19 +140,16 @@ public class View_NXB extends javax.swing.JFrame {
                 helper.error(this, "Sửa thất bại");
             }
             int heso = (sotrang * 5) - 5;
-        nxb2 = nxbService.getAll2(heso);
+            nxb2 = nxbService.getAll2(heso);
             loadDataTable(nxb2);
         }
     }
-    
-
-   
 
     private void reset() {
         txtMa.setText("");
         txtTen.setText("");
         buttonGroup2.clearSelection();
-
+        check = -1;
     }
 
     private void loadDataTable(List<NXB> list) {
@@ -164,21 +163,21 @@ public class View_NXB extends javax.swing.JFrame {
                 x.getTen(),
                 sdf.format(x.getNgayTao()),
                 sdf.format(x.getNgaySua()),
-            x.getTrangThai()==1?"Đang Hợp Tác": "Ngừng Hợp Tác"}
+                x.getTrangThai() == 1 ? "Đang Hợp Tác" : "Ngừng Hợp Tác"}
             );
         }
     }
 
     public void search() {
-       String ten = txtTimKiem.getText();
+        String ten = txtTimKiem.getText();
         if (ten.isEmpty()) {
             int heso = (sotrang * 5) - 5;
-        nxb2 = nxbService.getAll2(heso);
+            nxb2 = nxbService.getAll2(heso);
             loadDataTable(nxb2);
-        }else{
+        } else {
             loadDataTable(nxbService.search(ten));
         }
-    
+
     }
 
     /**
@@ -487,11 +486,19 @@ public class View_NXB extends javax.swing.JFrame {
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        update();
+        if (check == -1) {
+            JOptionPane.showMessageDialog(this, "Chọn nhà xuất bản cần cập nhật");
+        } else {
+            update();
+        }
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        delete();
+          if (check == -1) {
+            JOptionPane.showMessageDialog(this, "Chọn nhà xuất bản cần xóa");
+        } else {
+            delete();
+        } 
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnLammoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLammoiActionPerformed
@@ -499,10 +506,10 @@ public class View_NXB extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLammoiActionPerformed
 
     private void tblNXBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNXBMouseClicked
-       int index = tblNXB.getSelectedRow();
+        int index = tblNXB.getSelectedRow();
         tblModel = (DefaultTableModel) tblNXB.getModel();
         String ma = tblModel.getValueAt(index, 1).toString();
-         NXB nxb = nxbService.getObjbyMa(ma);
+        NXB nxb = nxbService.getObjbyMa(ma);
         txtMa.setText(nxb.getMa());
         txtTen.setText(nxb.getTen());
         if (nxb.getTrangThai() == 0) {
@@ -510,11 +517,17 @@ public class View_NXB extends javax.swing.JFrame {
         } else {
             rdbCon.setSelected(true);
         }
-        
+        check = tblNXB.getSelectedRow();
     }//GEN-LAST:event_tblNXBMouseClicked
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
-        search();
+       if (txtTimKiem.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập vào tên nhà xuất bản cần tìm!");
+            txtTimKiem.requestFocus();
+            return;
+        } else {
+            search();
+        }
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
     private void btnnextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnextActionPerformed
@@ -534,12 +547,12 @@ public class View_NXB extends javax.swing.JFrame {
             nxb2 = nxbService.getAll2(heso);
             loadDataTable(nxb2);
             lblsotrang.setText(String.valueOf(sotrang) + "/" + tongSoTrang);
-        
-        }        
+
+        }
     }//GEN-LAST:event_btnnextActionPerformed
 
     private void btnbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbackActionPerformed
-                int tongSoTrang = nxb.size() / 5;
+        int tongSoTrang = nxb.size() / 5;
         if (sotrang <= 1) {
             JOptionPane.showMessageDialog(this, "Không Thể Back Nữa !!");
         }

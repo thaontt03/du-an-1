@@ -20,6 +20,7 @@ import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -43,6 +44,7 @@ public class view_SachCT extends javax.swing.JFrame {
     private DefaultTableModel tblModel;
     private helper helper = new helper();
     private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+    int check;
 
     public view_SachCT() {
         initComponents();
@@ -58,6 +60,7 @@ public class view_SachCT extends javax.swing.JFrame {
         setLocationRelativeTo(null);
 //        tblSachCT.setRowSelectionInterval(0, 0);
 //        loadText();
+        check = -1;
     }
 
     private void loadDataTable() {
@@ -71,7 +74,7 @@ public class view_SachCT extends javax.swing.JFrame {
                 x.getSach().getTen(),
                 x.getTheLoai().getTen(),
                 x.getNXB().getTen(),
-//                x.getNCC().getTen(),
+                //                x.getNCC().getTen(),
                 x.getTacGia(),
                 x.getMoTa(),
                 x.getSoLuongTon(),
@@ -143,11 +146,20 @@ public class view_SachCT extends javax.swing.JFrame {
         sct.setNgayTao(java.sql.Date.valueOf(LocalDate.now()));
         sct.setNgaySua(java.sql.Date.valueOf(LocalDate.now()));
         if (sachCTService.saveOrUpdate(sct)) {
-            helper.alert(this, "thêm oke");
+            helper.alert(this, "Thêm thành công");
+            reset();
         } else {
-            helper.error(this, "thêm thất bại");
+            helper.error(this, "Thêm thất bại");
         }
         loadDataTable();
+    }
+
+    void reset() {
+        txtGiaBan.setText("");
+        txtGiaNhap.setText("");
+        txtMoTa.setText("");
+        txtTacGia.setText("");
+        check = -1;
     }
 
     private void update() {
@@ -163,21 +175,22 @@ public class view_SachCT extends javax.swing.JFrame {
 //        sct.setNCC(ncc);
         sct.setMoTa(txtMoTa.getText());
         sct.setTacGia(txtTacGia.getText());
-       
-        int soluongton =(int) spSLT.getValue();
-         sct.setSoLuongTon(soluongton);
+
+        int soluongton = (int) spSLT.getValue();
+        sct.setSoLuongTon(soluongton);
         sct.setGiaNhap(helper.convertToDecimal(txtGiaNhap, "Giá nhập không hợp lệ"));
         sct.setGiaBan(helper.convertToDecimal(txtGiaBan, "Giá nhập không hợp lệ"));
         sct.setNgaySua(java.sql.Date.valueOf(LocalDate.now()));
-        if(soluongton>0){
+        if (soluongton > 0) {
             sct.setTrangThai(0);
-        }else if(soluongton<=0){
+        } else if (soluongton <= 0) {
             sct.setTrangThai(1);
         }
         if (sachCTService.saveOrUpdate(sct)) {
-            helper.alert(this, "sửa oke");
+            helper.alert(this, "Đã cập nhật");
+            reset();
         } else {
-            helper.error(this, "sửa thất bại thất bại");
+            helper.error(this, "Cập nhật thất bại");
         }
         loadDataTable();
     }
@@ -191,6 +204,7 @@ public class view_SachCT extends javax.swing.JFrame {
         } else {
             if (sachCTService.delete(sct)) {
                 helper.alert(this, "xóa thành công");
+                reset();
             } else {
                 helper.error(this, "xóa thất bại");
             }
@@ -426,11 +440,19 @@ public class view_SachCT extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        update();
+          if (check == -1) {
+            JOptionPane.showMessageDialog(this, "Chọn sách cần cập nhật");
+        } else {
+            update();
+        } 
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        delete();
+         if (check == -1) {
+            JOptionPane.showMessageDialog(this, "Chọn sách cần xóa");
+        } else {
+            delete();
+        } 
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
@@ -439,6 +461,7 @@ public class view_SachCT extends javax.swing.JFrame {
 
     private void tblSachCTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSachCTMouseClicked
         loadText();
+        check = tblSachCT.getSelectedRow();
     }//GEN-LAST:event_tblSachCTMouseClicked
 
     /**

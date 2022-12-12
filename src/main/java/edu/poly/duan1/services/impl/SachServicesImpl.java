@@ -44,18 +44,5 @@ public class SachServicesImpl implements SachServices {
         return sachRepositories.search(ten);
     }
 
-    @Override
-    public List<Sach> getAll2(int heso) {
-        List<Sach> list = sachRepositories.getAll2(heso);
-        List<Sach> list2 = new ArrayList<>();
-        int index = 0;
-        for (Sach x : list) {
-            list2.add(x);
-            index++;
-            if(index ==5)
-            break;
-        }
-       return list2;
-    }
 
 }

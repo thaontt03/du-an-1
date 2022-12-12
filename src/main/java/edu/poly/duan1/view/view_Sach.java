@@ -12,6 +12,7 @@ import edu.poly.duan1.ultis.helper;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -27,7 +28,7 @@ public class view_Sach extends javax.swing.JFrame {
     private DefaultTableModel tblModel;
     private helper helper = new helper();
     private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-
+    int check;
     public view_Sach() {
         initComponents();
         setLocationRelativeTo(null);
@@ -35,6 +36,7 @@ public class view_Sach extends javax.swing.JFrame {
         tblSach.getTableHeader().setReorderingAllowed(false);
         tblSach.setRowSelectionInterval(0, 0);
         loadText();
+        check = -1;
     }
 
     private void loadDataTable() {
@@ -94,9 +96,10 @@ public class view_Sach extends javax.swing.JFrame {
         s.setNgayTao(java.sql.Date.valueOf(LocalDate.now()));
         s.setNgaySua(java.sql.Date.valueOf(LocalDate.now()));
         if (sachServices.saveOrUpdate(s)) {
-            helper.alert(this, "add thanh cong");
+            helper.alert(this, "Thêm thành công");
+            reset();
         } else {
-            helper.error(this, "add loi");
+            helper.error(this, "Thêm thất bại");
         }
         loadDataTable();
     }
@@ -151,7 +154,7 @@ public class view_Sach extends javax.swing.JFrame {
         txtMa.setText("");
         txtTen.setText("");
         buttonGroup1.clearSelection();
-
+        check = -1;
     }
 
     private void loadText() {
@@ -267,6 +270,11 @@ public class view_Sach extends javax.swing.JFrame {
         });
 
         jButton1.setText("Tìm kiếm");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(rdbCon);
         rdbCon.setText("Đang Kinh Doanh ");
@@ -390,19 +398,38 @@ public class view_Sach extends javax.swing.JFrame {
 
     private void tblSachMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSachMouseClicked
         loadText();
+        check = tblSach.getSelectedRow();
     }//GEN-LAST:event_tblSachMouseClicked
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        delete();
+         if (check == -1) {
+            JOptionPane.showMessageDialog(this, "Chọn sách cần xóa");
+        } else {
+            delete();
+        }  
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        update();
+         if (check == -1) {
+            JOptionPane.showMessageDialog(this, "Chọn sách cần cập nhật");
+        } else {
+            update();
+        }  
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void txtTimKiemCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTimKiemCaretUpdate
         search();
     }//GEN-LAST:event_txtTimKiemCaretUpdate
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+            if (txtTimKiem.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập vào tên sách cần tìm!");
+            txtTimKiem.requestFocus();
+            return;
+        } else {
+            search();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

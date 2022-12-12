@@ -45,18 +45,4 @@ public class TheLoaiServiceImpl implements TheLoaiService {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public List<TheLoai> getAll2(int heso) {
-        List<TheLoai> list = theLoaiRepositories.getAll2(heso);
-        List<TheLoai> list2 = new ArrayList<>();
-        int index = 0;
-        for (TheLoai x : list) {
-            list2.add(x);
-            index++;
-            if(index ==5)
-            break;
-        }
-       return list2;
-    }
-
 }

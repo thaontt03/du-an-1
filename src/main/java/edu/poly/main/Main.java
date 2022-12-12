@@ -11,7 +11,6 @@ import edu.poly.duan1.view.PanleSach;
 import edu.poly.duan1.view.viewBH;
 import edu.poly.duan1.view.view_Ban_Hang;
 import edu.poly.duan1.view.view_KhachHang;
-import edu.poly.duan1.view.view_NCC;
 import edu.poly.duan1.view.view_SachCT;
 import edu.poly.event.EventMenuSelected;
 import edu.poly.event.EventShowPopupMenu;
@@ -63,7 +62,7 @@ public class Main extends javax.swing.JFrame {
                 System.out.println("Menu Index : " + menuIndex + " SubMenu Index " + subMenuIndex);
                 if (menuIndex == 0) {
                     if (subMenuIndex == 0) {
-                        main.showForm(new view_NCC());
+//                        main.showForm(new view_NCC());
                     } else if (subMenuIndex == 1) {
                         main.showForm(new Form1());
                     }else if(subMenuIndex==3){
@@ -148,7 +147,7 @@ public class Main extends javax.swing.JFrame {
                 System.out.println("Menu Index : " + menuIndex + " SubMenu Index " + subMenuIndex);
                 if (menuIndex == 0) {
                     if (subMenuIndex == 0) {
-                        main.showForm(new view_NCC());
+//                        main.showForm(new view_NCC());
                     } else if (subMenuIndex == 1) {
                         main.showForm(new Form1());
                     }else if(subMenuIndex==3){

@@ -13,6 +13,7 @@ import edu.poly.duan1.ultis.helper;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,7 +26,7 @@ public class view_TheLoai extends javax.swing.JFrame {
     private DefaultTableModel tblModel;
     private helper helper = new helper();
     private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-
+    int check;
     /**
      * Creates new form view_TheLoai
      */
@@ -33,6 +34,7 @@ public class view_TheLoai extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         loadDataTable();
+        check = -1;
     }
 
     private void loadDataTable(List<TheLoai> list) {
@@ -100,6 +102,7 @@ public class view_TheLoai extends javax.swing.JFrame {
             s.setTrangThai(a);
         if (theLoaiServices.saveOrUpdate(s)) {
             helper.alert(this, "Thêm thành công");
+            reset();
         } else {
             helper.error(this, "Thêm không thành công");
         }
@@ -110,6 +113,7 @@ public class view_TheLoai extends javax.swing.JFrame {
         txtMa.setText("");
         txtTen.setText("");
         buttonGroup1.clearSelection();
+        check = -1;
     }
 
     private void delete() {
@@ -189,6 +193,12 @@ public class view_TheLoai extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("QUẢN LÝ THỂ LOẠI SÁCH");
+
+        txtTimKiem.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtTimKiemCaretUpdate(evt);
+            }
+        });
 
         jButton1.setText("Tìm kiếm");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -363,6 +373,7 @@ public class view_TheLoai extends javax.swing.JFrame {
         } else {
             rdbCon.setSelected(true);
         }
+        check = tblTheLoai.getSelectedRow();
     }//GEN-LAST:event_tblTheLoaiMouseClicked
 
     private void txtTenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenActionPerformed
@@ -382,16 +393,36 @@ public class view_TheLoai extends javax.swing.JFrame {
     }//GEN-LAST:event_btnResetActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        update();        // TODO add your handling code here:
+        if (check == -1) {
+            JOptionPane.showMessageDialog(this, "Chọn thể loại cần cập nhật");
+        } else {
+            update();
+        }       // TODO add your handling code here:
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        delete();        // TODO add your handling code here:
+         if (check == -1) {
+            JOptionPane.showMessageDialog(this, "Chọn thể loại cần xóa");
+        } else {
+            delete();
+        }         // TODO add your handling code here:
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        search();
+        if (txtTimKiem.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập vào tên thể loại cần tìm!");
+            txtTimKiem.requestFocus();
+            return;
+        } else {
+            search();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtTimKiemCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTimKiemCaretUpdate
+        // TODO add your handling code here:
+        search();
+        
+    }//GEN-LAST:event_txtTimKiemCaretUpdate
 
     /**
      * @param args the command line arguments

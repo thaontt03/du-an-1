@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -37,7 +38,8 @@ public class view_NguoiDung extends javax.swing.JFrame {
     private DefaultComboBoxModel<ChucVu> dcbmCV;
     private DefaultTableModel tblModel;
     private helper helper = new helper();
-    private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    int check;
 
     public view_NguoiDung() {
         initComponents();
@@ -45,7 +47,7 @@ public class view_NguoiDung extends javax.swing.JFrame {
         dcbmCV = new DefaultComboBoxModel<>();
         loadDataTable();
         loadCBChucVu();
-
+        check = -1;
     }
 
     private void loadDataTable() {
@@ -119,7 +121,7 @@ public class view_NguoiDung extends javax.swing.JFrame {
             rdoNu.setSelected(true);
         }
         txtDiaChi.setText(nd.getDiaChi());
-        txtSĐT.setText(nd.getSdt());
+        txtSdt.setText(nd.getSdt());
         txtMK.setText(nd.getMatKhau());
         dcbmCV.setSelectedItem(nd.getChucVu());
         if (nd.getTrangThai() == 1) {
@@ -131,7 +133,7 @@ public class view_NguoiDung extends javax.swing.JFrame {
 
     private boolean checkNull() {
         if (helper.checkNull(txtMa, "Mã") || helper.checkNull(txtHoTen, "Họ tên") || helper.checkNull(txtDiaChi, "Địa Chỉ")
-                || helper.checkNull(txtSĐT, "SĐT") || helper.checkNull(txtMK, "Mật Khẩu") || helper.checkNull(txtNS, "Ngày Sinh")) {
+                || helper.checkNull(txtSdt, "SĐT") || helper.checkNull(txtMK, "Mật Khẩu") || helper.checkNull(txtNS, "Ngày Sinh")) {
             return false;
         }
         return true;
@@ -142,6 +144,10 @@ public class view_NguoiDung extends javax.swing.JFrame {
     }
 
     private boolean Validate() {
+        if (!txtSdt.getText().matches("^(0|\\+84)(\\s|\\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\\d)(\\s|\\.)?(\\d{3})(\\s|\\.)?(\\d{3})$")) {
+            JOptionPane.showMessageDialog(null, "Số điện thoại không hợp lệ");
+            return false;
+        }
         String ma = txtMa.getText();
         if (ndService.getObjbyMa(ma) != null) {
             helper.error(this, "Mã đã tồn tại vui lòng thử lại bằng mã khác");
@@ -178,7 +184,7 @@ public class view_NguoiDung extends javax.swing.JFrame {
         rdoNu = new javax.swing.JRadioButton();
         txtNS = new javax.swing.JTextField();
         txtDiaChi = new javax.swing.JTextField();
-        txtSĐT = new javax.swing.JTextField();
+        txtSdt = new javax.swing.JTextField();
         cboChucVu = new javax.swing.JComboBox<>();
         rdoCDK = new javax.swing.JRadioButton();
         rdoDDK = new javax.swing.JRadioButton();
@@ -354,7 +360,7 @@ public class view_NguoiDung extends javax.swing.JFrame {
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addGroup(layout.createSequentialGroup()
                                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                    .addComponent(txtSĐT))
+                                                    .addComponent(txtSdt))
                                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                                     .addGap(13, 13, 13)
                                                     .addComponent(txtMK, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -375,7 +381,7 @@ public class view_NguoiDung extends javax.swing.JFrame {
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cboChucVu, txtDiaChi, txtHoTen, txtMa, txtNS, txtSĐT});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cboChucVu, txtDiaChi, txtHoTen, txtMa, txtNS, txtSdt});
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnThem, jButton2, jButton3, jButton4});
 
@@ -389,7 +395,7 @@ public class view_NguoiDung extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabel7)
                     .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtSĐT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtSdt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -448,6 +454,7 @@ public class view_NguoiDung extends javax.swing.JFrame {
         int index = 0;
         index = tblND.getSelectedRow();
         loadText();
+        check = tblND.getSelectedRow();
     }//GEN-LAST:event_tblNDMouseClicked
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
@@ -462,12 +469,20 @@ public class view_NguoiDung extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        update();
+          if (check == -1) {
+            JOptionPane.showMessageDialog(this, "Chọn người dùng cần cập nhật");
+        } else {
+            update();
+        } 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        delete();
+          if (check == -1) {
+            JOptionPane.showMessageDialog(this, "Chọn người dùng cần xóa");
+        } else {
+            delete();
+        } 
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -477,15 +492,19 @@ public class view_NguoiDung extends javax.swing.JFrame {
 
     private void txtTimKiemCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTimKiemCaretUpdate
         // TODO add your handling code here:
-                search();
+        search();
     }//GEN-LAST:event_txtTimKiemCaretUpdate
 
     private void btnTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTKActionPerformed
         // TODO add your handling code here:
-        search();
+          if (txtTimKiem.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập vào mã người dùng cần tìm!");
+            txtTimKiem.requestFocus();
+            return;
+        } else {
+            search();
+        }
     }//GEN-LAST:event_btnTKActionPerformed
-
-                                     
 
     /**
      * @param args the command line arguments
@@ -553,7 +572,7 @@ public class view_NguoiDung extends javax.swing.JFrame {
     private javax.swing.JTextField txtMK;
     private javax.swing.JTextField txtMa;
     private javax.swing.JTextField txtNS;
-    private javax.swing.JTextField txtSĐT;
+    private javax.swing.JTextField txtSdt;
     private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
 
@@ -565,7 +584,7 @@ public class view_NguoiDung extends javax.swing.JFrame {
             nd.setNgaySinh(sdf.parse(txtNS.getText()));
             nd.setGioiTinh(rdoNam.isSelected() ? "Nam" : "Nữ");
             nd.setDiaChi(txtDiaChi.getText());
-            nd.setSdt(txtSĐT.getText());
+            nd.setSdt(txtSdt.getText());
             nd.setMatKhau(txtMK.getText());
             ChucVu cv = (ChucVu) cboChucVu.getSelectedItem();
             nd.setChucVu(cv);
@@ -580,6 +599,7 @@ public class view_NguoiDung extends javax.swing.JFrame {
             nd.setTrangThai(a);
             if (ndService.saveOrUpdate(nd)) {
                 helper.alert(this, "Thêm Thành Công");
+                reset();
             } else {
                 helper.error(this, "Thêm Thất Bại");
             }
@@ -604,7 +624,7 @@ public class view_NguoiDung extends javax.swing.JFrame {
             }
             nd.setGioiTinh(rdoNam.isSelected() ? "Nam" : "Nữ");
             nd.setDiaChi(txtDiaChi.getText());
-            nd.setSdt(txtSĐT.getText());
+            nd.setSdt(txtSdt.getText());
             nd.setMatKhau(txtMK.getText());
             ChucVu cv = (ChucVu) cboChucVu.getSelectedItem();
             nd.setChucVu(cv);
@@ -648,8 +668,9 @@ public class view_NguoiDung extends javax.swing.JFrame {
         txtHoTen.setText("");
         txtNS.setText("");
         txtDiaChi.setText("");
-        txtSĐT.setText("");
+        txtSdt.setText("");
         txtMK.setText("");
+        check = -1;
     }
 
 }

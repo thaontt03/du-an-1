@@ -30,17 +30,19 @@ public class View_ChucVu extends javax.swing.JFrame {
 //    private List<ChucVu> cv;
     private List<ChucVu> cv;
     private List<ChucVu> cv2;
-    int sotrang =1;
+    int sotrang = 1;
+    int check;
 
     public View_ChucVu() {
         initComponents();
         setLocationRelativeTo(null);
-       cv = chucVuu.getAll();
+        cv = chucVuu.getAll();
         int heso = (sotrang * 5) - 5;
         cv2 = chucVuu.getAll2(heso);
         fillToTable(cv2);
 //        fillToTable();
         uppanel();
+        check = -1;
     }
 
     private boolean checkNull() {
@@ -53,7 +55,7 @@ public class View_ChucVu extends javax.swing.JFrame {
     private boolean Validate() {
         String ma = txtma.getText();
         if (chucVuu.getObjbyMa(ma) != null) {
-            helper.error(this, "mã đã tồn tại vui lòng thử lại bằng mã khác");
+            helper.error(this, "Mã đã tồn tại vui lòng thử lại bằng mã khác");
             return false;
         } else {
             return true;
@@ -88,7 +90,7 @@ public class View_ChucVu extends javax.swing.JFrame {
         lblsotrang = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        txttimkiem = new javax.swing.JTextField();
+        txtTimKiem = new javax.swing.JTextField();
         btntimkiem = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
 
@@ -224,9 +226,9 @@ public class View_ChucVu extends javax.swing.JFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm kiếm"));
 
-        txttimkiem.addCaretListener(new javax.swing.event.CaretListener() {
+        txtTimKiem.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                txttimkiemCaretUpdate(evt);
+                txtTimKiemCaretUpdate(evt);
             }
         });
 
@@ -243,7 +245,7 @@ public class View_ChucVu extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txttimkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btntimkiem)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -253,7 +255,7 @@ public class View_ChucVu extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txttimkiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btntimkiem))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -355,20 +357,34 @@ public class View_ChucVu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnlammoiActionPerformed
 
     private void btnsuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsuaActionPerformed
-        update();
+        if (check == -1) {
+            JOptionPane.showMessageDialog(this, "Chọn chức vụ cần cập nhật");
+        } else {
+            update();
+        }
     }//GEN-LAST:event_btnsuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        delete();
+         if (check == -1) {
+            JOptionPane.showMessageDialog(this, "Chọn chức vụ cần xóa");
+        } else {
+            delete();
+        } 
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btntimkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntimkiemActionPerformed
-        search();
+        if (txtTimKiem.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập vào tên chức vụ cần tìm!");
+            txtTimKiem.requestFocus();
+            return;
+        } else {
+            search();
+        }
     }//GEN-LAST:event_btntimkiemActionPerformed
 
     private void btnnextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnextActionPerformed
-              int tongSoTrang = cv.size() / 5;
-              if (sotrang > tongSoTrang) {
+        int tongSoTrang = cv.size() / 5;
+        if (sotrang > tongSoTrang) {
             JOptionPane.showMessageDialog(this, "Không Thể next Nữa !!");
         }
         if (cv.size() % 5 != 0) {
@@ -406,18 +422,18 @@ public class View_ChucVu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnbackActionPerformed
 
-    private void txttimkiemCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txttimkiemCaretUpdate
+    private void txtTimKiemCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTimKiemCaretUpdate
         search();
-    }//GEN-LAST:event_txttimkiemCaretUpdate
+    }//GEN-LAST:event_txtTimKiemCaretUpdate
 
     private void tblchucvuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblchucvuMouseClicked
         int index = tblchucvu.getSelectedRow();
         tblModel = (DefaultTableModel) tblchucvu.getModel();
         String ma = tblModel.getValueAt(index, 1).toString();
-         ChucVu s = chucVuu.getObjbyMa(ma);
+        ChucVu s = chucVuu.getObjbyMa(ma);
         txtma.setText(s.getMa());
         txtten.setText(s.getTen());
-       
+        check = tblchucvu.getSelectedRow();
     }//GEN-LAST:event_tblchucvuMouseClicked
 
     /**
@@ -476,9 +492,9 @@ public class View_ChucVu extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblsotrang;
     private javax.swing.JTable tblchucvu;
+    private javax.swing.JTextField txtTimKiem;
     private javax.swing.JTextField txtma;
     private javax.swing.JTextField txtten;
-    private javax.swing.JTextField txttimkiem;
     // End of variables declaration//GEN-END:variables
 
     private void fillToTable() {
@@ -505,9 +521,10 @@ public class View_ChucVu extends javax.swing.JFrame {
                 x.getTen(),
                 sdf.format(x.getNgayTao()),
                 sdf.format(x.getNgaySua())
-               });
+            });
         }
-}
+    }
+
     public boolean validatee() {
         if (txtma.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "chưa nhập mã nhân viên");
@@ -528,7 +545,7 @@ public class View_ChucVu extends javax.swing.JFrame {
         s.setTen(txtten.getText());
         s.setNgayTao(java.sql.Date.valueOf(LocalDate.now()));
         s.setNgaySua(java.sql.Date.valueOf(LocalDate.now()));
-        
+
         if (chucVuu.saveOrUpdate(s)) {
             helper.alert(this, "Thêm Thành Công");
         } else {
@@ -536,7 +553,7 @@ public class View_ChucVu extends javax.swing.JFrame {
         }
         int heso = (sotrang * 5) - 5;
         cv2 = chucVuu.getAll2(heso);
-                
+
         fillToTable(cv2);
     }
 
@@ -550,8 +567,7 @@ public class View_ChucVu extends javax.swing.JFrame {
             s.setTen(txtten.getText());
             s.setNgaySua(java.sql.Date.valueOf(LocalDate.now()));
             int a;
-           
-           
+
             if (chucVuu.saveOrUpdate(s)) {
                 helper.alert(this, "Sửa thành công");
                 reset();
@@ -559,7 +575,7 @@ public class View_ChucVu extends javax.swing.JFrame {
                 helper.error(this, "Sửa thất bại");
             }
             int heso = (sotrang * 5) - 5;
-        cv2 = chucVuu.getAll2(heso);
+            cv2 = chucVuu.getAll2(heso);
             fillToTable(cv2);
         }
     }
@@ -591,19 +607,21 @@ public class View_ChucVu extends javax.swing.JFrame {
         txtma.setText("");
         txtten.setText("");
         buttonGroup1.clearSelection();
-
+        check = -1;
     }
-     public void search() {
-        String ten = txttimkiem.getText();
+
+    public void search() {
+        String ten = txtTimKiem.getText();
         if (ten.isEmpty()) {
             int heso = (sotrang * 5) - 5;
-        cv2 = chucVuu.getAll2(heso);
+            cv2 = chucVuu.getAll2(heso);
             fillToTable(cv2);
-        }else{
+        } else {
             fillToTable(chucVuu.search(ten));
         }
     }
-     private void uppanel() {
+
+    private void uppanel() {
         int tongsotrang = cv.size() / 5;
         if (cv.size() % 5 != 0) {
             tongsotrang += 1;
