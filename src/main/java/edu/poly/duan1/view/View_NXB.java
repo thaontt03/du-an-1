@@ -223,6 +223,12 @@ public class View_NXB extends javax.swing.JFrame {
 
         jLabel2.setText("Tìm Kiếm");
 
+        txtTimKiem.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtTimKiemCaretUpdate(evt);
+            }
+        });
+
         btnTimKiem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnTimKiem.setText("Tìm Kiếm");
         btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
@@ -248,6 +254,9 @@ public class View_NXB extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(tblNXB);
+        if (tblNXB.getColumnModel().getColumnCount() > 0) {
+            tblNXB.getColumnModel().getColumn(5).setHeaderValue("Trạng Thái");
+        }
 
         jLabel3.setText("Mã");
 
@@ -490,8 +499,10 @@ public class View_NXB extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLammoiActionPerformed
 
     private void tblNXBMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNXBMouseClicked
-        int index = tblNXB.getSelectedRow();
-        NXB nxb = nxbService.getAll().get(index);
+       int index = tblNXB.getSelectedRow();
+        tblModel = (DefaultTableModel) tblNXB.getModel();
+        String ma = tblModel.getValueAt(index, 1).toString();
+         NXB nxb = nxbService.getObjbyMa(ma);
         txtMa.setText(nxb.getMa());
         txtTen.setText(nxb.getTen());
         if (nxb.getTrangThai() == 0) {
@@ -499,6 +510,7 @@ public class View_NXB extends javax.swing.JFrame {
         } else {
             rdbCon.setSelected(true);
         }
+        
     }//GEN-LAST:event_tblNXBMouseClicked
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
@@ -545,6 +557,10 @@ public class View_NXB extends javax.swing.JFrame {
             lblsotrang.setText(String.valueOf(sotrang) + "/" + tongSoTrang);
         }
     }//GEN-LAST:event_btnbackActionPerformed
+
+    private void txtTimKiemCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTimKiemCaretUpdate
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTimKiemCaretUpdate
 
     /**
      * @param args the command line arguments

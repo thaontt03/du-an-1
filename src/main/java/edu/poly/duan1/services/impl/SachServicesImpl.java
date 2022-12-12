@@ -8,6 +8,7 @@ package edu.poly.duan1.services.impl;
 import edu.poly.duan1.model.Sach;
 import edu.poly.duan1.repositories.SachRepositories;
 import edu.poly.duan1.services.SachServices;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,6 +42,20 @@ public class SachServicesImpl implements SachServices {
     @Override
     public List<Sach> search(String ten) {
         return sachRepositories.search(ten);
+    }
+
+    @Override
+    public List<Sach> getAll2(int heso) {
+        List<Sach> list = sachRepositories.getAll2(heso);
+        List<Sach> list2 = new ArrayList<>();
+        int index = 0;
+        for (Sach x : list) {
+            list2.add(x);
+            index++;
+            if(index ==5)
+            break;
+        }
+       return list2;
     }
 
 }

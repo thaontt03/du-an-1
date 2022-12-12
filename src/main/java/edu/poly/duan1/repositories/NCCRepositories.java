@@ -23,6 +23,12 @@ public class NCCRepositories {
         list = query.getResultList();
         return list;
     }
+    public List<NCC> getAll2(int heso) {
+        List<NCC> list = new ArrayList<>();
+        Query query = session.createQuery("SELECT c FROM NCC c");
+        list = query.setFirstResult(heso).getResultList();
+        return list;
+    }
 
     public List<NCC> search(String ten) {
         List<NCC> list = new ArrayList();

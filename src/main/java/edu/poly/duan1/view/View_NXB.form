@@ -164,6 +164,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtTimKiem">
+      <Events>
+        <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="txtTimKiemCaretUpdate"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnTimKiem">
       <Properties>
@@ -223,7 +226,7 @@
                   <Renderer/>
                 </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
+                  <Title value="Tr&#x1ea1;ng Th&#xe1;i"/>
                   <Editor/>
                   <Renderer/>
                 </Column>

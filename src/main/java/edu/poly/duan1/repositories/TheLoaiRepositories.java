@@ -28,6 +28,12 @@ public class TheLoaiRepositories {
         list = query.getResultList();
         return list;
     }
+     public List<TheLoai> getAll2(int heso) {
+        List<TheLoai> list = new ArrayList<>();
+        Query query = session.createQuery("SELECT c FROM TheLoai c");
+        list = query.setFirstResult(heso).getResultList();
+        return list;
+    }
 
     public List<TheLoai> search(String ten) {
         List<TheLoai> list = new ArrayList();

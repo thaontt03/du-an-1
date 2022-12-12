@@ -28,6 +28,12 @@ public class SachRepositories {
         list = query.getResultList();
         return list;
     }
+    public List<Sach> getAll2(int heso) {
+        List<Sach> list = new ArrayList<>();
+        Query query = session.createQuery("SELECT c FROM Sach c");
+        list = query.setFirstResult(heso).getResultList();
+        return list;
+    }
 
     public Boolean saveOrUpdate(Sach s) {
         try {
