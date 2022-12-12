@@ -2,6 +2,9 @@ package edu.poly.main;
 
 import edu.poly.component.Header;
 import edu.poly.component.Menu;
+import edu.poly.duan1.model.NguoiDung;
+import edu.poly.duan1.ui.GoogleMaterialDesignIcons;
+import edu.poly.duan1.ui.IconFontSwing;
 import edu.poly.duan1.ultis.helper;
 import edu.poly.duan1.view.Panel_SachCT;
 import edu.poly.duan1.view.PanleSach;
@@ -16,8 +19,8 @@ import edu.poly.form.Form1;
 import edu.poly.form.MainForm;
 import edu.poly.swing.MenuItem;
 import edu.poly.swing.PopupMenu;
-import edu.poly.swing.icon.GoogleMaterialDesignIcons;
-import edu.poly.swing.icon.IconFontSwing;
+//import edu.poly.swing.icon.GoogleMaterialDesignIcons;
+//import edu.poly.swing.icon.IconFontSwing;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,13 +38,104 @@ public class Main extends javax.swing.JFrame {
     private Animator animator;
     private helper helper = new helper();
 
+    public Main(NguoiDung nd) {
+        initComponents();
+        setExtendedState(MAXIMIZED_BOTH);
+        init(nd);
+
+    }
     public Main() {
         initComponents();
-//        setExtendedState(MAXIMIZED_BOTH);
+        setExtendedState(MAXIMIZED_BOTH);
         init();
 
     }
 
+    private void init(NguoiDung nd) {
+        layout = new MigLayout("fill", "0[]0[100%, fill]0", "0[fill, top]0");
+        bg.setLayout(layout);
+        menu = new Menu();
+        header = new Header(nd);
+        main = new MainForm();
+        menu.addEvent(new EventMenuSelected() {
+            @Override
+            public void menuSelected(int menuIndex, int subMenuIndex) {
+                System.out.println("Menu Index : " + menuIndex + " SubMenu Index " + subMenuIndex);
+                if (menuIndex == 0) {
+                    if (subMenuIndex == 0) {
+                        main.showForm(new view_NCC());
+                    } else if (subMenuIndex == 1) {
+                        main.showForm(new Form1());
+                    }else if(subMenuIndex==3){
+                         main.showForm(new PanleSach());
+                    }                    
+                } else if (menuIndex == 1) {
+                    logoutƠut();
+                    new viewBH().setVisible(true);
+                
+                } else if (menuIndex == 3) {
+                    logoutƠut();
+//                    new view_Ban_Hang().setVisible(true);
+                }
+            }
+        });
+        menu.addEventShowPopup(new EventShowPopupMenu() {
+            @Override
+            public void showPopup(Component com) {
+                MenuItem item = (MenuItem) com;
+                PopupMenu popup = new PopupMenu(Main.this, item.getIndex(), item.getEventSelected(), item.getMenu().getSubMenu());
+                int x = Main.this.getX() + 52;
+                int y = Main.this.getY() + com.getY() + 86;
+                popup.setLocation(x, y);
+                popup.setVisible(true);
+            }
+        });
+        menu.initMenuItem();
+        bg.add(menu, "w 230!, spany 2");    // Span Y 2cell
+        bg.add(header, "h 50!, wrap");
+        bg.add(main, "w 100%, h 100%");
+        TimingTarget target = new TimingTargetAdapter() {
+            @Override
+            public void timingEvent(float fraction) {
+                double width;
+                if (menu.isShowMenu()) {
+                    width = 60 + (170 * (1f - fraction));
+                } else {
+                    width = 60 + (170 * fraction);
+                }
+                layout.setComponentConstraints(menu, "w " + width + "!, spany2");
+                menu.revalidate();
+            }
+
+            @Override
+            public void end() {
+                menu.setShowMenu(!menu.isShowMenu());
+                menu.setEnableMenu(true);
+            }
+
+        };
+        animator = new Animator(500, target);
+        animator.setResolution(0);
+        animator.setDeceleration(0.5f);
+        animator.setAcceleration(0.5f);
+        header.addMenuEvent(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                if (!animator.isRunning()) {
+                    animator.start();
+                }
+                menu.setEnableMenu(false);
+                if (menu.isShowMenu()) {
+                    menu.hideallMenu();
+                }
+            }
+        });
+
+//        //  Init google icon font
+        IconFontSwing.register(GoogleMaterialDesignIcons.getIconFont());
+        //  Start with this form
+        main.showForm(new Panel_SachCT());
+    }
     private void init() {
         layout = new MigLayout("fill", "0[]0[100%, fill]0", "0[fill, top]0");
         bg.setLayout(layout);
