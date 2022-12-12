@@ -72,7 +72,7 @@ public class KhachHangRepositories {
     public List<KhachHang> search(String ten) {
         List<KhachHang> list = new ArrayList();
         Query query = session.createQuery("SELECT c From KhachHang c where c.ten like :ten");
-        query.setParameter("ten", "%" + ten + "%");
+        query.setParameter("ten",ten);
         list = query.getResultList();
         return list;
     }

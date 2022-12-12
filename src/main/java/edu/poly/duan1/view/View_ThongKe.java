@@ -28,6 +28,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -305,7 +306,7 @@ public class View_ThongKe extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBieuDoSPActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       writeExcel();
+        writeExcel();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -425,7 +426,7 @@ public class View_ThongKe extends javax.swing.JFrame {
     public JFreeChart createChart1() {
         JFreeChart barChart = ChartFactory.createBarChart(
                 "Biểu đồ thống kê sản phẩm đã bán".toUpperCase(),
-                 "Sản phẩm","Số lượng",
+                "Sản phẩm", "Số lượng",
                 createDataset1(), PlotOrientation.VERTICAL, false, true, false);
         return barChart;
     }
@@ -465,18 +466,21 @@ public class View_ThongKe extends javax.swing.JFrame {
 //        pnlBieuDo.removeAll();
 //        pnlBieuDo.add(chartPanel);
     }
+
     public void writeExcel() {
         try {
             SimpleDateFormat dateTimeFM = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             listTK = thongKeService.getExcel();
-            String date = dateTimeFM.format(new Date());          
-            FileOutputStream file = new FileOutputStream("C:\\Users\\quank\\OneDrive\\Desktop\\thongke.xlsx");
+            String date = dateTimeFM.format(new Date());
+            String i = UUID.randomUUID().toString();
+            String a = i.substring(0, 4);
+            FileOutputStream file = new FileOutputStream("C:\\Users\\quank\\OneDrive\\Desktop\\thongke" + a + ".xlsx");
             XSSFWorkbook worbook = new XSSFWorkbook();
             XSSFSheet worksheet = worbook.createSheet("Thống Kê Sản Phẩm");
             XSSFRow row;
-            XSSFCell ma, ten,soluong, soluonton;
-            int i = 1;
-            row = worksheet.createRow(i);
+            XSSFCell ma, ten, soluong, soluonton;
+            int i1 = 1;
+            row = worksheet.createRow(i1);
             ma = row.createCell(0);
             ma.setCellValue("Mã Sản Phẩm");
             ten = row.createCell(1);
@@ -486,9 +490,9 @@ public class View_ThongKe extends javax.swing.JFrame {
             soluonton = row.createCell(3);
             soluonton.setCellValue("Số Lượng Còn");
             for (thongke t : listTK) {
-                i++;
+                i1++;
                 Sach sp = sachService.getObjbyMa(t.getMa());
-                row = worksheet.createRow(i);
+                row = worksheet.createRow(i1);
                 ma = row.createCell(0);
                 ma.setCellValue(t.getMa());
                 ten = row.createCell(1);

@@ -33,18 +33,18 @@ public class helper {
     }
 
     public Date checkDate(String d) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date date = null;
         try {
             date = sdf.parse(d);
         } catch (ParseException ex) {
-            error(null, "Vui lòng nhập đúng định dạng yyyy-MM-dd!");
+            error(null, "Vui lòng nhập đúng định dạng dd/MM/yyyy!");
         }
         return date;
     }
 
     public String formatDate(Date date) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         String result = format.format(date);
         return result;
     }
