@@ -28,7 +28,7 @@ public class view_Login extends javax.swing.JFrame {
         if (nguoiDungService.getObjbyMa(ma) == null) {
             helper.error(this, "Người dùng không tồn tại");
         } else if (mk.equals(nguoiDungService.getObjbyMa(ma).getMatKhau())) {
-            new Main().setVisible(true);
+            new Main(nguoiDungService.getObjbyMa(ma)).setVisible(true);
             this.dispose();
         } else {
             helper.error(this, "Mật khẩu sai");

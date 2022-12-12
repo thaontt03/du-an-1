@@ -35,7 +35,7 @@ public class HoaDonCTServiceImpl implements HoaDonCTService {
     }
 
     @Override
-    public List<HoaDonCT> getObjbyMa(String ma) {
+    public List<HoaDonCT> findNByMa(String ma) {
         return hoaDonRep.getObjbyMa(ma);
     }
 

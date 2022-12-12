@@ -6,6 +6,7 @@ package edu.poly.duan1.view;
 
 import edu.poly.duan1.model.HoaDon;
 import edu.poly.duan1.model.HoaDonCT;
+import edu.poly.duan1.model.NguoiDung;
 import edu.poly.duan1.model.SachCT;
 import edu.poly.duan1.services.HoaDonCTService;
 import edu.poly.duan1.services.HoaDonService;
@@ -16,11 +17,13 @@ import edu.poly.duan1.services.impl.SachCTServiceImpl;
 import edu.poly.duan1.swing.table.Table1;
 import edu.poly.duan1.ultis.helper;
 import edu.poly.main.Main;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -41,7 +44,9 @@ public class viewBH extends javax.swing.JFrame {
     private helper helper = new helper();
     private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
-    public viewBH() {
+    private NguoiDung nguoiDung = new NguoiDung();
+
+    public viewBH(NguoiDung nd) {
         initComponents();
         Table1.apply(jScrollPane1, Table1.TableType.DEFAULT);
         Table1.apply(jScrollPane2, Table1.TableType.DEFAULT);
@@ -52,6 +57,10 @@ public class viewBH extends javax.swing.JFrame {
         GroupTT();
         rdTatCa.setSelected(true);
         setTitle("Bán Hàng");
+        this.nguoiDung = nd;
+        Image icon = Toolkit.getDefaultToolkit().getImage("images/logo.png");
+        this.setIconImage(icon);
+
     }
 
     private void loadDataTaSach(List<SachCT> list) {
@@ -73,14 +82,14 @@ public class viewBH extends javax.swing.JFrame {
 
     private void loadDataHoaDon(List<HoaDon> list) {
         tblModel = (DefaultTableModel) tblHD.getModel();
-        tblModel.setColumnIdentifiers(new String[]{"STT", "Mã HD", "Ngày tạo", "Trạng thái"});
+        tblModel.setColumnIdentifiers(new String[]{"STT", "Mã HD", "Người Tạo", "Ngày tạo", "Trạng thái"});
         tblModel.setRowCount(0);
         int i = 1;
         for (HoaDon x : list) {
             tblModel.addRow(new Object[]{
                 i++,
                 x.getMa(),
-                //                x.getNguoiDung().getHoTen(),
+                x.getNguoiDungTao().getHoTen(),
                 sdf.format(x.getNgayTao()),
                 x.getTrangThai() == 1 ? "Đã thanh toán" : "Chưa thanh toán"
             });
@@ -128,7 +137,7 @@ public class viewBH extends javax.swing.JFrame {
     }
 
     private void tongTien() {
-        //        DecimalFormat x = new DecimalFormat("###,###,###");
+        DecimalFormat x = new DecimalFormat("###,###,###");
         Double tongTien = 0.0;
         // Tổng tiền
         for (int i = 0; i < tblGioHang.getRowCount(); i++) {
@@ -196,18 +205,13 @@ public class viewBH extends javax.swing.JFrame {
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         tblSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblSanPhamMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblSanPhamMousePressed(evt);
             }
         });
         jScrollPane3.setViewportView(tblSanPham);
@@ -251,15 +255,7 @@ public class viewBH extends javax.swing.JFrame {
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         tblGioHang.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 tblGioHangMousePressed(evt);
@@ -340,6 +336,9 @@ public class viewBH extends javax.swing.JFrame {
         tblHD.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblHDMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblHDMousePressed(evt);
             }
         });
         jScrollPane1.setViewportView(tblHD);
@@ -487,7 +486,7 @@ public class viewBH extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGoHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoHomeActionPerformed
-        new Main().setVisible(true);
+        new Main(nguoiDung).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnGoHomeActionPerformed
 
@@ -511,34 +510,38 @@ public class viewBH extends javax.swing.JFrame {
         Double tongTien = 0.0;
         Double tienKhachDua = 0.0;
         Double tienThua = 0.0;
+        DecimalFormat x = new DecimalFormat("###,###,###");
         try {
+//            tongTien = Double.parseDouble(x.format(txtTongTien.getText()));
             tongTien = Double.parseDouble(txtTongTien.getText().toString());
+//            tienKhachDua = Double.parseDouble(x.format(txtTienKhachDua.getText()));
             tienKhachDua = Double.parseDouble(txtTienKhachDua.getText());
-            //            tienThua = tienThua - tongTien;
+            tienThua = tienKhachDua - tongTien;
         } catch (Exception e) {
         }
         if (tienKhachDua - tongTien <= 0.0) {
             //            txtTienThua.setText(0 + "");
-            txtTienThua.setText(tienKhachDua - tongTien + "");
+            txtTienThua.setText(x.format(tienThua) + " VNĐ");
         } else {
-            txtTienThua.setText(tienKhachDua - tongTien + "");
+            txtTienThua.setText(x.format(tienThua) + " VNĐ");
         }
     }//GEN-LAST:event_txtTienKhachDuaCaretUpdate
     private void thanhToan() {
+        DecimalFormat x = new DecimalFormat("###,###,###");
         Double tongTien = 0.0;
         Double tienKhachDua = 0.0;
         Double tienThua = 0.0;
         try {
             tongTien = Double.parseDouble(txtTongTien.getText().toString());
             tienKhachDua = Double.parseDouble(txtTienKhachDua.getText());
-//            tienThua = tienThua - tongTien;
+            tienThua = tienKhachDua - tongTien;
         } catch (Exception e) {
         }
         if (tienKhachDua - tongTien <= 0.0) {
 //            txtTienThua.setText(0 + "");
-            txtTienThua.setText(tienKhachDua - tongTien + "");
+            txtTienThua.setText(x.format(tienThua));
         } else {
-            txtTienThua.setText(tienKhachDua - tongTien + "");
+            txtTienThua.setText(x.format(tienThua));
         }
         int row = tblHD.getSelectedRow();
 
@@ -547,20 +550,24 @@ public class viewBH extends javax.swing.JFrame {
             helper.error(this, "Đơn hàng này đã được thanh toán");
             return;
         }
+
         if (tienKhachDua - tongTien >= 0) {
-            hd.setTrangThai(1);
-            hd.setNgayThanhToan(java.sql.Date.valueOf(LocalDate.now()));
-            if (hoaDonService.saveOrUpdate(hd)) {
+            if (helper.confirm(this, "Bạn có muốn thanh toán hóa đơn: ''" + hd.getMa() + "''\n"
+                    + "Tổng số tiền là: " + x.format(tongTien) + " VNĐ không?")) {
+                hd.setTrangThai(1);
+                hd.setNgayThanhToan(java.sql.Date.valueOf(LocalDate.now()));
+                hd.setNguoiDungThanhToan(nguoiDung);
+                if (hoaDonService.saveOrUpdate(hd)) {
 
-                helper.alert(this, "Thanh toán thành công");
-                tblModel = (DefaultTableModel) tblGioHang.getModel();
-                tblModel.setRowCount(0);
-                loadDataHoaDon(hoaDonService.getAll());
+                    helper.alert(this, "Thanh toán thành công");
+                    tblModel = (DefaultTableModel) tblGioHang.getModel();
+                    tblModel.setRowCount(0);
+                    loadDataHoaDon(hoaDonService.getAll());
 
-            } else {
-                helper.error(this, "Thanh toán thất bại");
+                } else {
+                    helper.error(this, "Thanh toán thất bại");
+                }
             }
-
         } else {
             helper.error(this, "Tiền khách đưa không đủ vui lòng nhập lại số tiền");
         }
@@ -568,12 +575,14 @@ public class viewBH extends javax.swing.JFrame {
 
     private void taoHoaDon() {
         HoaDon hd = new HoaDon();
+
         String result;
         hd.setNgayTao(java.sql.Date.valueOf(LocalDate.now()));
         for (int i = 0; i < hoaDonService.getAll().size() + 1; i++) {
             result = "HD" + i;
             if (hoaDonService.getObjbyMa(result) == null) {
                 hd.setMa(result);
+                hd.setNguoiDungTao(nguoiDung);
                 break;
             } else {
                 continue;
@@ -581,233 +590,205 @@ public class viewBH extends javax.swing.JFrame {
         }
         if (hoaDonService.saveOrUpdate(hd)) {
             helper.alert(this, "Thêm hoá đơn Thành Công");
+
+            loadDataHoaDon(hoaDonService.getAll());
+            tblHD.setRowSelectionInterval(0, 0);
+            int row = tblHD.getSelectedRow();
+            loadDataGH((List<HoaDonCT>) hoaDonCTService.findNByMa((String) tblHD.getValueAt(row, 1)));
+            txtMaHD.setText(hd.getMa());
+            txtNgayTao.setText(sdf.format(hd.getNgayTao()) + "");
+            tongTien();
         } else {
             helper.error(this, "Thêm hoá đơn mới thất bại");
 
         }
-        loadDataHoaDon(hoaDonService.getAll());
+
     }
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
+
         thanhToan();
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
     private void tblHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHDMouseClicked
-        int row = tblHD.getSelectedRow();
-        HoaDon hd = hoaDonService.getObjbyMa((String) tblHD.getValueAt(row, 1));
-//        loadDataGH(hoaDonCTService.getObjbyMa(txtMaHD.getText()));
-        loadDataGH((List<HoaDonCT>) hoaDonCTService.getObjbyMa((String) tblHD.getValueAt(row, 1)));
-        txtMaHD.setText(hd.getMa());
-        txtNgayTao.setText(sdf.format(hd.getNgayTao()) + "");
-        tongTien();
+
+
     }//GEN-LAST:event_tblHDMouseClicked
 
     private void tblSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMouseClicked
-        try {
 
-            int row = tblHD.getSelectedRow();
-            int rowSP = tblSanPham.getSelectedRow();
+    }//GEN-LAST:event_tblSanPhamMouseClicked
+    private void sanphamMousePressed() {
+
+        int row = tblHD.getSelectedRow();
+        int rowSP = tblSanPham.getSelectedRow();
+        if (row == -1) {
+            helper.error(this, "Vui lòng chọn hóa đơn cần chỉnh sửa");
+            tblSanPham.clearSelection();
+        } else {
             HoaDon hd = hoaDonService.getObjbyMa((String) tblHD.getValueAt(row, 1));
             SachCT sctt = sachCTService.getAll().get(rowSP);
             SachCT sct = new SachCT();
             sct = sachCTService.getObjbyID(sctt.getId());
             HoaDonCT hdct = hoaDonCTService.getObj(hd.getId(), sct.getId());
-
+            if (hd.getTrangThai() == 1) {
+                helper.error(this, "Hóa đơn này đã được thanh toán");
+                tblSanPham.clearSelection();
+                return;
+            }
             if (sctt.getSoLuongTon() <= 0) {
                 helper.error(this, "Đã hết hàng");
                 return;
             }
             String input = JOptionPane.showInputDialog("Vui lòng nhập số lượng");
-            Integer soLuong = Integer.parseInt(input);
-            if (soLuong > sctt.getSoLuongTon()) {
-                helper.error(this, "Đã vượt quá số lượng tối đa \n" + "(max:" + sct.getSoLuongTon() + ")");
-                return;
-            }
-            if (hdct != null) {
+            try {
 
-                hdct.setSoLuong(hdct.getSoLuong() + soLuong);
-                sct.setSoLuongTon(sct.getSoLuongTon() - soLuong);
-            } else {
-                hdct = new HoaDonCT();
-                hdct.setHoaDon(hd);
-                hdct.setSachCT(sct);
-                hdct.setDonGia(sct.getGiaBan().doubleValue());
-                hdct.setSoLuong(hdct.getSoLuong() + soLuong);
-                sct.setSoLuongTon(sct.getSoLuongTon() - soLuong);
+                Integer soLuong = Integer.parseInt(input);
+                if (soLuong > sctt.getSoLuongTon()) {
+                    helper.error(this, "Đã vượt quá số lượng tối đa \n" + "(max:" + sct.getSoLuongTon() + ")");
+                    tblSanPham.clearSelection();
+                    return;
+                } else if (soLuong <= 0) {
+                    helper.error(this, "Số lượng phải >0");
+                    tblSanPham.clearSelection();
+                    return;
+                }
+                if (hdct != null) {
+
+                    hdct.setSoLuong(hdct.getSoLuong() + soLuong);
+                    sct.setSoLuongTon(sct.getSoLuongTon() - soLuong);
+                    hdct.setNgayTao(java.sql.Date.valueOf(LocalDate.now()));
+                    hdct.setNgaySua(java.sql.Date.valueOf(LocalDate.now()));
+                } else {
+                    hdct = new HoaDonCT();
+                    hdct.setNgaySua(java.sql.Date.valueOf(LocalDate.now()));
+                    hdct.setHoaDon(hd);
+                    hdct.setSachCT(sct);
+                    hdct.setDonGia(sct.getGiaBan().doubleValue());
+                    hdct.setSoLuong(hdct.getSoLuong() + soLuong);
+                    sct.setSoLuongTon(sct.getSoLuongTon() - soLuong);
+                }
+                sachCTService.saveOrUpdate(sct);
+                hoaDonCTService.saveOrUpdate(hdct);
+            } catch (Exception e) {
+                helper.error(this, "vui lòng nhập lại");
             }
-            sachCTService.saveOrUpdate(sct);
-            hoaDonCTService.saveOrUpdate(hdct);
             loadDataTaSach(sachCTService.getAll());
-            loadDataGH((List<HoaDonCT>) hoaDonCTService.getObjbyMa((String) tblHD.getValueAt(row, 1)));
-
-        } catch (Exception e) {
-        }
-        tongTien();
-    }//GEN-LAST:event_tblSanPhamMouseClicked
-
-    private void tblGioHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGioHangMousePressed
-//        abc();
-//        int index = tblGioHang.getSelectedRow();
-        int index = tblGioHang.getSelectedRow();
-        int row = tblHD.getSelectedRow();
-        List<HoaDonCT> listHDCT = hoaDonCTService.getObjbyMa(txtMaHD.getText());
-        HoaDonCT hdctt = listHDCT.get(index);
-        SachCT sct = hdctt.getSachCT();
-        HoaDon hd = hoaDonService.getObjbyMa((String) tblHD.getValueAt(row, 1));
-        if (hd.getTrangThai() == 1) {
-            helper.error(this, "Hóa đơn này đã được thanh toán");
-            return;
-        } else {
-            try {
-                String input = JOptionPane.showInputDialog("Vui lòng nhập số lượng");
-                Integer soLuong = Integer.parseInt(input);
-
-                try {
-                    Pattern patternSL = Pattern.compile("[0-9]{0,10}$");
-                    if (patternSL.matcher(input).matches()) {
-
-                    } else {
-                        helper.error(this, "Số lượng phải là số nguyên");
-                        return;
-                    }
-                    if (soLuong < 0) {
-                        helper.error(this, "số lượng phải >=0");
-                        return;
-                    }
-
-                } catch (Exception e) {
-
-                }
-
-                Integer soLuongCu = (Integer) tblGioHang.getValueAt(index, 3);
-                try {
-                    if (soLuong > sct.getSoLuongTon()) {
-                        helper.error(this, "Qúa số lượng cho phép");
-                        return;
-                    } else if (soLuong == 0) {
-                        sct.setSoLuongTon(sct.getSoLuongTon() + soLuongCu - soLuong);
-                        hoaDonCTService.delete(hdctt);
-                        sachCTService.saveOrUpdate(sct);
-                    } else {
-
-                        hdctt.setSoLuong(soLuong);
-                        sct.setSoLuongTon(sct.getSoLuongTon() + soLuongCu - soLuong);
-                        sachCTService.saveOrUpdate(sct);
-                        hoaDonCTService.saveOrUpdate(hdctt);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-//                loadDataTaSach(sachCTService.getAll());
-//                loadDataGH((List<HoaDonCT>) hoaDonCTService.getObjbyMa((String) tblHD.getValueAt(row, 1)));
-                loadDataGH((List<HoaDonCT>) hoaDonCTService.getObjbyMa((String) tblHD.getValueAt(row, 1)));
-                loadDataTaSach(sachCTService.getAll());
-//                tongTien();
-
-            } catch (Exception e) {
-//                helper.error(this, "số lượng phải >=0");
-//                return;
-                e.printStackTrace();
-            }
-
-        }
-        loadDataGH((List<HoaDonCT>) hoaDonCTService.getObjbyMa((String) tblHD.getValueAt(row, 1)));
-        loadDataTaSach(sachCTService.getAll());
-    }//GEN-LAST:event_tblGioHangMousePressed
-
-    void abc(){
-        int index = tblGioHang.getSelectedRow();
-        int row = tblHD.getSelectedRow();
-        List<HoaDonCT> listHDCT = hoaDonCTService.getObjbyMa(txtMaHD.getText());
-        HoaDonCT hdctt = listHDCT.get(index);
-        SachCT sct = hdctt.getSachCT();
-        HoaDon hd = hoaDonService.getObjbyMa((String) tblHD.getValueAt(row, 1));
-
-        if (hd.getTrangThai() == 1) {
-            helper.error(this, "Hóa đơn này đã được thanh toán");
-            return;
-        } else {
-            try {
-
-                String input = JOptionPane.showInputDialog("Vui lòng nhập số lượng");
-                Integer soLuong = Integer.parseInt(input);
-
-                try {
-                    Pattern patternSL = Pattern.compile("[0-9]{0,10}$");
-                    if (patternSL.matcher(input).matches()) {
-                        
-                    } else {
-                        helper.error(this, "Số lượng phải là số nguyên");
-                        return;
-                    }
-                    if (soLuong < 0) {
-                        helper.error(this, "số lượng phải >=0");
-                        return;
-                    }
-
-                } catch (Exception e) {
-                    
-                }
-
-                Integer soLuongCu = (Integer) tblGioHang.getValueAt(index, 3);
-                try {
-
-                    if (soLuong == 0) {
-                        sct.setSoLuongTon(sct.getSoLuongTon() + soLuongCu - soLuong);
-                        hoaDonCTService.delete(hdctt);
-                        sachCTService.saveOrUpdate(sct);
-                    } else {
-
-                        hdctt.setSoLuong(soLuong);
-                        sct.setSoLuongTon(sct.getSoLuongTon() + soLuongCu - soLuong);
-                        sachCTService.saveOrUpdate(sct);
-                        hoaDonCTService.saveOrUpdate(hdctt);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                loadDataGH((List<HoaDonCT>) hoaDonCTService.getObjbyMa((String) tblHD.getValueAt(row, 1)));
-                loadDataTaSach(sachCTService.getAll());
-            } catch (Exception e) {
-//                helper.error(this, "số lượng phải >=0");
-//                return;
-            }
-
+            loadDataGH((List<HoaDonCT>) hoaDonCTService.findNByMa((String) tblHD.getValueAt(row, 1)));
+            tongTien();
         }
     }
+
+    private void tblGioHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGioHangMousePressed
+        giohang();
+
+    }//GEN-LAST:event_tblGioHangMousePressed
+
+    private void tblHDMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHDMousePressed
+        int row = tblHD.getSelectedRow();
+        HoaDon hd = hoaDonService.getObjbyMa((String) tblHD.getValueAt(row, 1));
+//        loadDataGH(hoaDonCTService.getObjbyMa(txtMaHD.getText()));
+        loadDataGH((List<HoaDonCT>) hoaDonCTService.findNByMa((String) tblHD.getValueAt(row, 1)));
+        txtMaHD.setText(hd.getMa());
+        txtNgayTao.setText(sdf.format(hd.getNgayTao()) + "");
+        tongTien();
+    }//GEN-LAST:event_tblHDMousePressed
+
+    private void tblSanPhamMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMousePressed
+        sanphamMousePressed();
+    }//GEN-LAST:event_tblSanPhamMousePressed
+
+    private void giohang() {
+        int rowGH = tblGioHang.getSelectedRow();
+        int rowHD = tblHD.getSelectedRow();
+        Integer soLuongNhap;
+
+        HoaDon hd = hoaDonService.getObjbyMa((String) tblHD.getValueAt(rowHD, 1));
+
+        if (hd.getTrangThai() == 1) {
+            helper.error(this, "Hóa đơn này đã được thanh toán");
+            tblGioHang.clearSelection();
+            return;
+        } else {
+            HoaDonCT hdct = hoaDonCTService.findNByMa(txtMaHD.getText()).get(rowGH);
+            SachCT sct = sachCTService.getObjbyID(hdct.getSachCT().getId());
+            Integer soLuongCu = hdct.getSoLuong();
+            String input = JOptionPane.showInputDialog("Vui lòng nhập số lượng");
+            try {
+
+                soLuongNhap = Integer.parseInt(input);
+
+                if (soLuongNhap < 0) {
+                    helper.error(this, "Số lượng phải >=0");
+                    tblGioHang.clearSelection();
+                    return;
+                }
+                if (soLuongNhap > sct.getSoLuongTon() && soLuongNhap > soLuongCu) {
+                    helper.error(this, "Quá số lượng cho phép");
+                    tblGioHang.clearSelection();
+                    return;
+                }
+
+            } catch (Exception e) {
+                helper.error(this, "Vui lòng nhập lại");
+                tblGioHang.clearSelection();
+                return;
+            }
+            if (soLuongNhap == 0) {
+                if (helper.confirm(this, "Bạn có muốn xóa: ''" + hdct.getSachCT().getSach().getTen() + "'' ra khỏi giỏ hàng không?")) {
+                    sct.setSoLuongTon(sct.getSoLuongTon() + soLuongCu - soLuongNhap);
+                    sachCTService.saveOrUpdate(sct);
+                    hoaDonCTService.delete(hdct);
+                }
+            } else {
+
+                sct.setSoLuongTon(sct.getSoLuongTon() + soLuongCu - soLuongNhap);
+                hdct.setNgaySua(java.sql.Date.valueOf(LocalDate.now()));
+                hdct.setSoLuong(soLuongNhap);
+                sachCTService.saveOrUpdate(sct);
+                hoaDonCTService.saveOrUpdate(hdct);
+
+            }
+            tongTien();
+
+        }
+        loadDataGH((List<HoaDonCT>) hoaDonCTService.findNByMa(hd.getMa()));
+        loadDataTaSach(sachCTService.getAll());
+    }
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(viewBH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(viewBH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(viewBH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(viewBH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new viewBH().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(viewBH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(viewBH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(viewBH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(viewBH.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new viewBH().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;

@@ -22,6 +22,8 @@ import edu.poly.swing.PopupMenu;
 //import edu.poly.swing.icon.GoogleMaterialDesignIcons;
 //import edu.poly.swing.icon.IconFontSwing;
 import java.awt.Component;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import net.miginfocom.swing.MigLayout;
@@ -45,9 +47,12 @@ public class Main extends javax.swing.JFrame {
 
     }
     public Main() {
+       
         initComponents();
-        setExtendedState(MAXIMIZED_BOTH);
+//        setExtendedState(MAXIMIZED_BOTH);
         init();
+        Image icon = Toolkit.getDefaultToolkit().getImage("images/logo.png");
+        this.setIconImage(icon);
 
     }
 
@@ -71,7 +76,7 @@ public class Main extends javax.swing.JFrame {
                     }                    
                 } else if (menuIndex == 1) {
                     logoutƠut();
-                    new viewBH().setVisible(true);
+                    new viewBH(nd).setVisible(true);
                 
                 } else if (menuIndex == 3) {
                     logoutƠut();
@@ -136,6 +141,7 @@ public class Main extends javax.swing.JFrame {
         //  Start with this form
         main.showForm(new Panel_SachCT());
     }
+    
     private void init() {
         layout = new MigLayout("fill", "0[]0[100%, fill]0", "0[fill, top]0");
         bg.setLayout(layout);
@@ -156,7 +162,7 @@ public class Main extends javax.swing.JFrame {
                     }                    
                 } else if (menuIndex == 1) {
                     logoutƠut();
-                    new viewBH().setVisible(true);
+//                    new viewBH().setVisible(true);
                 
                 } else if (menuIndex == 3) {
                     logoutƠut();

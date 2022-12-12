@@ -1,4 +1,4 @@
-    CREATE DATABASE DUAN_1_GROUP1_
+  CREATE DATABASE DUAN_1_GROUP1_
 GO
     USE DUAN_1_GROUP1_
 GO
@@ -67,7 +67,8 @@ GO
 CREATE TABLE HoaDon(
     Id INT IDENTITY(1,1) PRIMARY KEY,
     IdKH INT,
-    IdND INT,
+    IdNguoiTao INT,
+	IdNguoiThanhToan INT,
     Ma VARCHAR(20) UNIQUE,
     NgayTao DATE DEFAULT NULL,
     NgayThanhToan DATE DEFAULT NULL,
@@ -82,7 +83,6 @@ CREATE TABLE HoaDonCT(
     Id INT IDENTITY(1,1) PRIMARY KEY,
     IdSachCT INT,
     IdHD INT,
---     Ma VARCHAR(20) UNIQUE, //  bor khong dung den
     DonGia DECIMAL(20,0) DEFAULT 0,
     SoLuong INT,
     NgayTao DATE DEFAULT NULL,
@@ -189,8 +189,10 @@ ALTER TABLE HoaDonCT ADD FOREIGN KEY(IdSachCT) REFERENCES SachCT(Id)
 -- ChiTietHoaDon - HoaDonBan
 ALTER TABLE HoaDonCT ADD FOREIGN KEY(IdHD) REFERENCES HoaDon(Id)
 
--- HoaDonBan - NguoiDung
-ALTER TABLE HoaDon ADD FOREIGN KEY(IDND) REFERENCES NguoiDung(Id)
+-- HoaDonBan - NguoiDung(NhanVien tao)
+ALTER TABLE HoaDon ADD FOREIGN KEY(IDNguoiTao) REFERENCES NguoiDung(Id)
+--HoaDonBan - NguoiThanhToan (NV thanh toan)
+ALTER TABLE HoaDon ADD FOREIGN KEY(IDNguoiThanhToan) REFERENCES NguoiDung(Id)
 -- HoaDonBan - KhachHang
 ALTER TABLE HoaDon ADD FOREIGN KEY(IdKH) REFERENCES KhachHang(Id)
 -- HoaDonTra - HoaDon
@@ -201,33 +203,33 @@ ALTER TABLE HoaDonTra ADD FOREIGN KEY(IdND) REFERENCES NguoiDung(Id)
 alter table HoaDonTraCT add foreign key(IdHDT) references HoaDonTra(Id)
 
 --Thêm dữ liệu cho Sách
-insert into Sach(ma,ten,ngaytao,ngaysua) values 
-		('S1',N'Tiệm sách cơn mưa','2002-11-11','2002-11-11'),
+INSERT INTO SACH(MA,TEN,NGAYTAO,NGAYSUA) VALUES 
+		('S1',N'Tiệm sách cơn mưa','2013-11-11','2013-11-11'),
 		('S2',N'Đáp án của thanh xuân','2002-11-11','2002-11-11'),
 		('S3',N'Kẻ truy sát','2002-11-11','2002-11-11'),
-		('S4',N'Bán hàng bằng trái tim','2002-11-11','2002-11-11'),
+		('S4',N'Bán hàng bằng trái tim','2014-12-11','2014-12-11'),
 		('S5',N'Họ đã khởi nghiệp thế nào','2002-11-11','2002-11-11'),
 		('S6',N'Nang đoạn kim cương','2002-11-11','2002-11-11'),
 		('S7',N'Những chú chó bán hàng','2002-11-11','2002-11-11'),
 		('S8',N'Biến tầm nhìn thành hành động','2002-11-11','2002-11-11'),
 		('S9',N'Sống tối giản','2002-11-11','2002-11-11'),
-		('S10',N'Việt Nam thời dựng nước','2002-11-11','2002-11-11'),
+		('S10',N'Việt Nam thời dựng nước','2007-11-11','2007-11-11'),
 		('S11',N'Việt Nam sử lược','2002-11-11','2002-11-11'),
-		('S12',N'Việt sử và những câu chuyện thú vị','2002-11-11','2002-11-11'),
+		('S12',N'Việt sử và những câu chuyện thú vị','2012-11-11','2012-11-11'),
 		('S13',N'Bác Hồ ở Tân Trào','2002-11-11','2002-11-11'),
 		('S14',N'25 tướng lĩnh Việt Nam','2002-11-11','2002-11-11'),
 		('S15',N'Bách khoa lịch sử thế giới','2002-11-11','2002-11-11'),
 		('S16',N'Ung thư hiểu để chữa lành','2002-11-11','2002-11-11'),
 		('S17',N'Đừng chết bởi canxi','2002-11-11','2002-11-11'),
-		('S18',N'Ma Y Thần tướng','2002-11-11','2002-11-11'),
-		('S19',N'Hệ miễn dịch-Kiệt tác của sự sống','2002-11-11','2002-11-11')
+		('S18',N'Ma Y Thần tướng','2020-11-11','2020-11-11'),
+		('S19',N'Hệ miễn dịch-Kiệt tác của sự sống','2015-11-11','2015-11-11')
 
 -- Thêm dữ liệu cho Thể Loại
 insert into TheLoai(ma,ten,ngaytao,ngaysua) values 
-		('TL1',N'Văn học','2002-11-11','2002-11-11'),
+		('TL1',N'Văn học','2017-11-11','2017-11-11'),
 		('TL2',N'Kinh tế','2002-11-11','2002-11-11'),
 		('TL3',N'Kỹ năng sống','2002-11-11','2002-11-11'),
-		('TL4',N'Lịch sử','2002-11-11','2002-11-11'),
+		('TL4',N'Lịch sử','2002-11-11','2020-11-11'),
 		('TL5',N'Y học','2002-11-11','2002-11-11')
 -- Thêm dữ liệu cho NCC
 --insert into NCC(ma,ten,ngaytao,ngaysua) values 
@@ -243,9 +245,7 @@ insert into nxb(ma,ten,ngaytao,ngaysua) values
 		('NXB4',N'Nhà xuất bản Phụ Nữ','2002-11-11','2002-11-11'),
 		('NXB5',N'Nhà xuất bản Trẻ','2002-11-11','2002-11-11'),
 		('NXB6',N'Nhà xuất bản Hà Nội','2002-11-11','2002-11-11'),
-		('NXB7',N'Nhà xuất bản Công Thương','2002-11-11','2002-11-11')
+		('NXB7',N'Nhà xuất bản Công Thương','2009-11-11','2002-11-11')
 
-	--drop database DUAN_1_GROUP1_
-
-	--select * from HoaDon
-
+insert into ChucVu(ma, ten) values ('NV', N'Nhân Viên'),
+                                   ('QL', N'Quản Lý')
