@@ -14,7 +14,6 @@ public class NewJFrame extends javax.swing.JFrame {
      */
     private Jp_Sach jpsach = new Jp_Sach();
     private view_KhachHang viewKH = new view_KhachHang();
-    private view_NCC viewNCC = new view_NCC();
 
     public NewJFrame() {
         initComponents();

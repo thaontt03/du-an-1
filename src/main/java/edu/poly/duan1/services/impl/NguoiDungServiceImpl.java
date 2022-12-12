@@ -42,20 +42,5 @@ public class NguoiDungServiceImpl implements NguoiDungService {
     public List<NguoiDung> search(String ma) {
         return nguoiDungRepositories.search(ma);
     }
-
-    @Override
-    public List<NguoiDung> getAll2(int heso) {
-        List<NguoiDung> list = nguoiDungRepositories.getAll2(heso);
-        List<NguoiDung> list2 = new ArrayList<>();
-        int index = 0;
-        for (NguoiDung x : list) {
-            list2.add(x);
-            index++;
-            if(index ==5)
-            break;
-        }
-       return list2;
-    }
-
   
 }
