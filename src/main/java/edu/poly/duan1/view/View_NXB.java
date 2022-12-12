@@ -93,6 +93,8 @@ public class View_NXB extends javax.swing.JFrame {
         } else {
             helper.error(this, "Thêm thất bại");
         }
+        int heso = (sotrang * 5) - 5;
+        nxb2 = nxbService.getAll2(heso);
         loadDataTable(nxb2);
     }
 
@@ -109,6 +111,8 @@ public class View_NXB extends javax.swing.JFrame {
             }
             reset();
         }
+        int heso = (sotrang * 5) - 5;
+        nxb2 = nxbService.getAll2(heso);
         loadDataTable(nxb2);
     }
 
@@ -133,6 +137,8 @@ public class View_NXB extends javax.swing.JFrame {
             } else {
                 helper.error(this, "Sửa thất bại");
             }
+            int heso = (sotrang * 5) - 5;
+        nxb2 = nxbService.getAll2(heso);
             loadDataTable(nxb2);
         }
     }
@@ -166,6 +172,8 @@ public class View_NXB extends javax.swing.JFrame {
     public void search() {
        String ten = txtTimKiem.getText();
         if (ten.isEmpty()) {
+            int heso = (sotrang * 5) - 5;
+        nxb2 = nxbService.getAll2(heso);
             loadDataTable(nxb2);
         }else{
             loadDataTable(nxbService.search(ten));

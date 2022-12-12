@@ -335,7 +335,7 @@ public class View_ChucVu extends javax.swing.JFrame {
                                 .addComponent(btnnext, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(23, 23, 23))
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -526,7 +526,7 @@ public class View_ChucVu extends javax.swing.JFrame {
     private void fillToTable(List<ChucVu> list) {
         tblModel = (DefaultTableModel) tblchucvu.getModel();
         tblModel.setRowCount(0);
-        for (edu.poly.duan1.model.ChucVu x : list) {
+        for (ChucVu x : list) {
             tblModel.addRow(new Object[]{
                 x.getId(),
                 x.getMa(),
@@ -566,6 +566,9 @@ public class View_ChucVu extends javax.swing.JFrame {
         } else {
             helper.error(this, "Lỗi Thêm");
         }
+        int heso = (sotrang * 5) - 5;
+        cv2 = chucVuu.getAll2(heso);
+                
         fillToTable(cv2);
     }
 
@@ -591,6 +594,8 @@ public class View_ChucVu extends javax.swing.JFrame {
             } else {
                 helper.error(this, "Sửa thất bại");
             }
+            int heso = (sotrang * 5) - 5;
+        cv2 = chucVuu.getAll2(heso);
             fillToTable(cv2);
         }
     }
@@ -608,6 +613,8 @@ public class View_ChucVu extends javax.swing.JFrame {
             }
             reset();
         }
+        int heso = (sotrang * 5) - 5;
+        cv2 = chucVuu.getAll2(heso);
         fillToTable(cv2);
     }
 
@@ -625,6 +632,8 @@ public class View_ChucVu extends javax.swing.JFrame {
      public void search() {
         String ten = txttimkiem.getText();
         if (ten.isEmpty()) {
+            int heso = (sotrang * 5) - 5;
+        cv2 = chucVuu.getAll2(heso);
             fillToTable(cv2);
         }else{
             fillToTable(chucVuu.search(ten));
