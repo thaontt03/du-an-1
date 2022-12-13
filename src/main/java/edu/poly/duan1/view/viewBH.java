@@ -161,7 +161,7 @@ public class viewBH extends javax.swing.JFrame {
 
         bg = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
-        textField7 = new edu.poly.duan1.swing.textfield.TextField();
+        txtTimKiem = new edu.poly.duan1.swing.textfield.TextField();
         tableScrollButton3 = new edu.poly.duan1.swing.table.TableScrollButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblSanPham = new javax.swing.JTable();
@@ -193,7 +193,12 @@ public class viewBH extends javax.swing.JFrame {
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Sản phẩm"));
 
-        textField7.setLabelText("Tìm Kiếm");
+        txtTimKiem.setLabelText("Tìm Kiếm");
+        txtTimKiem.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtTimKiemCaretUpdate(evt);
+            }
+        });
 
         tblSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -229,7 +234,7 @@ public class viewBH extends javax.swing.JFrame {
                         .addGap(6, 6, 6)
                         .addComponent(tableScrollButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(textField7, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -237,7 +242,7 @@ public class viewBH extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(textField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(tableScrollButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE))
         );
@@ -492,14 +497,20 @@ public class viewBH extends javax.swing.JFrame {
 
     private void rdChuaTTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdChuaTTActionPerformed
         loadDataHoaDon(hoaDonService.search(0));
+        loadDataGH();
+        tongTien();
     }//GEN-LAST:event_rdChuaTTActionPerformed
 
     private void rdDaTTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdDaTTActionPerformed
         loadDataHoaDon(hoaDonService.search(1));
+        loadDataGH();
+        tongTien();
     }//GEN-LAST:event_rdDaTTActionPerformed
 
     private void rdTatCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdTatCaActionPerformed
         loadDataHoaDon(hoaDonService.getAll());
+        loadDataGH();
+        tongTien();
     }//GEN-LAST:event_rdTatCaActionPerformed
 
     private void btnTaoHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoHoaDonActionPerformed
@@ -605,8 +616,13 @@ public class viewBH extends javax.swing.JFrame {
 
     }
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
+        if (txtMaHD.getText().isEmpty()) {
+            helper.error(this, "Vui lòng chọn hóa đơn cần thanh toán");
+            return;
+        } else {
+            thanhToan();
+        }
 
-        thanhToan();
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
     private void tblHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHDMouseClicked
@@ -697,62 +713,73 @@ public class viewBH extends javax.swing.JFrame {
         sanphamMousePressed();
     }//GEN-LAST:event_tblSanPhamMousePressed
 
+    private void txtTimKiemCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTimKiemCaretUpdate
+        String ten = txtTimKiem.getText();
+        loadDataTaSach(sachCTService.findByTen(ten));
+    }//GEN-LAST:event_txtTimKiemCaretUpdate
+
     private void giohang() {
         int rowGH = tblGioHang.getSelectedRow();
         int rowHD = tblHD.getSelectedRow();
         Integer soLuongNhap;
-
-        HoaDon hd = hoaDonService.getObjbyMa((String) tblHD.getValueAt(rowHD, 1));
-
-        if (hd.getTrangThai() == 1) {
-            helper.error(this, "Hóa đơn này đã được thanh toán");
-            tblGioHang.clearSelection();
+        if (rowHD == -1) {
+            helper.error(this, "không được thực hiện");
             return;
         } else {
-            HoaDonCT hdct = hoaDonCTService.findNByMa(txtMaHD.getText()).get(rowGH);
-            SachCT sct = sachCTService.getObjbyID(hdct.getSachCT().getId());
-            Integer soLuongCu = hdct.getSoLuong();
-            String input = JOptionPane.showInputDialog("Vui lòng nhập số lượng");
-            try {
 
-                soLuongNhap = Integer.parseInt(input);
+            HoaDon hd = hoaDonService.getObjbyMa((String) tblHD.getValueAt(rowHD, 1));
 
-                if (soLuongNhap < 0) {
-                    helper.error(this, "Số lượng phải >=0");
-                    tblGioHang.clearSelection();
-                    return;
-                }
-                if (soLuongNhap > sct.getSoLuongTon() && soLuongNhap > soLuongCu) {
-                    helper.error(this, "Quá số lượng cho phép");
-                    tblGioHang.clearSelection();
-                    return;
-                }
-
-            } catch (Exception e) {
-                helper.error(this, "Vui lòng nhập lại");
+            if (hd.getTrangThai() == 1) {
+                helper.error(this, "Hóa đơn này đã được thanh toán");
                 tblGioHang.clearSelection();
                 return;
-            }
-            if (soLuongNhap == 0) {
-                if (helper.confirm(this, "Bạn có muốn xóa: ''" + hdct.getSachCT().getSach().getTen() + "'' ra khỏi giỏ hàng không?")) {
-                    sct.setSoLuongTon(sct.getSoLuongTon() + soLuongCu - soLuongNhap);
-                    sachCTService.saveOrUpdate(sct);
-                    hoaDonCTService.delete(hdct);
-                }
             } else {
+                HoaDonCT hdct = hoaDonCTService.findNByMa(txtMaHD.getText()).get(rowGH);
+                SachCT sct = sachCTService.getObjbyID(hdct.getSachCT().getId());
+                Integer soLuongCu = hdct.getSoLuong();
+                String input = JOptionPane.showInputDialog("Vui lòng nhập số lượng");
+                try {
 
-                sct.setSoLuongTon(sct.getSoLuongTon() + soLuongCu - soLuongNhap);
-                hdct.setNgaySua(java.sql.Date.valueOf(LocalDate.now()));
-                hdct.setSoLuong(soLuongNhap);
-                sachCTService.saveOrUpdate(sct);
-                hoaDonCTService.saveOrUpdate(hdct);
+                    soLuongNhap = Integer.parseInt(input);
+
+                    if (soLuongNhap < 0) {
+                        helper.error(this, "Số lượng phải >=0");
+                        tblGioHang.clearSelection();
+                        return;
+                    }
+                    if (soLuongNhap > sct.getSoLuongTon() && soLuongNhap > soLuongCu) {
+                        helper.error(this, "Quá số lượng cho phép");
+                        tblGioHang.clearSelection();
+                        return;
+                    }
+
+                } catch (Exception e) {
+                    helper.error(this, "Vui lòng nhập lại");
+                    tblGioHang.clearSelection();
+                    return;
+                }
+                if (soLuongNhap == 0) {
+                    if (helper.confirm(this, "Bạn có muốn xóa: ''" + hdct.getSachCT().getSach().getTen() + "'' ra khỏi giỏ hàng không?")) {
+                        sct.setSoLuongTon(sct.getSoLuongTon() + soLuongCu - soLuongNhap);
+                        sachCTService.saveOrUpdate(sct);
+                        hoaDonCTService.delete(hdct);
+                    }
+                } else {
+
+                    sct.setSoLuongTon(sct.getSoLuongTon() + soLuongCu - soLuongNhap);
+                    hdct.setNgaySua(java.sql.Date.valueOf(LocalDate.now()));
+                    hdct.setSoLuong(soLuongNhap);
+                    sachCTService.saveOrUpdate(sct);
+                    hoaDonCTService.saveOrUpdate(hdct);
+
+                }
+//            tongTien();
 
             }
+            loadDataGH((List<HoaDonCT>) hoaDonCTService.findNByMa(hd.getMa()));
+            loadDataTaSach(sachCTService.getAll());
             tongTien();
-
         }
-        loadDataGH((List<HoaDonCT>) hoaDonCTService.findNByMa(hd.getMa()));
-        loadDataTaSach(sachCTService.getAll());
     }
 
     /**
@@ -811,11 +838,11 @@ public class viewBH extends javax.swing.JFrame {
     private javax.swing.JTable tblGioHang;
     private javax.swing.JTable tblHD;
     private javax.swing.JTable tblSanPham;
-    private edu.poly.duan1.swing.textfield.TextField textField7;
     private edu.poly.duan1.swing.textfield.TextField txtMaHD;
     private edu.poly.duan1.swing.textfield.TextField txtNgayTao;
     private edu.poly.duan1.swing.textfield.TextField txtTienKhachDua;
     private edu.poly.duan1.swing.textfield.TextField txtTienThua;
+    private edu.poly.duan1.swing.textfield.TextField txtTimKiem;
     private edu.poly.duan1.swing.textfield.TextField txtTongTien;
     // End of variables declaration//GEN-END:variables
 }

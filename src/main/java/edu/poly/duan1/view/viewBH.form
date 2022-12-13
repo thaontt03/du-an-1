@@ -108,7 +108,7 @@
                               <Component id="tableScrollButton3" pref="488" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Component id="textField7" min="-2" pref="222" max="-2" attributes="0"/>
+                              <Component id="txtTimKiem" min="-2" pref="222" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -120,7 +120,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="textField7" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtTimKiem" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="tableScrollButton3" pref="158" max="32767" attributes="0"/>
                   </Group>
@@ -128,10 +128,13 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="edu.poly.duan1.swing.textfield.TextField" name="textField7">
+            <Component class="edu.poly.duan1.swing.textfield.TextField" name="txtTimKiem">
               <Properties>
                 <Property name="labelText" type="java.lang.String" value="T&#xec;m Ki&#x1ebf;m"/>
               </Properties>
+              <Events>
+                <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="txtTimKiemCaretUpdate"/>
+              </Events>
             </Component>
             <Container class="edu.poly.duan1.swing.table.TableScrollButton" name="tableScrollButton3">
 

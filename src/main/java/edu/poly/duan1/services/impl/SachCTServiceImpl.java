@@ -34,7 +34,7 @@ public class SachCTServiceImpl implements SachCTService {
     }
 
     @Override
-    public List getObjbyTen(String ten) {
-        return sachCTRep.getObjbyTen(ten);
+    public List findByTen(String ten) {
+        return sachCTRep.findByTen(ten);
     }
 }

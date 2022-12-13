@@ -60,11 +60,11 @@ public class SachCTRepositories {
         return sct;
     }
 
-    public List getObjbyTen(String ten) {
+    public List findByTen(String ten) {
         List<SachCT> list = new ArrayList<>();
         try {
-            Query query = session.createQuery("select c from SachCT c where c.sach.ten = :ten");
-            query.setParameter("ten", ten);
+            Query query = session.createQuery("SELECT c FROM SachCT c WHERE c.sach.ten LIKE :ten ORDER BY c.soLuongTon DESC");
+            query.setParameter("ten", "%" + ten + "%");
             list = query.getResultList();
         } catch (Exception e) {
         }
