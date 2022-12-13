@@ -1,4 +1,4 @@
-  CREATE DATABASE DUAN_1_GROUP1_
+    CREATE DATABASE DUAN_1_GROUP1_
 GO
     USE DUAN_1_GROUP1_
 GO
@@ -118,6 +118,7 @@ CREATE TABLE NguoiDung(
     Id INT IDENTITY(1,1) PRIMARY KEY,
     Ma VARCHAR(20) UNIQUE,
     HoTen NVARCHAR(30) DEFAULT NULL,
+	Email varchar(100) Default null,
     GioiTinh NVARCHAR(10) DEFAULT NULL,
     NgaySinh DATE DEFAULT NULL,
     DiaChi NVARCHAR(100) DEFAULT NULL,
@@ -248,4 +249,11 @@ insert into nxb(ma,ten,ngaytao,ngaysua) values
 		('NXB7',N'Nhà xuất bản Công Thương','2009-11-11','2002-11-11')
 
 insert into ChucVu(ma, ten) values ('NV', N'Nhân Viên'),
-                                   ('QL', N'Quản Lý')
+				('QL', N'Quản Lý')
+
+	--drop database DUAN_1_GROUP1_
+
+	--select * from HoaDon
+
+	SELECT * FROM NguoiDung
+

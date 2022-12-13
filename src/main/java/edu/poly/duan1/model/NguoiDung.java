@@ -34,6 +34,9 @@ public class NguoiDung {
 
     @Column
     private String hoTen;
+    
+    @Column
+    private String email;
 
     @Column
     private String gioiTinh;
