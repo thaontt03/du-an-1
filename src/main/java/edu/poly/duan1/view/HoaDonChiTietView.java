@@ -29,7 +29,7 @@ public class HoaDonChiTietView extends javax.swing.JFrame {
     private HoaDonService hoaDonServices = new HoaDonServiceImpl();
     private HoaDonCTService hoaDonCTServices = new HoaDonCTServiceImpl();
     private DefaultTableModel tblModel;
-    private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+//    private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
     /**
      * Creates new form HoaDonChiTietView
@@ -265,7 +265,7 @@ public class HoaDonChiTietView extends javax.swing.JFrame {
                 x.getHoaDon().getMa(),
                 x.getDonGia(),
                 x.getSoLuong(),
-                sdf.format(x.getNgayTao()),
+//                sdf.format(x.getNgayTao()),
 //                sdf.format(x.getNgaySua()),
                 x.getTrangThai() == 1 ? "Chưa thanh toán" : "Đã thanh toán"
             }

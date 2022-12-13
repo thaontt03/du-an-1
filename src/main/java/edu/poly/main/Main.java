@@ -6,11 +6,16 @@ import edu.poly.duan1.model.NguoiDung;
 import edu.poly.duan1.ui.GoogleMaterialDesignIcons;
 import edu.poly.duan1.ui.IconFontSwing;
 import edu.poly.duan1.ultis.helper;
-import edu.poly.duan1.view.Panel_SachCT;
+import edu.poly.duan1.view.PanelNXBoke;
+import edu.poly.duan1.view.PanelSachCT;
+import edu.poly.duan1.view.PanelTheLoaiOke;
+import edu.poly.duan1.view.Panel_DoiMK;
+//import edu.poly.duan1.view.Panel_SachCT;
 import edu.poly.duan1.view.PanleSach;
+import edu.poly.duan1.view.View_ThongKe;
 import edu.poly.duan1.view.viewBH;
+import edu.poly.duan1.view.view_DangNhap;
 import edu.poly.duan1.view.view_KhachHang;
-import edu.poly.duan1.view.view_SachCT;
 import edu.poly.event.EventMenuSelected;
 import edu.poly.event.EventShowPopupMenu;
 import edu.poly.form.Form1;
@@ -44,8 +49,9 @@ public class Main extends javax.swing.JFrame {
         init(nd);
 
     }
+
     public Main() {
-       
+
         initComponents();
 //        setExtendedState(MAXIMIZED_BOTH);
         init();
@@ -65,20 +71,34 @@ public class Main extends javax.swing.JFrame {
             public void menuSelected(int menuIndex, int subMenuIndex) {
                 System.out.println("Menu Index : " + menuIndex + " SubMenu Index " + subMenuIndex);
                 if (menuIndex == 0) {
-                    if (subMenuIndex == 0) {
-//                        main.showForm(new view_NCC());
-                    } else if (subMenuIndex == 1) {
-                        main.showForm(new Form1());
-                    }else if(subMenuIndex==3){
-                         main.showForm(new PanleSach());
-                    }                    
+                    if (subMenuIndex == 1) {
+                         main.showForm(new PanelTheLoaiOke());  
+                    } else if (subMenuIndex == 0) {
+                        main.showForm(new PanelNXBoke());
+                    } else if (subMenuIndex == 3) {
+                        main.showForm(new PanelSachCT());
+                    } else if (subMenuIndex == 2) {
+                        main.showForm(new PanleSach());
+                    }
                 } else if (menuIndex == 1) {
                     logoutƠut();
                     new viewBH(nd).setVisible(true);
-                
-                } else if (menuIndex == 3) {
-                    logoutƠut();
-//                    new view_Ban_Hang().setVisible(true);
+                }else if(menuIndex==2){
+                    if(subMenuIndex==0){
+                         main.showForm(new Panel_DoiMK(nd));
+                    }
+                }else if(menuIndex==3){
+                    if(nd.getChucVu().getTen().equalsIgnoreCase("Quản Lý")){
+                        new View_ThongKe(nd).setVisible(true);
+                    }else{
+                        helper.error(null, "Bạn không có quyền truy cập");
+                    }
+                   
+                } else if (menuIndex == 4) {
+                    if (helper.confirm(null, "Bạn có muốn đăng xuất không?")) {
+                        logoutƠut();
+                        new view_DangNhap().setVisible(true);
+                    }
                 }
             }
         });
@@ -137,9 +157,9 @@ public class Main extends javax.swing.JFrame {
 //        //  Init google icon font
         IconFontSwing.register(GoogleMaterialDesignIcons.getIconFont());
         //  Start with this form
-        main.showForm(new Panel_SachCT());
+        main.showForm(new PanelSachCT());
     }
-    
+
     private void init() {
         layout = new MigLayout("fill", "0[]0[100%, fill]0", "0[fill, top]0");
         bg.setLayout(layout);
@@ -152,19 +172,21 @@ public class Main extends javax.swing.JFrame {
                 System.out.println("Menu Index : " + menuIndex + " SubMenu Index " + subMenuIndex);
                 if (menuIndex == 0) {
                     if (subMenuIndex == 0) {
-//                        main.showForm(new view_NCC());
+
                     } else if (subMenuIndex == 1) {
-                        main.showForm(new Form1());
-                    }else if(subMenuIndex==3){
-                         main.showForm(new PanleSach());
-                    }                    
+                        main.showForm(new PanelSachCT());
+                    } else if (subMenuIndex == 3) {
+                        main.showForm(new PanelSachCT());
+                    }
                 } else if (menuIndex == 1) {
                     logoutƠut();
 //                    new viewBH().setVisible(true);
-                
-                } else if (menuIndex == 3) {
-                    logoutƠut();
-//                    new view_Ban_Hang().setVisible(true);
+
+                } else if (menuIndex == 4) {
+                    if (helper.confirm(null, "Bạn có muốn đăng xuất không?")) {
+                        logoutƠut();
+                        new view_DangNhap().setVisible(true);
+                    }
                 }
             }
         });
@@ -223,7 +245,7 @@ public class Main extends javax.swing.JFrame {
 //        //  Init google icon font
         IconFontSwing.register(GoogleMaterialDesignIcons.getIconFont());
         //  Start with this form
-        main.showForm(new Panel_SachCT());
+        main.showForm(new PanelSachCT());
     }
 
     private void logoutƠut() {

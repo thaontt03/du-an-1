@@ -68,14 +68,14 @@ public class view_NguoiDung extends javax.swing.JFrame {
                 x.getChucVu().getTen(),
                 sdf.format(x.getNgayTao()),
                 sdf.format(x.getNgaySua()),
-                x.getTrangThai() == 1 ? "Đang làm việc" : "Nghỉ Làm"
+                x.getTrangThai() == 1 ? "Nghỉ Làm" : "Đang Làm việc"
             });
         }
     }
 
     private void loadDataTable(List<NguoiDung> list) {
         tblModel = (DefaultTableModel) tblND.getModel();
-        tblModel.setColumnIdentifiers(new String[]{"STT", "Mã", "Họ Tên", "Giới Tính", "Ngày Sinh", "Địa Chỉ", "Sđt", "Mật Khẩu", "Chức Vụ", "Ngày Tạo", "Ngày Sửa", "Trạng Thái"});
+        tblModel.setColumnIdentifiers(new String[]{"STT", "Mã", "Họ Tên", "Giới Tính", "Ngày Sinh", "Địa Chỉ", "Sđt", "Email", "Chức Vụ", "Ngày Tạo", "Ngày Sửa", "Trạng Thái"});
         tblModel.setRowCount(0);
         int i = 1;
         for (edu.poly.duan1.model.NguoiDung x : list) {
@@ -87,7 +87,7 @@ public class view_NguoiDung extends javax.swing.JFrame {
                 sdf.format(x.getNgaySinh()),
                 x.getDiaChi(),
                 x.getSdt(),
-                x.getMatKhau(),
+                x.getEmail(),
                 x.getChucVu().getTen(),
                 sdf.format(x.getNgayTao()),
                 sdf.format(x.getNgaySua()),
@@ -120,11 +120,12 @@ public class view_NguoiDung extends javax.swing.JFrame {
         } else {
             rdoNu.setSelected(true);
         }
+        txtEmail.setText(nd.getEmail());
         txtDiaChi.setText(nd.getDiaChi());
         txtSdt.setText(nd.getSdt());
         txtMK.setText(nd.getMatKhau());
         dcbmCV.setSelectedItem(nd.getChucVu());
-        if (nd.getTrangThai() == 1) {
+        if (nd.getTrangThai() == 0) {
             rdoDDK.setSelected(true);
         } else {
             rdoCDK.setSelected(true);
@@ -144,7 +145,7 @@ public class view_NguoiDung extends javax.swing.JFrame {
     }
 
     private boolean Validate() {
-        if (!txtSdt.getText().matches("^(0|\\+84)(\\s|\\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\\d)(\\s|\\.)?(\\d{3})(\\s|\\.)?(\\d{3})$")) {
+        if (!txtSdt.getText().matches("^0[0-9]{9,10}$")) {
             JOptionPane.showMessageDialog(null, "Số điện thoại không hợp lệ");
             return false;
         }
@@ -605,6 +606,7 @@ public class view_NguoiDung extends javax.swing.JFrame {
             nd.setSdt(txtSdt.getText());
             nd.setMatKhau(txtMK.getText());
             ChucVu cv = (ChucVu) cboChucVu.getSelectedItem();
+            nd.setEmail(txtEmail.getText());
             nd.setChucVu(cv);
             nd.setNgayTao(java.sql.Date.valueOf(LocalDate.now()));
             nd.setNgaySua(java.sql.Date.valueOf(LocalDate.now()));
@@ -635,6 +637,7 @@ public class view_NguoiDung extends javax.swing.JFrame {
         } else {
             nd.setMa(txtMa.getText());
             nd.setHoTen(txtHoTen.getText());
+            nd.setEmail(txtEmail.getText());
             try {
                 nd.setNgaySinh(sdf.parse(txtNS.getText()));
             } catch (ParseException ex) {

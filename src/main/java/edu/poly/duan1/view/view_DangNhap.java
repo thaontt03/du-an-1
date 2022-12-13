@@ -8,6 +8,8 @@ import edu.poly.duan1.services.NguoiDungService;
 import edu.poly.duan1.services.impl.NguoiDungServiceImpl;
 import edu.poly.duan1.ultis.helper;
 import edu.poly.main.Main;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 /**
  *
@@ -24,6 +26,8 @@ public class view_DangNhap extends javax.swing.JFrame {
     public view_DangNhap() {
         initComponents();
         setLocationRelativeTo(null);
+        Image icon = Toolkit.getDefaultToolkit().getImage("images/logo.png");
+        this.setIconImage(icon);
     }
 
     private void login() {
@@ -32,6 +36,10 @@ public class view_DangNhap extends javax.swing.JFrame {
         if (nguoiDungService.getObjbyMa(ma) == null) {
             helper.error(this, "Người dùng không tồn tại");
         } else if (mk.equals(nguoiDungService.getObjbyMa(ma).getMatKhau())) {
+            if(nguoiDungService.getObjbyMa(ma).getTrangThai()==1){
+                helper.error(this, "Bạn đã nghỉ làm, nên không thể đăng nhập được");
+                return;
+            }
             new Main(nguoiDungService.getObjbyMa(ma)).setVisible(true);
             this.dispose();
         } else {
@@ -158,7 +166,7 @@ public class view_DangNhap extends javax.swing.JFrame {
     }//GEN-LAST:event_btnQuenMKActionPerformed
 
     private void btnDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangNhapActionPerformed
-          if (checkNull()) {
+        if (checkNull()) {
             login();
         }
     }//GEN-LAST:event_btnDangNhapActionPerformed

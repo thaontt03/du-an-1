@@ -35,6 +35,7 @@ public class view_TheLoai extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         loadDataTable();
         check = -1;
+        
     }
 
     private void loadDataTable(List<TheLoai> list) {

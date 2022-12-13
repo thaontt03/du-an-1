@@ -70,7 +70,7 @@ public class NguoiDung {
     List<HoaDon> listHD;
     
     @OneToMany(mappedBy = "nguoiDungThanhToan", fetch = FetchType.LAZY)
-    List<HoaDon> listtHD;
+    List<HoaDon> listtHD1;
 
 }
 /*

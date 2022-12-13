@@ -10,6 +10,8 @@ import edu.poly.duan1.services.NguoiDungService;
 import edu.poly.duan1.services.impl.NguoiDungServiceImpl;
 import edu.poly.duan1.ultis.MailSender;
 import edu.poly.duan1.ultis.helper;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.UUID;
 
 /**
@@ -32,7 +34,8 @@ public class view_QuenMK extends javax.swing.JFrame {
         lblTitel.setText("Mã xác minh");
         lblMa.setText(ma);
         setLocationRelativeTo(null);
-
+     Image icon = Toolkit.getDefaultToolkit().getImage("images/logo.png");
+        this.setIconImage(icon);
     }
 
     /**

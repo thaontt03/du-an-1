@@ -14,7 +14,7 @@ import org.hibernate.Transaction;
  */
 public class HoaDonRepositories {
 
-    Session session = HibernateConfig.getFACTORY().openSession();
+    private final Session session = HibernateConfig.getFACTORY().openSession();
     private Transaction transaction = session.getTransaction();
 
     public List<HoaDon> getAll() {

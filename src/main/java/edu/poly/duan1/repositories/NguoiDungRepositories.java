@@ -19,7 +19,7 @@ import org.hibernate.Transaction;
  */
 public class NguoiDungRepositories {
 
-    Session session = HibernateConfig.getFACTORY().openSession();
+    private final Session session = HibernateConfig.getFACTORY().openSession();
     private Transaction transaction = session.getTransaction();
 
     public List<NguoiDung> getAll() {
@@ -44,6 +44,7 @@ public class NguoiDungRepositories {
             return true;
         } catch (Exception e) {
             e.printStackTrace();
+            transaction.rollback();
             return false;
         }
     }

@@ -54,20 +54,11 @@ public class Menu extends javax.swing.JPanel {
     }
 
     public void initMenuItem() {
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/home-page-24.png")), "Trang chủ", "Quản lý NCC", "Quản lý NXB", "Quản lý Thể Loại", "Quản lý sách", "Quản lý CTS"));
-//        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/2.png")), "Charts", "Morris", "Flot", "Line"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/home-page-24.png")), "Trang chủ", "Quản lý NXB", "Quản lý Thể Loại", "Quản lý sách", "Quản lý CTS"));
         addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/icon-cart.png")), "Bán hàng"));
-//        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/4.png")), "Message", "Sender", "Inbox", "User"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/5.png")), "Quản lý khách hàng", "Menu 1", "menu 2", "menu 3"));
-//        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/6.png")), "Student", "Menu 001", "Menu 002", "Menu 003"));
-//        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/7.png")), "Library", "Menu 001", "Menu 002", "Menu 003"));
-//        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/8.png")), "Holiday", "Menu 001", "Menu 002", "Menu 003"));
-//        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/9.png")), "Calendar", "Menu 001", "Menu 002", "Menu 003"));
-//        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/10.png")), "Chat App", "Menu 001", "Menu 002", "Menu 003"));
-//        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/11.png")), "Contace", "Menu 001", "Menu 002", "Menu 003"));
-//        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/12.png")), "File Manager", "Menu 001", "Menu 002", "Menu 003"));
-        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/logout-rounded-24.png")), "Thoát"));
-//        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/14.png")), "Gallery"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/5.png")), "Quản lý thông tin", "Đổi mật khẩu", "Quản lý thông tin khách hàng", "Quản lý nhân viên"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/6.png")), "Thống kê"));
+        addMenu(new ModelMenu(new ImageIcon(getClass().getResource("/icon/logout-rounded-24.png")), "Đăng xuất"));
     }
 
     private void addMenu(ModelMenu menu) {

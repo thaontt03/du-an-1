@@ -253,9 +253,6 @@ public class View_NXB extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(tblNXB);
-        if (tblNXB.getColumnModel().getColumnCount() > 0) {
-            tblNXB.getColumnModel().getColumn(5).setHeaderValue("Trạng Thái");
-        }
 
         jLabel3.setText("Mã");
 

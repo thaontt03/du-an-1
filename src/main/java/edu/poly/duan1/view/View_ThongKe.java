@@ -7,6 +7,7 @@ package edu.poly.duan1.view;
 
 import edu.poly.duan1.model.HoaDon;
 import edu.poly.duan1.model.HoaDonCT;
+import edu.poly.duan1.model.NguoiDung;
 import edu.poly.duan1.model.Sach;
 import edu.poly.duan1.model.thongke;
 import edu.poly.duan1.repositories.HoaDonCTRepositories;
@@ -19,7 +20,10 @@ import edu.poly.duan1.services.impl.HoaDonServiceImpl;
 import edu.poly.duan1.services.impl.SachServicesImpl;
 import edu.poly.duan1.services.impl.ThongKeServiceImpl;
 import edu.poly.duan1.ultis.helper;
+import edu.poly.main.Main;
 import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -66,11 +70,23 @@ public class View_ThongKe extends javax.swing.JFrame {
     /**
      * Creates new form View_ThongKe
      */
+    private NguoiDung nguoiDung = new NguoiDung();
+    public View_ThongKe(NguoiDung nd) {
+        initComponents();
+        loadDataTableDoanhThu();
+        this.setLocationRelativeTo(null);
+        loadDataTableSanPham();
+        this.nguoiDung = nd;
+        Image icon = Toolkit.getDefaultToolkit().getImage("images/logo.png");
+        this.setIconImage(icon);
+    }
     public View_ThongKe() {
         initComponents();
         loadDataTableDoanhThu();
         this.setLocationRelativeTo(null);
         loadDataTableSanPham();
+        Image icon = Toolkit.getDefaultToolkit().getImage("images/logo.png");
+        this.setIconImage(icon);
     }
 
     /**
@@ -100,6 +116,7 @@ public class View_ThongKe extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblThongKeHoaDon = new javax.swing.JTable();
+        btnTroVe = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -257,6 +274,13 @@ public class View_ThongKe extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(tblThongKeHoaDon);
 
+        btnTroVe.setText("trở về");
+        btnTroVe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTroVeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -266,7 +290,11 @@ public class View_ThongKe extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jScrollPane3)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnTroVe)
+                        .addGap(52, 52, 52))
                     .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -276,13 +304,15 @@ public class View_ThongKe extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(btnTroVe))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -308,6 +338,11 @@ public class View_ThongKe extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         writeExcel();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btnTroVeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTroVeActionPerformed
+        new Main(nguoiDung).setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnTroVeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -513,6 +548,7 @@ public class View_ThongKe extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBieuDoSP;
     private javax.swing.JButton btnTimKiem;
+    private javax.swing.JButton btnTroVe;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
