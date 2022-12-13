@@ -702,7 +702,6 @@ public class viewBH extends javax.swing.JFrame {
     private void tblHDMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHDMousePressed
         int row = tblHD.getSelectedRow();
         HoaDon hd = hoaDonService.getObjbyMa((String) tblHD.getValueAt(row, 1));
-//        loadDataGH(hoaDonCTService.getObjbyMa(txtMaHD.getText()));
         loadDataGH((List<HoaDonCT>) hoaDonCTService.findNByMa((String) tblHD.getValueAt(row, 1)));
         txtMaHD.setText(hd.getMa());
         txtNgayTao.setText(sdf.format(hd.getNgayTao()) + "");
@@ -741,13 +740,14 @@ public class viewBH extends javax.swing.JFrame {
                 try {
 
                     soLuongNhap = Integer.parseInt(input);
-
+                    int check = 0;
+                    check = (soLuongCu + sct.getSoLuongTon()) - soLuongNhap;
                     if (soLuongNhap < 0) {
                         helper.error(this, "Số lượng phải >=0");
                         tblGioHang.clearSelection();
                         return;
                     }
-                    if (soLuongNhap > sct.getSoLuongTon() && soLuongNhap > soLuongCu) {
+                    if (soLuongNhap > sct.getSoLuongTon() && check<0) {
                         helper.error(this, "Quá số lượng cho phép");
                         tblGioHang.clearSelection();
                         return;
