@@ -17,7 +17,7 @@
             <artifactId>hibernate-core</artifactId>
             <version>5.6.9.Final</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
+        
         <!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
         <dependency>
             <groupId>com.microsoft.sqlserver</groupId>
@@ -32,12 +32,14 @@
             <version>1.18.24</version>
             <scope>provided</scope>
         </dependency>
+        
         <!-- https://mvnrepository.com/artifact/com.kenai.nbpwr/org-jdesktop-animation-timing -->
         <dependency>
             <groupId>com.kenai.nbpwr</groupId>
             <artifactId>org-jdesktop-animation-timing</artifactId>
             <version>1.0-201002281504</version>
         </dependency>
+        
         <!-- https://mvnrepository.com/artifact/me.shib.plugin/text-file-writer-maven-plugin -->
         <dependency>
             <groupId>me.shib.plugin</groupId>
@@ -51,37 +53,48 @@
             <artifactId>swingx-autocomplete</artifactId>
             <version>1.6.5-1</version>
         </dependency>
+        
         <!-- https://mvnrepository.com/artifact/com.miglayout/miglayout -->
         <dependency>
             <groupId>com.miglayout</groupId>
             <artifactId>miglayout</artifactId>
             <version>3.5.5</version>
         </dependency>
+        
         <!-- https://mvnrepository.com/artifact/org.jfree/jcommon -->
         <dependency>
             <groupId>org.jfree</groupId>
             <artifactId>jcommon</artifactId>
             <version>1.0.23</version>
         </dependency>
-<!-- https://mvnrepository.com/artifact/org.jfree/jfreechart -->
+        
+        <!-- https://mvnrepository.com/artifact/org.jfree/jfreechart -->
         <dependency>
             <groupId>org.jfree</groupId>
             <artifactId>jfreechart</artifactId>
             <version>1.5.0</version>
         </dependency>
+        
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
             <version>3.17</version>
             <type>jar</type>
         </dependency>
+        
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
             <version>3.17</version>
             <type>jar</type>
         </dependency>
-
+        
+        <!-- https://mvnrepository.com/artifact/com.sun.mail/jakarta.mail -->
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>jakarta.mail</artifactId>
+            <version>2.0.1</version>
+        </dependency>
     </dependencies>
     
 </project>
