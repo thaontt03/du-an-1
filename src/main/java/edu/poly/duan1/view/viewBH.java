@@ -550,9 +550,9 @@ public class viewBH extends javax.swing.JFrame {
         }
         if (tienKhachDua - tongTien <= 0.0) {
 //            txtTienThua.setText(0 + "");
-            txtTienThua.setText(x.format(tienThua));
+            txtTienThua.setText(x.format(tienThua)+" VNĐ");
         } else {
-            txtTienThua.setText(x.format(tienThua));
+            txtTienThua.setText(x.format(tienThua)+" VNĐ");
         }
         int row = tblHD.getSelectedRow();
 
@@ -564,7 +564,8 @@ public class viewBH extends javax.swing.JFrame {
 
         if (tienKhachDua - tongTien >= 0) {
             if (helper.confirm(this, "Bạn có muốn thanh toán hóa đơn: ''" + hd.getMa() + "''\n"
-                    + "Tổng số tiền là: " + x.format(tongTien) + " VNĐ không?")) {
+                    + "Tổng số tiền là: " + x.format(tongTien) + " VNĐ \n"
+                    + "Tiền thừa của khách là: " + x.format(tienThua) + "VNĐ không?")) {
                 hd.setTrangThai(1);
                 hd.setNgayThanhToan(java.sql.Date.valueOf(LocalDate.now()));
                 hd.setNguoiDungThanhToan(nguoiDung);
@@ -747,7 +748,7 @@ public class viewBH extends javax.swing.JFrame {
                         tblGioHang.clearSelection();
                         return;
                     }
-                    if (soLuongNhap > sct.getSoLuongTon() && check<0) {
+                    if (soLuongNhap > sct.getSoLuongTon() && check < 0) {
                         helper.error(this, "Quá số lượng cho phép");
                         tblGioHang.clearSelection();
                         return;
